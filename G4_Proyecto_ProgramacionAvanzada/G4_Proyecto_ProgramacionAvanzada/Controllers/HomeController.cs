@@ -13,16 +13,10 @@ namespace G4_Proyecto_ProgramacionAvanzada.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
         public ActionResult LogIn()
-        {
+        {           
             return View();
         }
+
     }
 }
