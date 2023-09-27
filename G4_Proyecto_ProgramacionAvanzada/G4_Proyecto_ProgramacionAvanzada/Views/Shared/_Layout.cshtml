@@ -16,9 +16,11 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="~/Template/style.css">
-
-
-
+    <style>
+        #botongenerico:hover {
+            color: #fff ;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,13 +43,14 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="@Url.Action("Index", "Home")"><img style="height:12vh;" src="~/Template/img/cloudcashlogo-nb-black.png" alt=""></a>
+                            <a href="@Url.Action("Index", "Home")"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb-black.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
                         <div class="top-contact-info d-flex align-items-center">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
+                            <a href="@Url.Action("LogIn", "Home")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Secion</a>
                         </div>
                     </div>
                 </div>
@@ -159,7 +162,7 @@
                     <div class="col-12">
                         <div class="copywrite-content d-flex flex-wrap justify-content-between align-items-center">
                             <!-- Footer Logo -->
-                            <a href="index.html" class="footer-logo"><img style="height:12vh;" src="~/Template/img/cloudcashlogo-nb.png" alt=""></a>
+                            <a href="index.html" class="footer-logo"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb.png" alt=""></a>
 
                             <!-- Copywrite Text -->
                             <p class="copywrite-text">
