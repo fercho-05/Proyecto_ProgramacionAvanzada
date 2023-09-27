@@ -200,6 +200,7 @@
     <Content Include="Template\img\bg-img\add.png" />
     <Content Include="Template\img\bg-img\add2.png" />
     <Content Include="Template\img\bg-img\concert.jpg" />
+    <Content Include="Template\img\bg-img\login.jpg" />
     <Content Include="Template\img\cloudcashlogo-blue.png" />
     <Content Include="Template\img\cloudcashlogo-nb-black.png" />
     <Content Include="Template\img\cloudcashlogo-nb.png" />
@@ -282,6 +283,8 @@
     <Content Include="Template\.sass-cache\d85c8cf619ac1df897d554b9bf37f413df87287f\_theme_color.scssc" />
     <Content Include="Template\style.css.map" />
     <Content Include="Views\Home\copiaindex.cshtml" />
+    <Content Include="Views\Home\LogIn.cshtml" />
+    <Content Include="Views\Shared\_Layout_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
