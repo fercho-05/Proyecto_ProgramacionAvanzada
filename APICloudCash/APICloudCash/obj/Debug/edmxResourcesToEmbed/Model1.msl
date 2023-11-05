@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CloudCashModelStoreContainer" CdmEntityContainer="CloudCashEntities">
+    <EntitySetMapping Name="Administradores">
+      <EntityTypeMapping TypeName="CloudCashModel.Administradores">
+        <MappingFragment StoreEntitySet="Administradores">
+          <ScalarProperty Name="id_Administrador" ColumnName="id_Administrador" />
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="CloudCashModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prestamos">
+      <EntityTypeMapping TypeName="CloudCashModel.Prestamos">
+        <MappingFragment StoreEntitySet="Prestamos">
+          <ScalarProperty Name="id_Prestamo" ColumnName="id_Prestamo" />
+          <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+          <ScalarProperty Name="id_TipoPrestamo" ColumnName="id_TipoPrestamo" />
+          <ScalarProperty Name="id_tipoDivisa" ColumnName="id_tipoDivisa" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="tasaInteres" ColumnName="tasaInteres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tarjetas">
+      <EntityTypeMapping TypeName="CloudCashModel.Tarjetas">
+        <MappingFragment StoreEntitySet="Tarjetas">
+          <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
+          <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+          <ScalarProperty Name="numeroTarjeta" ColumnName="numeroTarjeta" />
+          <ScalarProperty Name="nombrePoseedor" ColumnName="nombrePoseedor" />
+          <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+          <ScalarProperty Name="cvc" ColumnName="cvc" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+          <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
+          <ScalarProperty Name="activa" ColumnName="activa" />
+          <ScalarProperty Name="id_TipoTarjeta" ColumnName="id_TipoTarjeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TCreditos">
+      <EntityTypeMapping TypeName="CloudCashModel.TCreditos">
+        <MappingFragment StoreEntitySet="TCreditos">
+          <ScalarProperty Name="id_Credito" ColumnName="id_Credito" />
+          <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TDebitos">
+      <EntityTypeMapping TypeName="CloudCashModel.TDebitos">
+        <MappingFragment StoreEntitySet="TDebitos">
+          <ScalarProperty Name="id_Debito" ColumnName="id_Debito" />
+          <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDivisas">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoDivisas">
+        <MappingFragment StoreEntitySet="TipoDivisas">
+          <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
+          <ScalarProperty Name="Abreviado" ColumnName="Abreviado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoTarjetas">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoTarjetas">
+        <MappingFragment StoreEntitySet="TipoTarjetas">
+          <ScalarProperty Name="id_TipoTarjeta" ColumnName="id_TipoTarjeta" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoUsuarios">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoUsuarios">
+        <MappingFragment StoreEntitySet="TipoUsuarios">
+          <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="CloudCashModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoUno" ColumnName="apellidoUno" />
+          <ScalarProperty Name="apellidoDos" ColumnName="apellidoDos" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_CrearTarjetaCredito" FunctionName="CloudCashModel.Store.SP_CrearTarjetaCredito" />
+    <FunctionImportMapping FunctionImportName="SP_CrearTarjetaDebito" FunctionName="CloudCashModel.Store.SP_CrearTarjetaDebito" />
+    <FunctionImportMapping FunctionImportName="SP_IngresarAdministrador" FunctionName="CloudCashModel.Store.SP_IngresarAdministrador" />
+    <FunctionImportMapping FunctionImportName="SP_IngresarCliente" FunctionName="CloudCashModel.Store.SP_IngresarCliente" />
+    <FunctionImportMapping FunctionImportName="SP_IniciarSesion" FunctionName="CloudCashModel.Store.SP_IniciarSesion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CloudCashModel.SP_IniciarSesion_Result">
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoUno" ColumnName="apellidoUno" />
+          <ScalarProperty Name="apellidoDos" ColumnName="apellidoDos" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_ListarClientes" FunctionName="CloudCashModel.Store.SP_ListarClientes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CloudCashModel.SP_ListarClientes_Result">
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoUno" ColumnName="apellidoUno" />
+          <ScalarProperty Name="apellidoDos" ColumnName="apellidoDos" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

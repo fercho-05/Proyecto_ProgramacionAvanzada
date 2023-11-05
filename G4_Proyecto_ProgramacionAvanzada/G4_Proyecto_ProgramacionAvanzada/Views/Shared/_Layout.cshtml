@@ -46,11 +46,20 @@
                             <a href="@Url.Action("Index", "Home")"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb-black.png" alt=""></a>
                         </div>
 
-                        <!-- Top Contact Info -->
+                        <!-- Top Info -->
                         <div class="top-contact-info d-flex align-items-center">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
-                            <a href="@Url.Action("LogIn", "Home")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Secion</a>
+                            @if (Session["NombreCompleto"] != null)
+                            {
+                                @Session["NombreCompleto"]
+
+                                <a href="@Url.Action("CerrarSesion", "Usuario")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                            }
+                            else
+                            {
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
+                                <a href="@Url.Action("LogIn", "Usuario")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Sesión</a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -80,7 +89,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="@Url.Action("Index", "Home")>Inicio</a></li>
+                                    <li><a href="@Url.Action("Index", "Home")">Inicio</a></li>
                                     <li><a href="about.html">Acerca de Nosotros</a></li>
                                     <li>
                                         <a href="#">Productos</a>
@@ -100,7 +109,11 @@
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contacto</a></li>
-                                    <li><a href="@Url.Action("LogIn", "Home")">Banca en línea</a></li>
+
+                                    @* Opción solo para uso de administradores *@
+                                    @* Se debe realizar la validación para solo mostrar a administradores*@
+                                    <li><a href="@Url.Action("RegistroUsuarios", "Usuario")">Registrar usuarios(Admin)</a></li>
+                                    
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -116,9 +129,9 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-    <!-- ##### Hero Area Start ##### -->
+    <!-- ##### BODY Start ##### -->
     @RenderBody()
-    <!-- ##### Newsletter Area End ###### -->
+    <!-- ##### BODY End ###### -->
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area section-padding-100-0">
         <div class="container">
