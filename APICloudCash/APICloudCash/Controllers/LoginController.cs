@@ -14,14 +14,14 @@ namespace APICloudCash.Controllers
 
         Utilitario util = new Utilitario();
 
-        [HttpGet] 
+        [HttpPost]
         [Route("IniciarSesion")]
         public SP_IniciarSesion_Result IniciarSesion(entUsuarios entUsuario) //Se recibe un objeto de tipo Usuario
         {
 
             try
             {
-                using (var context = new DBCC())
+                using (var context = new CloudCashEntities())
                 {
 
                     return context.SP_IniciarSesion(entUsuario.nombreUsuario, entUsuario.contrasena).FirstOrDefault(); //Con SP(Procedimiento Almacenamiento)

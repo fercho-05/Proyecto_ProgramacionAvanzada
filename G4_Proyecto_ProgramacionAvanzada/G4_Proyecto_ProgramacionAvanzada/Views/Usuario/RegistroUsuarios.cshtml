@@ -12,20 +12,18 @@
                 <div class="px-5 ms-xl-4">
                     <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
                 </div>
+                @if (ViewBag.MensajeUsuario != null)
+                {
+                    <div class="alert alert-danger" role="alert" style="text-align:center;">
+                        @ViewBag.MensajeUsuario
+                    </div>
+                }
                 <div class="d-flex align-items-center justify-content-center">
-                    &nbsp;&nbsp;&nbsp;
-                    @if (ViewBag.MensajeUsuario != null)
-                    {
-                        <div class="alert alert-danger" role="alert" style="text-align:center;">
-                            @ViewBag.MensajeUsuario
-                        </div>
-                    }
-
                     @* Para uso de administrador *@
                     @using (Html.BeginForm("RegistroUsuarios", "Usuario", FormMethod.Post, new { style = "width: 25rem;" }))
                     {
                         <br />
-                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Regitrar Clientes</h3>
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Registrar Clientes</h3>
                         <div class="form-outline mb-4">
                             @Html.TextBoxFor(m => m.cedula, new { @onkeyup = "ConsultarNombre()", @class = "form-control form-control-lg", @type = "text" })
                             <label class="form-label">Cédula</label>

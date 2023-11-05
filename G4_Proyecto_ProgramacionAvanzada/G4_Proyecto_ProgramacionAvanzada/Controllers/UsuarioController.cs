@@ -28,7 +28,7 @@ namespace G4_Proyecto_ProgramacionAvanzada.Controllers
             if (resp != null)
             {
                 Session["CodigoUsuario"] = resp.id_Usuario;
-                Session["NombreCompleto"] = resp.nombre + resp.apellidoUno;
+                Session["NombreCompleto"] = resp.nombre +" "+ resp.apellidoUno;
                 return RedirectToAction("Index", "Home");
             }
             else

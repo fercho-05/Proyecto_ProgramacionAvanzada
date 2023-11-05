@@ -48,16 +48,17 @@
 
                         <!-- Top Info -->
                         <div class="top-contact-info d-flex align-items-center">
-                            @if (Session["NombreCompleto"] == null)
+                            @if (Session["NombreCompleto"] != null)
+                            {
+                                @Session["NombreCompleto"]
+
+                                <a href="@Url.Action("CerrarSesion", "Usuario")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                            }
+                            else
                             {
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
                                 <a href="@Url.Action("LogIn", "Usuario")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Sesión</a>
-                            }
-                            else
-                            {
-                                @Session["NombreUsuario"]
-                                <a href="@Url.Action("CerrarSesion", "Usuario")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
                             }
                         </div>
                     </div>
@@ -108,14 +109,11 @@
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contacto</a></li>
-                                    <li><a href="@Url.Action("LogIn", "Usuario")">Banca en línea</a></li>
 
                                     @* Opción solo para uso de administradores *@
-                                    @* La validación no debe ser por Rol(no se usa) sino por algo que valide que es un admin*@
-                                    @if (Session["Rol"] != null)
-                                    {
-                                        <li><a href="@Url.Action("RegistroUsuarios", "Usuario")">Registrar usuarios</a></li>
-                                    }
+                                    @* Se debe realizar la validación para solo mostrar a administradores*@
+                                    <li><a href="@Url.Action("RegistroUsuarios", "Usuario")">Registrar usuarios(Admin)</a></li>
+                                    
                                 </ul>
                             </div>
                             <!-- Nav End -->
