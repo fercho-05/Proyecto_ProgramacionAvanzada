@@ -20,6 +20,5 @@ namespace APICloudCash.Entities
         public bool activo { get; set; }
         public int id_TipoUsuario { get; set; }
         public string mensaje { get; set; }
-
     }
 }

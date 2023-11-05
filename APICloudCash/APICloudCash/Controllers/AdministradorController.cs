@@ -18,7 +18,7 @@ namespace APICloudCash.Controllers
             try {
                 using (var context = new DBCC())
                 {
-
+                    
                     return context.SP_IngresarCliente( //Procedimiento Almacenado
                         entCliente.cedula,
                         entCliente.nombreUsuario,
@@ -28,7 +28,7 @@ namespace APICloudCash.Controllers
                         entCliente.apellidoDos,
                         entCliente.telefono,
                         entCliente.correo,
-                        entCliente.activo
+                        true //Siempre que se crea una cuenta por defecto tiene que quedar activa
 
                         ).FirstOrDefault();//Devuelve el registro
                 }

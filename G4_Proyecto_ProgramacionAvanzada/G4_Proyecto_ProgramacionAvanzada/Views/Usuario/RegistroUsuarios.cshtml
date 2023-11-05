@@ -1,0 +1,72 @@
+﻿@model G4_Proyecto_ProgramacionAvanzada.Entities.entUsuarios
+
+@{
+    ViewBag.Title = "RegistroUsuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="vh-50 d-flex justify-content-center align-items-center" >
+    <div class="container-fluid">
+        <div style="align-items: center">
+            <div class="text-black">
+                <div class="px-5 ms-xl-4">
+                    <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    &nbsp;&nbsp;&nbsp;
+                    @if (ViewBag.MensajeUsuario != null)
+                    {
+                        <div class="alert alert-danger" role="alert" style="text-align:center;">
+                            @ViewBag.MensajeUsuario
+                        </div>
+                    }
+
+                    @* Para uso de administrador *@
+                    @using (Html.BeginForm("RegistroUsuarios", "Usuario", FormMethod.Post, new { style = "width: 25rem;" }))
+                    {
+                        <br />
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Regitrar Clientes</h3>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.cedula, new { @onkeyup = "ConsultarNombre()", @class = "form-control form-control-lg", @type = "text" })
+                            <label class="form-label">Cédula</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.nombre, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
+                            <label class="form-label">Nombre</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.apellidoUno, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
+                            <label class="form-label">Primer apellido</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.apellidoDos, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
+                            <label class="form-label">Segundo apellido</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.telefono, new { @class = "form-control form-control-lg", @type = "text" })
+                            <label class="form-label">Teléfono</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control form-control-lg", @type = "email" })
+                            <label class="form-label">Correo electrónico</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.nombreUsuario, new { @class = "form-control form-control-lg", @type = "text" })
+                            <label class="form-label">Nombre de usuario</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                            @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control form-control-lg", @type = "password" })
+                            <label class="form-label">Contraseña</label>
+                        </div>
+                        <div class="pt-1 mb-4">
+                            <input type="submit" class="btn btn-info btn-lg btn-block" value="Registrar">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Funciones/ApiConsultarNombres.js"></script>
+
