@@ -21,7 +21,7 @@ namespace APICloudCash.Controllers
 
             try
             {
-                using (var context = new CloudCashEntities())
+                using (var context = new DBCC())
                 {
 
                     return context.SP_IniciarSesion(entUsuario.nombreUsuario, entUsuario.contrasena).FirstOrDefault(); //Con SP(Procedimiento Almacenamiento)
@@ -40,7 +40,7 @@ namespace APICloudCash.Controllers
         [Route("RecuperarContrasena")]
         public string RecuperarContrasena(entUsuarios entUsuario) {
             try
-            {/*
+            {
                 using (var context = new DBCC())
                 {
                     var datos = (from x in context.Usuarios
@@ -51,12 +51,12 @@ namespace APICloudCash.Controllers
                     {
                         string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "Templates\\RecuperacionContrasena.html";
                         string html = File.ReadAllText(urlHtml);
-                        html = html.Replace("@@Nombre", datos.Nombre);
-                        html = html.Replace("@@Contrasena", datos.Contrasena);
-                        util.EnvioCorreos(datos.Correo, "Recuperar Contraseña", html);
+                        html = html.Replace("@@Nombre", datos.nombre + " "+ datos.apellidoUno+" "+datos.apellidoDos);
+                        html = html.Replace("@@Contrasena", datos.contrasena);
+                        util.EnvioCorreos(datos.correo, "Recuperar Contraseña", html);
                     }
 
-                }*/
+                }
                 return "OK";
             }
             catch (Exception e)
