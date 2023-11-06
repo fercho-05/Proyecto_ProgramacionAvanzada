@@ -16,10 +16,10 @@ namespace APICloudCash.Controllers
         public string IngresarCliente(entClientes entCliente) {
 
             try {
-                using (var context = new CloudCashEntities())
+                using (var context = new DBCC())
                 {
                     
-                    context.SP_IngresarCliente( //Procedimiento Almacenado
+                return  context.SP_IngresarCliente( //Procedimiento Almacenado
                         entCliente.cedula,
                         entCliente.nombreUsuario,
                         entCliente.nombre,
@@ -32,7 +32,7 @@ namespace APICloudCash.Controllers
 
                         ).FirstOrDefault();//Devuelve el registro
 
-                    return "OK";
+                    
                 }
                
             }catch (Exception e)
@@ -48,7 +48,7 @@ namespace APICloudCash.Controllers
         public string IngresarAdministrador(entAdministradores entAdministrador)
         {
             try {
-                using (var context = new CloudCashEntities())
+                using (var context = new DBCC())
                 {
 
                     return context.SP_IngresarAdministrador(
@@ -73,10 +73,10 @@ namespace APICloudCash.Controllers
 
 
         [HttpGet]
-        [Route("ObtenerTipoUsuarios")]
-        public List<System.Web.Mvc.SelectListItem> ObtenerTipoUsuarios()
+        [Route("ListarTipoUsuarios")]
+        public List<System.Web.Mvc.SelectListItem> ListarTipoUsuarios()
         {
-            using (var context = new CloudCashEntities()) 
+            using (var context = new DBCC()) 
             {
                 var datos = (from x in context.TipoUsuarios select x).ToList();//Entity Framework
 
@@ -93,10 +93,10 @@ namespace APICloudCash.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerTipoDivisas")]
-        public List<System.Web.Mvc.SelectListItem> ObtenerTipoDivisas()
+        [Route("ListarTipoDivisas")]
+        public List<System.Web.Mvc.SelectListItem> ListarTipoDivisas()
         {
-            using (var context = new CloudCashEntities())
+            using (var context = new DBCC())
             {
                 var datos = (from x in context.TipoDivisas select x).ToList();//Entity Framework
 
@@ -120,7 +120,7 @@ namespace APICloudCash.Controllers
         public List<System.Web.Mvc.SelectListItem> ListarClientes()
         {
             try {
-                using (var context = new CloudCashEntities())
+                using (var context = new DBCC())
                 {
 
                     var datos = context.SP_ListarClientes().ToList();
@@ -152,7 +152,7 @@ namespace APICloudCash.Controllers
 
             try
             {
-                using (var context = new CloudCashEntities())
+                using (var context = new DBCC())
                 {
 
                     return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
@@ -184,7 +184,7 @@ namespace APICloudCash.Controllers
 
             try
             {
-                using (var context = new CloudCashEntities())
+                using (var context = new DBCC())
                 {
 
                     return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado

@@ -15,7 +15,7 @@ namespace APICloudCash.Entities
         string correoUsuario = ConfigurationManager.AppSettings["CorreoUsuario"];
         string claveUsuario = ConfigurationManager.AppSettings["ClaveUsuario"];
         string servidorCorreo = ConfigurationManager.AppSettings["ServidorCorreo"];
-        /*
+        
         public void EnvioCorreos(string destino, string asunto, string contenido)
         {
 
@@ -35,7 +35,7 @@ namespace APICloudCash.Entities
             smtpClient.Credentials = new NetworkCredential(correoUsuario, claveUsuario);
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.Send(mailMessage);
-        }*/
+        }
     }
 
 }
