@@ -182,6 +182,10 @@ namespace APICloudCash.Controllers
         public string IngresarTarjetaCredito(entTDebitos entTCredito)
         {
 
+
+
+            var cuentaIBAN = "CR" + "";
+
             try
             {
                 using (var context = new DBCC())
@@ -208,6 +212,33 @@ namespace APICloudCash.Controllers
 
 
         }
+
+
+        [HttpGet]
+        [Route("ListarUsuariosPorCedula")]
+        public List<Usuarios> ListarUsuariosPorCedula(string nombre)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    var datos = (from x in context.Usuarios
+                                 where x.nombre.Contains(nombre)
+                                 select x).ToList();
+
+                    return datos;
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return new List<Usuarios>();
+            }
+        }
+
+
 
     }
 }
