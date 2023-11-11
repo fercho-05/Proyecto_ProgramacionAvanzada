@@ -25,8 +25,8 @@
                         </div>
                         <!-- Top Contact Info -->
                         <div class="top-contact-info d-flex align-items-center">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="25 th Street Avenue, Los Angeles, CA"><img src="~/template/img/core-img/placeholder.png" alt=""> <span>Direccion</span></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="office@yourfirm.com"><img src="~/template/img/core-img/message.png" alt=""> <span>office@yourfirm.com</span></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                     <nav class="classy-navbar justify-content-between" id="creditNav" style="display:flex; flex-direction:row-reverse">
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="#"><img src="~/template/img/core-img/call2.png" alt=""> +506 9999 9999</a>
+                            <a href="#"><img src="~/template/img/core-img/call2.png" alt=""> +506 2222 2222</a>
                         </div>
                     </nav>
                 </div>
@@ -51,7 +51,63 @@
         @RenderBody()
     </section>
     <!-- ##### Footer Area Start ##### -->
+    <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-100">
+                        <h5 class="widget-title">Áreas</h5>
+                        <!-- Nav -->
+                        <nav>
+                            <ul>
+                                <li><a href="@Url.Action("Perfil", "Home")">Tarjeta de crédito</a></li>
+                                <li><a href="@Url.Action("Perfil", "Home")">Tarjeta de débito</a></li>
+                                <li><a href="@Url.Action("Perfil", "Home")">Crédito de vivienda</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-100">
+                        <h5 class="widget-title">Áreas</h5>
+                        <!-- Nav -->
+                        <nav>
+                            <ul>
+                                <li><a href="@Url.Action("CuentaAhorro", "Home")">Cuenta de ahorro</a></li>
+                                <li><a href="@Url.Action("CuentaCorriente", "Home")">Cuenta corriente</a></li>
+                                <li><a href="@Url.Action("CuentaPlanilla", "Home")">Cuenta de planilla</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-100">
+                        <h5 class="widget-title">Sitio</h5>
+                        <!-- Nav -->
+                        <nav>
+                            <ul>
+                                @if (Session["NombreCompleto"] != null)
+                                {
+                                    <li><a href="@Url.Action("Perfil", "Authenticated")">Banca en línea</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("LogIn", "Login")">Banca en línea</a></li>
+                                }
+                                <li><a href="@Url.Action("AboutUs", "Home")">Nosotros</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Copywrite Area -->
         <div class="copywrite-area">
             <div class="container">
@@ -59,7 +115,7 @@
                     <div class="col-12">
                         <div class="copywrite-content d-flex flex-wrap justify-content-between align-items-center">
                             <!-- Footer Logo -->
-                            <a href="index.html" class="footer-logo"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb.png" alt=""></a>
+                            <a href="" class="footer-logo"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb.png" alt=""></a>
 
                             <!-- Copywrite Text -->
                             <p class="copywrite-text">
@@ -74,17 +130,16 @@
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- ##### Footer Area Start ##### -->
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="~/template/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="~/template/js/bootstrap/popper.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="~/template/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="~/template/js/active.js"></script>
+        <!-- ##### Footer Area Start ##### -->
+        <!-- ##### All Javascript Script ##### -->
+        <!-- jQuery-2.2.4 js -->
+        <script src="~/template/js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="~/template/js/bootstrap/popper.min.js"></script>
+        <!-- All Plugins js -->
+        <script src="~/template/js/plugins/plugins.js"></script>
+        <!-- Active js -->
+        <script src="~/template/js/active.js"></script>
 </body>
 
 

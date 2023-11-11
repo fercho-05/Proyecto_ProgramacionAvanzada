@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "EnvioDinero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "WireTransfer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/Template/img/bg-img/21.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Envío de Dinero</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Envío de Dinero</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<section class="services-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading -->
+                <div class="section-heading text-center mb-100">
+                    <div class="line"></div>
+                    <p>Descubra nuestros</p>
+                    <h2>Servicios de Envío de Dinero</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Rápido y Seguro</h5>
+                        <p>Realice transferencias de dinero de manera rápida y segura a nivel nacional e internacional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-profits"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Tasas Competitivas</h5>
+                        <p>Disfrute de tasas competitivas para sus transferencias internacionales, asegurando el mejor valor por su dinero.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-calculator"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Transparente y Eficiente</h5>
+                        <p>Nuestro proceso de transferencia es transparente y eficiente, brindándole total tranquilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="top-header-area">
+        <div class="container h-100">
+            <div class="top-contact-info d-flex justify-content-center align-items-center">
+                @if (Session["NombreCompleto"] != null)
+                {
+                    @Session["NombreCompleto"]
+                    <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                }
+                else
+                {
+                    <a style="margin-bottom: 4rem; margin-left: auto;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Solicitar</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+

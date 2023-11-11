@@ -29,7 +29,7 @@ namespace G4_Proyecto_ProgramacionAvanzada.Controllers
             {
                 Session["CodigoUsuario"] = resp.id_Usuario;
                 Session["NombreCompleto"] = resp.nombre +" "+ resp.apellidoUno + " "+ resp.apellidoDos;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Perfil", "Authenticated");
             }
             else
             {
