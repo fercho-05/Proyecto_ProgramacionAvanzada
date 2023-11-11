@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "CreditoVivienda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/Template/img/bg-img/mortgage.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Crédito de Vivienda</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<section class="services-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading -->
+                <div class="section-heading text-center mb-100">
+                    <div class="line"></div>
+                    <p>De un vistazo a</p>
+                    <h2>Nuestros Beneficios</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Financiamiento a medida</h5>
+                        <p>Ofrecemos soluciones de financiamiento personalizadas para ayudarlo a adquirir la vivienda de sus sueños.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-profits"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Tasas competitivas</h5>
+                        <p>Disfrute de tasas de interés competitivas y plazos flexibles para hacer que su préstamo sea más asequible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Proceso de solicitud fácil</h5>
+                        <p>Realice su solicitud en línea con nuestro proceso sencillo y obtenga una respuesta rápida.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Amplia variedad de propiedades elegibles</h5>
+                        <p>Financiamos una amplia gama de propiedades, desde casas familiares hasta apartamentos urbanos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-calculator"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Asistencia sobre su préstamo los 7 días de la semana</h5>
+                        <p>Contáctenos para preguntas sobre su préstamo existente los 7 días de la semana.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-smartphone-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Asesoramiento personalizado en cada paso</h5>
+                        <p>Nuestros asesores están listos para brindarle orientación personalizada en cada paso del proceso.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="top-header-area">
+        <div class="container h-100">
+            <div class="top-contact-info d-flex justify-content-center align-items-center">
+                @if (Session["NombreCompleto"] != null)
+                {
+                    @Session["NombreCompleto"]
+                    <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                }
+                else
+                {
+                    <a style="margin-bottom: 4rem; margin-left: auto;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Solicitar</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

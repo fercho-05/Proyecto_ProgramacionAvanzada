@@ -1,19 +1,101 @@
-﻿@{
+﻿
+@model G4_Proyecto_ProgramacionAvanzada.Entities.entUsuarios
+
+
+@{
     ViewBag.Title = "Contact";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/Template/img/bg-img/13.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Contacto</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contacto</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
-</main>
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Contact Area -->
+                <div class="contact-form-area contact-page">
+                    @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                    {
+                        <br />
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Enviar mensaje</h3>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    @Html.TextBox("cedula", null, new { @onkeyup = "ConsultarNombre()", @class = "form-control form-control-lg", @type = "text", @placeholder = "Cédula" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBox("nombre", null, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text", @placeholder = "Nombre" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBox("apellidoUno", null, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text", @placeholder = "Primer apellido" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBox("apellidoDos", null, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text", @placeholder = "Segundo apellido" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    @Html.TextBox("email", null, new { @class = "form-control form-control-lg", @type = "email", @placeholder = "E-mail" })
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.DropDownList("asunto", new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Value = "Solicitar cuenta", Text = "Solicitar cuenta" },
+                                        new SelectListItem { Value = "Solicitar información adicional", Text = "Solicitar información adicional" },
+                                        new SelectListItem { Value = "Otra consulta", Text = "Otra consulta" }
+                                    }, "Seleccione asunto", new { @class = "form-control form-control-lg" })
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.TextArea("message", null, new { @class = "form-control form-control-lg", @id = "message", @cols = "30", @rows = "10", @placeholder = "Mensaje" })
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-center align-items-center" style="margin-bottom: 4vh;">
+                                <button class="btn credit-btn mt-30" type="submit">Enviar</button>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Funciones/ApiConsultarNombres.js"></script>
+
+
+

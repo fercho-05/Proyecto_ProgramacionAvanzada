@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "CuentaAhorros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/Template/img/bg-img/savingsaccount.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Cuenta de Ahorros</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Cuenta de Ahorro</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<section class="services-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading -->
+                <div class="section-heading text-center mb-100">
+                    <div class="line"></div>
+                    <p>De un vistazo a</p>
+                    <h2>Nuestros beneficios</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-profits"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Intereses Competitivos</h5>
+                        <p>Gane intereses competitivos en el saldo de su cuenta de ahorros, lo que le ayuda a hacer crecer su dinero.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Acceso Fácil</h5>
+                        <p>Acceda a su dinero fácilmente a través de cajeros automáticos y servicios en línea las 24 horas del día, los 7 días de la semana.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-coin"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Transacciones Gratuitas</h5>
+                        <p>Realice transacciones ilimitadas sin cargos adicionales, incluyendo retiros y transferencias.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-smartphone-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Acceso en Línea</h5>
+                        <p>Monitoree su saldo y transacciones en línea para un control total de sus finanzas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-diamond"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Seguridad Garantizada</h5>
+                        <p>Protegemos su cuenta de ahorros con las mejores medidas de seguridad para su tranquilidad.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-piggy-bank"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Atención Personalizada</h5>
+                        <p>Reciba asistencia personalizada para todas sus necesidades financieras relacionadas con su cuenta de ahorros.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="top-header-area">
+        <div class="container h-100">
+            <div class="top-contact-info d-flex justify-content-center align-items-center">
+                @if (Session["NombreCompleto"] != null)
+                {
+                    @Session["NombreCompleto"]
+                    <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                }
+                else
+                {
+                    <a style="margin-bottom: 4rem; margin-left: auto;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Solicitar</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

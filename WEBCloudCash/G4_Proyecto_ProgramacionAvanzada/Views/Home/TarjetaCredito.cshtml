@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "TarjetaCredito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/Template/img/bg-img/creditcard.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Tarjetas de crédito</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tarjeta de Crédito</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Breadcrumb Area End ##### -->
+<section class="services-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading -->
+                <div class="section-heading text-center mb-100">
+                    <div class="line"></div>
+                    <p>De un vistazo a</p>
+                    <h2>Nuestros beneficios</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-profits"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Recompensas por gastos</h5>
+                        <p>Gane puntos cada vez que utilice su tarjeta para realizar compras que luego podrá canjear por efectivo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Protección contra fraude</h5>
+                        <p>Cada tarjeta de crédito incluye un seguro de protección contra fraude.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-coin"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Ofertas exclusivas</h5>
+                        <p>Obtenga descuentos especiales, ofertas y privilegios exclusivos en comercios seleccionados.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-smartphone-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Acceso a servicios de concierge</h5>
+                        <p>Obtenga asistencia personalizada para reservas, información de viajes y otros servicios exclusivos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-diamond"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Seguro de viaje</h5>
+                        <p>Usted puede obtener un reembolso por vuelos cancelados.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-piggy-bank"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Extienda el plazo de de pago sus compras</h5>
+                        <p>Obtenga la facilidad de ampliar el plazo de pago de sus compras por un interés muy bajo mensual.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="top-header-area">
+        <div class="container h-100">
+                    <div class="top-contact-info d-flex justify-content-center align-items-center">
+                        @if (Session["NombreCompleto"] != null)
+                        {
+                            @Session["NombreCompleto"]
+                            <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                        }
+                        else
+                        {
+                            <a style="margin-bottom: 4rem; margin-left: auto;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Solicitar</a>
+                        }
+                    </div>
+                </div>
+            </div>
+</section>
+
+

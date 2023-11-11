@@ -1,0 +1,28 @@
+
+.nav-link:hover .icon-grid,
+.nav-link:hover .icon-layout {
+    color: #B30000 !important;
+}
+
+.nav-item.active .nav-link .icon-grid,
+.nav-item.active .nav-link .icon-layout,
+.nav-item:focus .nav-link .icon-grid,
+.nav-item:focus .nav-link .icon-layout {
+    color: #B30000 !important;
+}
+
+.main-panel {
+    background-color: #ffffff !important; 
+}
+
+.container-scroller {
+    background-color: #ffffff !important; 
+}
+
+.page-body-wrapper {
+    background-color: #ffffff !important; 
+}
+
+.content-wrapper {
+    background-color: #ffffff !important; /* Color blanco */
+}

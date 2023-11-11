@@ -18,6 +18,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="~/Template/style.css">
     <style>
+        #botongenerico{
+            color: white;
+        }
         #botongenerico:hover {
             color: #fff;
         }
@@ -53,14 +56,14 @@
                             {
                                 @Session["NombreCompleto"]
 
-                                <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                                <a style="margin-bottom: 1rem;" href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
                             }
                             else
                             {
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
                                 <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
-                                <a href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Sesión</a>
-                            }
+                                <a style="margin-bottom: 1rem;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Sesión</a>
+                            }   
                         </div>
                     </div>
                 </div>
@@ -91,25 +94,26 @@
                             <div class="classynav">
                                 <ul>
                                     <li><a href="@Url.Action("Index", "Home")">Inicio</a></li>
-                                    <li><a href="about.html">Acerca de Nosotros</a></li>
+                                    <li><a href="@Url.Action("AboutUs", "Home")">Acerca de Nosotros</a></li>
                                     <li>
                                         <a href="#">Productos</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Tarjeta de Crédito</a></li>
-                                            <li><a href="index.html">Tarjeta de Débito</a></li>
-                                            <li><a href="about.html">Cuenta de Ahorro</a></li>
-                                            <li><a href="services.html">Cuenta Corriente</a></li>
-                                            <li><a href="post.html">Cuenta de Planilla</a></li>
+                                            <li><a href="@Url.Action("TarjetaCredito", "Home")">Tarjeta de Crédito</a></li>
+                                            <li><a href="@Url.Action("TarjetaDebito", "Home")">Tarjeta de Débito</a></li>
+                                            <li><a href="@Url.Action("CuentaAhorro", "Home")">Cuenta de Ahorro</a></li>
+                                            <li><a href="@Url.Action("CuentaCorriente", "Home")">Cuenta Corriente</a></li>
+                                            <li><a href="@Url.Action("CuentaPlanilla", "Home")">Cuenta de Planilla</a></li>
+                                            <li><a href="@Url.Action("CreditoVivienda", "Home")">Crédito de Vivienda</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="#">Servicios</a>
                                         <ul class="dropdown">
-                                            <li><a href="post.html">Promociones</a></li>
-                                            <li><a href="post.html">Envío de dinero</a></li>
+                                            <li><a href="@Url.Action("Promociones", "Home")">Promociones</a></li>
+                                            <li><a href="@Url.Action("EnvioDinero", "Home")">Envío de Dinero</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">Contacto</a></li>
+                                    <li><a href="@Url.Action("Contact", "Home")">Contacto</a></li>
 
                                     @* Opción solo para uso de administradores *@
                                     @* Se debe realizar la validación para solo mostrar a administradores*@
@@ -145,9 +149,23 @@
                         <!-- Nav -->
                         <nav>
                             <ul>
-                                <li><a href="#">Tarjetas</a></li>
-                                <li><a href="#">Cuentas</a></li>
-                                <li><a href="#">Nosotros</a></li>
+                                <li><a href="@Url.Action("Perfil", "Home")">Tarjeta de crédito</a></li>
+                                <li><a href="@Url.Action("Perfil", "Home")">Tarjeta de débito</a></li>
+                                <li><a href="@Url.Action("Perfil", "Home")">Crédito de vivienda</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-100">
+                        <h5 class="widget-title">Áreas</h5>
+                        <!-- Nav -->
+                        <nav>
+                            <ul>
+                                <li><a href="@Url.Action("CuentaAhorro", "Home")">Cuenta de ahorro</a></li>
+                                <li><a href="@Url.Action("CuentaCorriente", "Home")">Cuenta corriente</a></li>
+                                <li><a href="@Url.Action("CuentaPlanilla", "Home")">Cuenta de planilla</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -160,8 +178,15 @@
                         <!-- Nav -->
                         <nav>
                             <ul>
-                                <li><a href="#">Banca en línea</a></li>
-                                <li><a href="#">Mapa del sitio</a></li>
+                                @if (Session["NombreCompleto"] != null)
+                                {
+                                    <li><a href="@Url.Action("Perfil", "Authenticated")">Banca en línea</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("LogIn", "Login")">Banca en línea</a></li>
+                                }
+                                <li><a href="@Url.Action("AboutUs", "Home")">Nosotros</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -176,7 +201,7 @@
                     <div class="col-12">
                         <div class="copywrite-content d-flex flex-wrap justify-content-between align-items-center">
                             <!-- Footer Logo -->
-                            <a href="index.html" class="footer-logo"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb.png" alt=""></a>
+                            <a href="" class="footer-logo"><img style="height:110px;" src="~/Template/img/cloudcashlogo-nb.png" alt=""></a>
 
                             <!-- Copywrite Text -->
                             <p class="copywrite-text">

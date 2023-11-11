@@ -4,110 +4,104 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="vh-100 d-flex justify-content-center align-items-center">
-    <div class="container-fluid">
-        <div style="align-items: center">
-            <div class="text-black">
-                <div class="px-5 ms-xl-4">
-                </div>
-
-                <div class="d-flex align-items-center justify-content-center">
-                    <row>
-                        <div class="col-lg-5">
-                            @* Para uso de administrador *@
-                            @using (Html.BeginForm("RegistroUsuarios", "Registro", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
-                            {
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Contact Area -->
+                <div class="contact-form-area contact-page">
+                    @* Para uso de administrador *@
+                    @using (Html.BeginForm("RegistroUsuarios", "Registro", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                    {
 
 
 
-                                <br />
-                                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Registrar Clientes</h3>
-                                if (ViewBag.mensaje != null)
-                                {
-                                    if (ViewBag.mensaje == "Usuario Cliente ingresado con exito")
-                                    {<div class="alert alert-success" role="alert" style="text-align:center;">
-                                            @ViewBag.mensaje
-                                        </div>
-                                    }
-                                    else
-                                    {<div class="alert alert-danger" role="alert" style="text-align:center;">
-                                            @ViewBag.mensaje
-                                        </div>
-                                    }
-                                }
-
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.cedula, new { @onkeyup = "ConsultarNombre()", @class = "form-control form-control-lg", @type = "text" })
-                                            <label class="form-label">Cédula</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.nombre, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
-                                            <label class="form-label">Nombre</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.apellidoUno, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
-                                            <label class="form-label">Primer apellido</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.apellidoDos, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
-                                            <label class="form-label">Segundo apellido</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.nombreUsuario, new { @class = "form-control form-control-lg", @type = "text" })
-                                            <label class="form-label">Nombre de usuario</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control form-control-lg", @type = "password" })
-                                            <label class="form-label">Contraseña</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.telefono, new { @class = "form-control form-control-lg", @type = "text" })
-                                            <label class="form-label">Teléfono</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-outline mb-4">
-                                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control form-control-lg", @type = "email" })
-                                            <label class="form-label">Correo electrónico</label>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-12">
-                                        <div class="form-outline mb-4">
-                                            @Html.DropDownListFor(m => m.id_TipoUsuario, ViewBag.listaTipoUsuarios as List<SelectListItem>, "Seleccione tipo de usuario", new { @class = "form-control form-control-lg" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="pt-1 mb-4">
-                                            <input type="submit" class="btn btn-info btn-lg btn-block" value="Registrar">
-                                        </div>
-                                    </div>
+                        <br />
+                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Registrar Clientes</h3>
+                        if (ViewBag.mensaje != null)
+                        {
+                            if (ViewBag.mensaje == "Usuario Cliente ingresado con exito")
+                            {<div class="alert alert-success" role="alert" style="text-align:center;">
+                                    @ViewBag.mensaje
                                 </div>
                             }
+                            else
+                            {<div class="alert alert-danger" role="alert" style="text-align:center;">
+                                    @ViewBag.mensaje
+                                </div>
+                            }
+                        }
 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.cedula, new { @onkeyup = "ConsultarNombre()", @class = "form-control form-control-lg", @type = "text" })
+                                    <label class="form-label">Cédula</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.nombre, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
+                                    <label class="form-label">Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.apellidoUno, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
+                                    <label class="form-label">Primer apellido</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.apellidoDos, new { @readonly = "@readonly", style = "background-color:#eeeeee", @class = "form-control form-control-lg", @type = "text" })
+                                    <label class="form-label">Segundo apellido</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.nombreUsuario, new { @class = "form-control form-control-lg", @type = "text" })
+                                    <label class="form-label">Nombre de usuario</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control form-control-lg", @type = "password" })
+                                    <label class="form-label">Contraseña</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.telefono, new { @class = "form-control form-control-lg", @type = "text" })
+                                    <label class="form-label">Teléfono</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.correo, new { @class = "form-control form-control-lg", @type = "email" })
+                                    <label class="form-label">Correo electrónico</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.DropDownListFor(m => m.id_TipoUsuario, ViewBag.listaTipoUsuarios as List<SelectListItem>, "Seleccione tipo de usuario", new { @class = "form-control form-control-lg" })
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <div class="pt-1 mb-4">
+                                    <input type="submit" class="btn credit-btn mt-30" value="Registrar">
+                                </div>
+                            </div>
                         </div>
-                    </row>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <script src="~/Funciones/ApiConsultarNombres.js"></script>
 

@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "TarjetaDebito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcrumb Area Start ##### -->
+<section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/Template/img/bg-img/debitcard.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Tarjetas de débito</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tarjeta de Débito</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<section class="services-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Section Heading -->
+                <div class="section-heading text-center mb-100">
+                    <div class="line"></div>
+                    <p>De un vistazo a</p>
+                    <h2>Nuestros beneficios</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-profits"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Uso conveniente</h5>
+                        <p>Realice compras fácilmente en establecimientos locales e internacionales vinculando su tarjeta de débito a su cuenta de ahorros o corriente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-money-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Seguridad Financiera</h5>
+                        <p>Disfrute de transacciones seguras con la tecnología de chip incorporada en su tarjeta de débito.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-coin"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Control Total</h5>
+                        <p>Monitoree y controle sus gastos fácilmente con acceso en línea a sus transacciones.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-smartphone-1"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Notificaciones en Tiempo Real</h5>
+                        <p>Reciba notificaciones instantáneas en su teléfono móvil sobre cada transacción realizada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-diamond"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Retiros sin Cargo</h5>
+                        <p>Haga retiros en cajeros automáticos sin cargos adicionales en nuestra amplia red de cajeros.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Service Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-service-area d-flex mb-100">
+                    <div class="icon">
+                        <i class="icon-piggy-bank"></i>
+                    </div>
+                    <div class="text">
+                        <h5>Recargas y Pagos</h5>
+                        <p>Realice recargas y pagos de servicios fácilmente desde su cuenta vinculada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="top-header-area">
+        <div class="container h-100">
+            <div class="top-contact-info d-flex justify-content-center align-items-center">
+                @if (Session["NombreCompleto"] != null)
+                {
+                    @Session["NombreCompleto"]
+                    <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
+                }
+                else
+                {
+                    <a style="margin-bottom: 4rem; margin-left: auto;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Solicitar</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
