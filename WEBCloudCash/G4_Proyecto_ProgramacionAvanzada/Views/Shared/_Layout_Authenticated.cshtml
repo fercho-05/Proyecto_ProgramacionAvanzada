@@ -14,6 +14,7 @@
     <link rel="icon" href="~/Template/img/core-img/favicon.ico">
 
 
+
 </head>
 <body>
     <div class="container-scroller">
@@ -55,7 +56,7 @@
                             }
                             else
                             {
-                                <a class="dropdown-item" href="@Url.Action("IniciarSesion","Login")">
+                                <a class="dropdown-item" href="@Url.Action("LogIn","Login")">
                                     <i class="ti-home text-primary"></i>
                                     Iniciar Sesión
                                 </a>
@@ -66,41 +67,42 @@
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                     <span class="icon-menu"></span>
+
                 </button>
             </div>
         </nav>
 
         <div class="container-fluid page-body-wrapper">
             @*MENU LATERAL*@
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: #b30000;">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Perfil","Authenticated")">
-                            <i class="icon-grid menu-icon"></i>
+                        <a class="nav-link" style="color: white;" href="@Url.Action("Perfil","Authenticated")">
+                            <i style="color: white;" class="icon-grid menu-icon"></i>
                             <span class="menu-title">Mi Perfil</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Productos","Authenticated")">
-                            <i class="icon-grid menu-icon"></i>
+                        <a class="nav-link" style="color: white;" href="@Url.Action("Productos","Authenticated")">
+                            <i style="color: white;" class="icon-grid menu-icon"></i>
                             <span class="menu-title">Mis Productos</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("EnviarDinero","Authenticated")">
-                            <i class="icon-grid menu-icon"></i>
+                        <a class="nav-link" style="color: white;" href="@Url.Action("EnviarDinero","Authenticated")">
+                            <i style="color: white;" class="icon-grid menu-icon"></i>
                             <span class="menu-title">Enviar Dinero</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("PagarServicios","Authenticated")">
-                            <i class="icon-grid menu-icon"></i>
+                        <a class="nav-link" style="color: white;" href="@Url.Action("PagarServicios","Authenticated")">
+                            <i style="color: white;" class="icon-grid menu-icon"></i>
                             <span class="menu-title">Pagar Servicios</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("MiCredito","Authenticated")">
-                            <i class="icon-grid menu-icon"></i>
+                        <a class="nav-link" style="color: white;" href="@Url.Action("MiCredito","Authenticated")">
+                            <i style="color: white;" class="icon-grid menu-icon"></i>
                             <span class="menu-title">Mi Crédito</span>
                         </a>
                     </li>

@@ -29,6 +29,13 @@ namespace WEBCloudCash.Controllers
             if (resp != null)
             {
                 Session["CodigoUsuario"] = resp.id_Usuario;
+                Session["CedulaUsuario"] = resp.cedula;
+                Session["userName"] = resp.nombreUsuario;
+                Session["NombreUsuario"] = resp.nombre;
+                Session["Apellido1Usuario"] = resp.apellidoUno;
+                Session["Apellido2Usuario"] = resp.apellidoDos;
+                Session["TelefonoUsuario"] = resp.telefono;
+                Session["CorreoUsuario"] = resp.correo;
                 Session["NombreCompleto"] = resp.nombre +" "+ resp.apellidoUno + " "+ resp.apellidoDos;
                 return RedirectToAction("Perfil", "Authenticated");
             }
