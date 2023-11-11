@@ -1,12 +1,12 @@
-﻿using G4_Proyecto_ProgramacionAvanzada.Entities;
-using G4_Proyecto_ProgramacionAvanzada.Models;
+﻿using WEBCloudCash.Entities;
+using WEBCloudCash.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace G4_Proyecto_ProgramacionAvanzada.Controllers
+namespace WEBCloudCash.Controllers
 {
     public class LoginController : Controller
     {
@@ -17,6 +17,7 @@ namespace G4_Proyecto_ProgramacionAvanzada.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
+            ViewBag.IniciarSesion = true;
             return View();
         }
 
@@ -45,9 +46,25 @@ namespace G4_Proyecto_ProgramacionAvanzada.Controllers
             return RedirectToAction("Index", "Home");
         }
 
- 
 
-       
+        [HttpGet]
+        public ActionResult RecuperarContrasena() { 
+        
+            return View();
+
+
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarContrasena(entUsuarios entUsuario)
+        {
+
+            ViewBag.mensaje =  modUsuario.RecuperarContrasena(entUsuario);
+            return View();
+
+
+        }
+
 
 
 

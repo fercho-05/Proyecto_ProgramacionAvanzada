@@ -31,6 +31,16 @@
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="tasaInteres" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tarjetas">
           <Key>
             <PropertyRef Name="id_Tarjeta" />
@@ -219,6 +229,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
         <Function Name="SP_CrearTarjetaCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Cliente" Type="bigint" Mode="In" />
           <Parameter Name="numeroTarjeta" Type="int" Mode="In" />
@@ -238,6 +255,24 @@
           <Parameter Name="saldo" Type="bigint" Mode="In" />
           <Parameter Name="id_TipoDivisa" Type="int" Mode="In" />
           <Parameter Name="activa" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_IngresarAdministrador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedula" Type="varchar" Mode="In" />
@@ -266,10 +301,17 @@
           <Parameter Name="contrasena" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_ListarClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CloudCashModelStoreContainer">
           <EntitySet Name="Administradores" EntityType="Self.Administradores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prestamos" EntityType="Self.Prestamos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TCreditos" EntityType="Self.TCreditos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TDebitos" EntityType="Self.TDebitos" Schema="dbo" store:Type="Tables" />
@@ -323,25 +365,25 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CloudCashModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Administradore">
+        <EntityType Name="Administradores">
           <Key>
             <PropertyRef Name="id_Administrador" />
           </Key>
           <Property Name="id_Administrador" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_Usuario" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Administradores_idUsuario" FromRole="Administradores" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Administradores_idUsuario" FromRole="Administradores" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Cliente">
+        <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="id_Cliente" />
           </Key>
           <Property Name="id_Cliente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_Usuario" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Clientes_idUsuario" FromRole="Clientes" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Clientes_idUsuario" FromRole="Clientes" ToRole="Usuarios" />
           <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_Clientes" FromRole="Clientes" ToRole="Prestamos" />
           <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Clientes" ToRole="Tarjetas" />
         </EntityType>
-        <EntityType Name="Prestamo">
+        <EntityType Name="Prestamos">
           <Key>
             <PropertyRef Name="id_Prestamo" />
           </Key>
@@ -352,10 +394,20 @@
           <Property Name="monto" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tasaInteres" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Prestamos_Clientes" FromRole="Prestamos" ToRole="Clientes" />
-          <NavigationProperty Name="TipoDivisa" Relationship="Self.FK_Prestamos_TipoDivisas" FromRole="Prestamos" ToRole="TipoDivisas" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_Prestamos_Clientes" FromRole="Prestamos" ToRole="Clientes" />
+          <NavigationProperty Name="TipoDivisas" Relationship="Self.FK_Prestamos_TipoDivisas" FromRole="Prestamos" ToRole="TipoDivisas" />
         </EntityType>
-        <EntityType Name="Tarjeta">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tarjetas">
           <Key>
             <PropertyRef Name="id_Tarjeta" />
           </Key>
@@ -369,29 +421,29 @@
           <Property Name="id_TipoDivisa" Type="Int32" Nullable="false" />
           <Property Name="activa" Type="Boolean" Nullable="false" />
           <Property Name="id_TipoTarjeta" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Tarjetas" ToRole="Clientes" />
-          <NavigationProperty Name="TipoDivisa" Relationship="Self.FK_Tarjetas_TipoDivisas" FromRole="Tarjetas" ToRole="TipoDivisas" />
-          <NavigationProperty Name="TipoTarjeta" Relationship="Self.FK_Tarjetas_TipoTarjetas" FromRole="Tarjetas" ToRole="TipoTarjetas" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Tarjetas" ToRole="Clientes" />
+          <NavigationProperty Name="TipoDivisas" Relationship="Self.FK_Tarjetas_TipoDivisas" FromRole="Tarjetas" ToRole="TipoDivisas" />
+          <NavigationProperty Name="TipoTarjetas" Relationship="Self.FK_Tarjetas_TipoTarjetas" FromRole="Tarjetas" ToRole="TipoTarjetas" />
           <NavigationProperty Name="TCreditos" Relationship="Self.FK_TCreditos_Tarjetas" FromRole="Tarjetas" ToRole="TCreditos" />
           <NavigationProperty Name="TDebitos" Relationship="Self.FK_TDebitos_Tarjetas" FromRole="Tarjetas" ToRole="TDebitos" />
         </EntityType>
-        <EntityType Name="TCredito">
+        <EntityType Name="TCreditos">
           <Key>
             <PropertyRef Name="id_Credito" />
           </Key>
           <Property Name="id_Credito" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_Tarjeta" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Tarjeta" Relationship="Self.FK_TCreditos_Tarjetas" FromRole="TCreditos" ToRole="Tarjetas" />
+          <NavigationProperty Name="Tarjetas" Relationship="Self.FK_TCreditos_Tarjetas" FromRole="TCreditos" ToRole="Tarjetas" />
         </EntityType>
-        <EntityType Name="TDebito">
+        <EntityType Name="TDebitos">
           <Key>
             <PropertyRef Name="id_Debito" />
           </Key>
           <Property Name="id_Debito" Type="Int64" Nullable="false" />
           <Property Name="id_Tarjeta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Tarjeta" Relationship="Self.FK_TDebitos_Tarjetas" FromRole="TDebitos" ToRole="Tarjetas" />
+          <NavigationProperty Name="Tarjetas" Relationship="Self.FK_TDebitos_Tarjetas" FromRole="TDebitos" ToRole="Tarjetas" />
         </EntityType>
-        <EntityType Name="TipoDivisa">
+        <EntityType Name="TipoDivisas">
           <Key>
             <PropertyRef Name="id_TipoDivisa" />
           </Key>
@@ -401,7 +453,7 @@
           <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_TipoDivisas" FromRole="TipoDivisas" ToRole="Prestamos" />
           <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_TipoDivisas" FromRole="TipoDivisas" ToRole="Tarjetas" />
         </EntityType>
-        <EntityType Name="TipoTarjeta">
+        <EntityType Name="TipoTarjetas">
           <Key>
             <PropertyRef Name="id_TipoTarjeta" />
           </Key>
@@ -409,7 +461,7 @@
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_TipoTarjetas" FromRole="TipoTarjetas" ToRole="Tarjetas" />
         </EntityType>
-        <EntityType Name="TipoUsuario">
+        <EntityType Name="TipoUsuarios">
           <Key>
             <PropertyRef Name="id_TipoUsuario" />
           </Key>
@@ -417,7 +469,7 @@
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_TipoUsuarios" FromRole="TipoUsuarios" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Usuario">
+        <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="id_Usuario" />
           </Key>
@@ -435,11 +487,11 @@
           <Property Name="id_TipoUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Administradores" Relationship="Self.FK_Administradores_idUsuario" FromRole="Usuarios" ToRole="Administradores" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_idUsuario" FromRole="Usuarios" ToRole="Clientes" />
-          <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_Usuarios_TipoUsuarios" FromRole="Usuarios" ToRole="TipoUsuarios" />
+          <NavigationProperty Name="TipoUsuarios" Relationship="Self.FK_Usuarios_TipoUsuarios" FromRole="Usuarios" ToRole="TipoUsuarios" />
         </EntityType>
         <Association Name="FK_Administradores_idUsuario">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Administradores" Type="Self.Administradore" Multiplicity="*" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Administradores" Type="Self.Administradores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="id_Usuario" />
@@ -450,8 +502,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Clientes_idUsuario">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="id_Usuario" />
@@ -462,8 +514,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Prestamos_Clientes">
-          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="*" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clientes">
               <PropertyRef Name="id_Cliente" />
@@ -474,8 +526,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tarjetas_Clientes">
-          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="Tarjetas" Type="Self.Tarjeta" Multiplicity="*" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clientes">
               <PropertyRef Name="id_Cliente" />
@@ -486,8 +538,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Prestamos_TipoDivisas">
-          <End Role="TipoDivisas" Type="Self.TipoDivisa" Multiplicity="1" />
-          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="*" />
+          <End Role="TipoDivisas" Type="Self.TipoDivisas" Multiplicity="1" />
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoDivisas">
               <PropertyRef Name="id_TipoDivisa" />
@@ -498,8 +550,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tarjetas_TipoDivisas">
-          <End Role="TipoDivisas" Type="Self.TipoDivisa" Multiplicity="1" />
-          <End Role="Tarjetas" Type="Self.Tarjeta" Multiplicity="*" />
+          <End Role="TipoDivisas" Type="Self.TipoDivisas" Multiplicity="1" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoDivisas">
               <PropertyRef Name="id_TipoDivisa" />
@@ -510,8 +562,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tarjetas_TipoTarjetas">
-          <End Role="TipoTarjetas" Type="Self.TipoTarjeta" Multiplicity="1" />
-          <End Role="Tarjetas" Type="Self.Tarjeta" Multiplicity="*" />
+          <End Role="TipoTarjetas" Type="Self.TipoTarjetas" Multiplicity="1" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoTarjetas">
               <PropertyRef Name="id_TipoTarjeta" />
@@ -522,8 +574,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TCreditos_Tarjetas">
-          <End Role="Tarjetas" Type="Self.Tarjeta" Multiplicity="1" />
-          <End Role="TCreditos" Type="Self.TCredito" Multiplicity="*" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="1" />
+          <End Role="TCreditos" Type="Self.TCreditos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tarjetas">
               <PropertyRef Name="id_Tarjeta" />
@@ -534,8 +586,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TDebitos_Tarjetas">
-          <End Role="Tarjetas" Type="Self.Tarjeta" Multiplicity="1" />
-          <End Role="TDebitos" Type="Self.TDebito" Multiplicity="*" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="1" />
+          <End Role="TDebitos" Type="Self.TDebitos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tarjetas">
               <PropertyRef Name="id_Tarjeta" />
@@ -546,8 +598,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_TipoUsuarios">
-          <End Role="TipoUsuarios" Type="Self.TipoUsuario" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="TipoUsuarios" Type="Self.TipoUsuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoUsuarios">
               <PropertyRef Name="id_TipoUsuario" />
@@ -558,16 +610,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBCC" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Administradores" EntityType="Self.Administradore" />
-          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
-          <EntitySet Name="Prestamos" EntityType="Self.Prestamo" />
-          <EntitySet Name="Tarjetas" EntityType="Self.Tarjeta" />
-          <EntitySet Name="TCreditos" EntityType="Self.TCredito" />
-          <EntitySet Name="TDebitos" EntityType="Self.TDebito" />
-          <EntitySet Name="TipoDivisas" EntityType="Self.TipoDivisa" />
-          <EntitySet Name="TipoTarjetas" EntityType="Self.TipoTarjeta" />
-          <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuario" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <EntitySet Name="Administradores" EntityType="Self.Administradores" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamos" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" />
+          <EntitySet Name="TCreditos" EntityType="Self.TCreditos" />
+          <EntitySet Name="TDebitos" EntityType="Self.TDebitos" />
+          <EntitySet Name="TipoDivisas" EntityType="Self.TipoDivisas" />
+          <EntitySet Name="TipoTarjetas" EntityType="Self.TipoTarjetas" />
+          <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuarios" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
           <AssociationSet Name="FK_Administradores_idUsuario" Association="Self.FK_Administradores_idUsuario">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Administradores" EntitySet="Administradores" />
@@ -608,6 +661,12 @@
             <End Role="TipoUsuarios" EntitySet="TipoUsuarios" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
           <FunctionImport Name="SP_CrearTarjetaCredito" ReturnType="Collection(String)">
             <Parameter Name="id_Cliente" Mode="In" Type="Int64" />
             <Parameter Name="numeroTarjeta" Mode="In" Type="Int32" />
@@ -627,6 +686,24 @@
             <Parameter Name="saldo" Mode="In" Type="Int64" />
             <Parameter Name="id_TipoDivisa" Mode="In" Type="Int32" />
             <Parameter Name="activa" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CloudCashModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CloudCashModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_IngresarAdministrador" ReturnType="Collection(String)">
             <Parameter Name="cedula" Mode="In" Type="String" />
@@ -655,7 +732,24 @@
             <Parameter Name="contrasena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_ListarClientes" ReturnType="Collection(CloudCashModel.SP_ListarClientes_Result)" />
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="SP_IniciarSesion_Result">
           <Property Type="Int64" Name="id_Usuario" Nullable="false" />
           <Property Type="String" Name="cedula" Nullable="false" MaxLength="20" />
@@ -691,7 +785,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CloudCashModelStoreContainer" CdmEntityContainer="DBCC">
           <EntitySetMapping Name="Administradores">
-            <EntityTypeMapping TypeName="CloudCashModel.Administradore">
+            <EntityTypeMapping TypeName="CloudCashModel.Administradores">
               <MappingFragment StoreEntitySet="Administradores">
                 <ScalarProperty Name="id_Administrador" ColumnName="id_Administrador" />
                 <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
@@ -699,7 +793,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="CloudCashModel.Cliente">
+            <EntityTypeMapping TypeName="CloudCashModel.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
                 <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
                 <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
@@ -707,7 +801,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Prestamos">
-            <EntityTypeMapping TypeName="CloudCashModel.Prestamo">
+            <EntityTypeMapping TypeName="CloudCashModel.Prestamos">
               <MappingFragment StoreEntitySet="Prestamos">
                 <ScalarProperty Name="id_Prestamo" ColumnName="id_Prestamo" />
                 <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
@@ -719,8 +813,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CloudCashModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tarjetas">
-            <EntityTypeMapping TypeName="CloudCashModel.Tarjeta">
+            <EntityTypeMapping TypeName="CloudCashModel.Tarjetas">
               <MappingFragment StoreEntitySet="Tarjetas">
                 <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
                 <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
@@ -736,7 +841,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TCreditos">
-            <EntityTypeMapping TypeName="CloudCashModel.TCredito">
+            <EntityTypeMapping TypeName="CloudCashModel.TCreditos">
               <MappingFragment StoreEntitySet="TCreditos">
                 <ScalarProperty Name="id_Credito" ColumnName="id_Credito" />
                 <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
@@ -744,7 +849,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TDebitos">
-            <EntityTypeMapping TypeName="CloudCashModel.TDebito">
+            <EntityTypeMapping TypeName="CloudCashModel.TDebitos">
               <MappingFragment StoreEntitySet="TDebitos">
                 <ScalarProperty Name="id_Debito" ColumnName="id_Debito" />
                 <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
@@ -752,7 +857,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoDivisas">
-            <EntityTypeMapping TypeName="CloudCashModel.TipoDivisa">
+            <EntityTypeMapping TypeName="CloudCashModel.TipoDivisas">
               <MappingFragment StoreEntitySet="TipoDivisas">
                 <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
                 <ScalarProperty Name="Abreviado" ColumnName="Abreviado" />
@@ -761,7 +866,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoTarjetas">
-            <EntityTypeMapping TypeName="CloudCashModel.TipoTarjeta">
+            <EntityTypeMapping TypeName="CloudCashModel.TipoTarjetas">
               <MappingFragment StoreEntitySet="TipoTarjetas">
                 <ScalarProperty Name="id_TipoTarjeta" ColumnName="id_TipoTarjeta" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -769,7 +874,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoUsuarios">
-            <EntityTypeMapping TypeName="CloudCashModel.TipoUsuario">
+            <EntityTypeMapping TypeName="CloudCashModel.TipoUsuarios">
               <MappingFragment StoreEntitySet="TipoUsuarios">
                 <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -777,7 +882,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="CloudCashModel.Usuario">
+            <EntityTypeMapping TypeName="CloudCashModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
                 <ScalarProperty Name="cedula" ColumnName="cedula" />
@@ -794,8 +899,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CloudCashModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="SP_CrearTarjetaCredito" FunctionName="CloudCashModel.Store.SP_CrearTarjetaCredito" />
           <FunctionImportMapping FunctionImportName="SP_CrearTarjetaDebito" FunctionName="CloudCashModel.Store.SP_CrearTarjetaDebito" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CloudCashModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CloudCashModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CloudCashModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CloudCashModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CloudCashModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CloudCashModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_IngresarAdministrador" FunctionName="CloudCashModel.Store.SP_IngresarAdministrador" />
           <FunctionImportMapping FunctionImportName="SP_IngresarCliente" FunctionName="CloudCashModel.Store.SP_IngresarCliente" />
           <FunctionImportMapping FunctionImportName="SP_IniciarSesion" FunctionName="CloudCashModel.Store.SP_IniciarSesion">
@@ -834,6 +961,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CloudCashModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CloudCashModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -848,7 +977,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

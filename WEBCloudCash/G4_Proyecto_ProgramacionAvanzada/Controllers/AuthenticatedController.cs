@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace G4_Proyecto_ProgramacionAvanzada.Controllers
+namespace WEBCloudCash.Controllers
 {
     public class AuthenticatedController : Controller
     {

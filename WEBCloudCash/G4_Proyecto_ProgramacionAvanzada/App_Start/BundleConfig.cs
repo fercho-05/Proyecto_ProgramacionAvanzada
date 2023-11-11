@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace G4_Proyecto_ProgramacionAvanzada
+namespace WEBCloudCash
 {
     public class BundleConfig
     {

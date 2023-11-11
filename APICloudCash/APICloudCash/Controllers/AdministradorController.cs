@@ -178,13 +178,34 @@ namespace APICloudCash.Controllers
         }
 
         [HttpPost]
-        [Route("IngresarTarjetaDebito")]
+        [Route("IngresarTarjetaCredito")]
         public string IngresarTarjetaCredito(entTDebitos entTCredito)
         {
 
+            /* Solo para cuentas 
+            string codigoBanco = "601"; //1) 3dig codigoBanco. 601 por el codigo del curso
+            string oficina = "001"; //2) 3dig oficina. 001 = Oficina principal
+            string tipoCuenta = "100"; //3) 3dig tipoCuenta. 100 = Corriente representando cuenta corriente. 200= Ahorros(No diseñado) y 300 = Credito
+            string moneda = entTCredito.id_TipoDivisa.ToString(); //4) 1dig moneda. 1 = Colones y 2 = Dolares
+
+            Random random = new Random();
+            string cuenta = random.Next(1000000).ToString().PadLeft(6,'0');//6dig cuenta. Genera un numero entre 0 y 999999, la convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
+            
+
+            var cuentaCC = codigoBanco + oficina + tipoCuenta+moneda+cuenta;
+            */
+
+            Random random = new Random();
+            long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 10000000000000000);//6dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
+            string cuenta = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
 
 
-            var cuentaIBAN = "CR" + "";
+
+
+
+
+
+
 
             try
             {
@@ -216,7 +237,7 @@ namespace APICloudCash.Controllers
 
         [HttpGet]
         [Route("ListarUsuariosPorCedula")]
-        public List<Usuarios> ListarUsuariosPorCedula(string nombre)
+        public List<Usuarios> ListarUsuariosPorCedula(entUsuarios entUsuario)
         {
             try
             {
@@ -224,7 +245,7 @@ namespace APICloudCash.Controllers
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     var datos = (from x in context.Usuarios
-                                 where x.nombre.Contains(nombre)
+                                 where x.nombre.Contains(entUsuario.cedula)
                                  select x).ToList();
 
                     return datos;
@@ -238,6 +259,29 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListarTarjetasPorCuentaCC")]
+        public List<Tarjetas> ListarTarjetasPorCuentaCC(entTarjetas entTarjeta)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    var datos = (from x in context.Tarjetas
+                                 where x.numeroTarjeta == entTarjeta.numeroTarjeta
+                                 select x).ToList();
+
+                    return datos;
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return new List<Tarjetas>();
+            }
+        }
 
 
     }

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace G4_Proyecto_ProgramacionAvanzada
+namespace WEBCloudCash
 {
     public class FilterConfig
     {

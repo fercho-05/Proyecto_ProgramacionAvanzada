@@ -1,0 +1,67 @@
+﻿@model WEBCloudCash.Entities.entUsuarios
+
+@{
+    ViewBag.Title = "RecuperarContraseña";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Contact Area -->
+                <div>
+                    <div class="contact-form-area contact-page">
+
+                        @using (Html.BeginForm("RecuperarContrasena", "Login", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                        {
+                            <br />
+                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Recuperar Contraseña</h3>
+                            if (ViewBag.mensaje != null)
+                            {
+                                if (ViewBag.mensaje == "OK")
+                                {
+                                    <div class="alert alert-success" role="alert" style="text-align:center;">
+                                        Correo enviado con exito. Revise el correo ligado a este usuario.
+                                    </div>
+                                }
+                                else if (ViewBag.mensaje == "NO DATA")
+                                {
+
+                                    <div class="alert alert-danger" role="alert" style="text-align:center;">
+                                        No se encontra registro con este nombre de usuario
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-danger" role="alert" style="text-align:center;">
+                                        Error al enviar el correo. Solicitar asistencia a nuestro correo cloudcash999@gmail.com
+                                    </div>
+
+
+                                }
+                            }
+
+
+                            <h6 class="text-center mt-3 mb-3">Ingrese su nombre de Usuario para recibir su contraseña en el correo</h6>
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.nombreUsuario, new { @class = "form-control form-control-lg text-dark", @type = "text", @placeholder = "Nombre de Usuario" })
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-center align-items-center" style="margin-bottom: 4vh;">
+                                    <button class="btn credit-btn mt-30" type="submit">Enviar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
