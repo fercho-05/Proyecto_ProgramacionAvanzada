@@ -18,120 +18,35 @@
                 -->
                 <div class="contact-form-area contact-page">
                     <div class="container">
-                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Tarjetas de débito</h2>
+                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Cuenta de Ahorro</h2>
                         <div class="row">
-                            <div class="col-12 mt-4 align-items-center justify-content-center">
-                                <div style="text-align: center; background-color: #B30000;" class="card p-3">
-                                    <p class="mb-0 fw-bold h4">Tarjeta de crédito</p>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div style="background-color: black; border: none;" class="card p-3">
-                                    <div style="border-color:white;" class="card-body border p-0">
-                                        <div class="collapse show p-3 pt-0" id="collapseExample">
-                                            <div class="row">
-                                                <div class="col-lg-5 mb-lg-0 mb-3 d-flex align-items-center justify-content-center">
-                                                    <p class="mb-0">
-                                                        <img src="~/Template/img/visa.png" alt="" class="img-fluid">
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-7">
-                                                    <form action="" class="form">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="form__div">
-                                                                    <input type="text" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">Número de tarjeta</label>
-                                                                </div>
-                                                            </div>
 
-                                                            <div class="col-6">
-                                                                <div class="form__div">
-                                                                    <input type="text" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">MM / yy</label>
-                                                                </div>
-                                                            </div>
+                            <div class="container">
+                                <!--   Use JavaScript to Populate Card -->
+                                <div style="background-color:; padding: 4rem;" id="root" class="card"><h1>@Session["NombreCompleto"]</h1><p style="text-align:center;">Balance $0</p><p style="text-align:center;">Ingreso $0</p><p style="text-align:center;">Gasto $0</p></div>
+                                <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
+                                <div class="update">
+                                    <form style="background-color: #B30000; padding: 1rem;">
 
-                                                            <div class="col-6">
-                                                                <div class="form__div">
-                                                                    <input type="password" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">cvc</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="form__div">
-                                                                    <input type="text" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">Nombre en la tarjeta</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <input class="form-control" type="number" name="amountAdded" id="amountAdded" placeholder="0.00" fdprocessedid="gicnjo">
+                                        <br>
+                                        <div class="input-group">
+                                            <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" class="btn btn-outline-secondary" value="Agregar Ingreso" onclick="addIncome()" fdprocessedid="cmttbr">
+                                            <br>
+                                            <br>
+                                            <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" class="btn btn-outline-secondary" value="Agregar Gasto" onclick="addExpense()" fdprocessedid="i00m5">
+                                            <br>
+                                            <br>
+                                            <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" value="Reset" class="btn btn-outline-secondary" onclick="resetAccount()" fdprocessedid="xkmbte">
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
+
                             </div>
+
+
                         </div>
                         <!--AQUI TERMINA UNA TARJETA-->
-
-                        <div class="row">
-                            <div class="col-12 mt-4 align-items-center justify-content-center">
-                                <div style="text-align: center; background-color: #B30000;" class="card p-3">
-                                    <p class="mb-0 fw-bold h4">Tarjeta de crédito</p>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div style="background-color: black; border: none;" class="card p-3">
-                                    <div style="border-color:white;" class="card-body border p-0">
-                                        <div class="collapse show p-3 pt-0" id="collapseExample">
-                                            <div class="row">
-                                                <div class="col-lg-5 mb-lg-0 mb-3 d-flex align-items-center justify-content-center">
-                                                    <p class="mb-0">
-                                                        <img src="~/Template/img/mastercard.png" alt="" class="img-fluid">
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-7">
-                                                    <form action="" class="form">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="form__div">
-                                                                    <input type="text" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">Número de tarjeta</label>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-6">
-                                                                <div class="form__div">
-                                                                    <input type="text" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">MM / yy</label>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-6">
-                                                                <div class="form__div">
-                                                                    <input type="password" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">cvc</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="form__div">
-                                                                    <input type="text" class="form-control" placeholder=" " readonly>
-                                                                    <label for="" class="form__label">Nombre en la tarjeta</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
                         <!--TERMINA OTRA TARJETA-->
                     </div>
 
@@ -141,3 +56,82 @@
         </div>
     </div>
 </section>
+
+<!--
+<script>
+    let myAccount = {
+        name: 'John Doe',
+        income: 0,
+        expense: 0
+    }
+
+    let addIncome = function () {
+        console.log('add income');
+        amount = parseInt(document.getElementById("amountAdded").value)
+        myAccount.income += amount
+        updateUI()
+    }
+
+    let addExpense = function () {
+        amount = parseInt(document.getElementById("amountAdded").value)
+        myAccount.expense += amount
+        updateUI()
+    }
+
+    let resetAccount = function () {
+        myAccount.income = 0
+        myAccount.expense = 0
+        updateUI()
+    }
+
+    let getAccountSummary = function () {
+        //for ui logic
+        return {
+            balance: myAccount.income - myAccount.expense,
+            income: myAccount.income,
+            expense: myAccount.expense
+        }
+    }
+
+    let printAccountSummary = function (account) {
+        //for developer
+        let accountSummary = getAccountSummary(account)
+        console.log(`
+        Balance: ${accountSummary.balance}
+        Income: ${accountSummary.income}
+        Expense: ${accountSummary.expense}
+    `)
+    }
+
+    // addExpense(account,100)
+    // addIncome(account,200)
+    // printAccountSummary(account)
+
+    let updateUI = function () {
+        //find app
+        var app = document.getElementById("root")
+        app.innerHTML = '';
+        //make elements
+        var h1 = document.createElement("h1")
+        var text = document.createTextNode(`${myAccount.name}`)
+
+        var balance = document.createElement("p")
+        var balanceText = document.createTextNode(`Balance $${getAccountSummary(myAccount).balance}`)
+        var expense = document.createElement("p")
+        var expenseText = document.createTextNode(`Expense $${getAccountSummary(myAccount).expense}`)
+        var income = document.createElement("p")
+        var incomeText = document.createTextNode(`Income $${getAccountSummary(myAccount).income}`)
+        //assign elements
+
+        h1.appendChild(text)
+        balance.appendChild(balanceText)
+        income.appendChild(incomeText)
+        expense.appendChild(expenseText)
+        //append children
+        app.appendChild(h1)
+        app.appendChild(balance)
+        app.appendChild(income)
+        app.appendChild(expense)
+    }
+    updateUI()
+</script>TERMINA OTRA TARJETA-->
