@@ -1,4 +1,4 @@
-﻿using G4_Proyecto_ProgramacionAvanzada.Entities;
+﻿using WEBCloudCash.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Net.Http.Json;
 using System.Web;
 using System.Web.Mvc;
 
-namespace G4_Proyecto_ProgramacionAvanzada.Models
+namespace WEBCloudCash.Models
 {
     public class modUsuarios
     {
@@ -55,6 +55,20 @@ namespace G4_Proyecto_ProgramacionAvanzada.Models
                 string url = urlApi + "ListarTipoUsuarios";
                 var resp = client.GetAsync(url).Result;
                 return resp.Content.ReadFromJsonAsync<List<SelectListItem>>().Result;
+
+
+            }
+
+        }
+
+        public string RecuperarContrasena(entUsuarios entUsuario) {
+
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "RecuperarContrasena";
+                JsonContent contenido = JsonContent.Create(entUsuario);
+                var resp = client.PostAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
 
 
             }

@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CloudCashModelStoreContainer" CdmEntityContainer="DBCC">
     <EntitySetMapping Name="Administradores">
-      <EntityTypeMapping TypeName="CloudCashModel.Administradore">
+      <EntityTypeMapping TypeName="CloudCashModel.Administradores">
         <MappingFragment StoreEntitySet="Administradores">
           <ScalarProperty Name="id_Administrador" ColumnName="id_Administrador" />
           <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Clientes">
-      <EntityTypeMapping TypeName="CloudCashModel.Cliente">
+      <EntityTypeMapping TypeName="CloudCashModel.Clientes">
         <MappingFragment StoreEntitySet="Clientes">
           <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
           <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
@@ -18,7 +18,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Prestamos">
-      <EntityTypeMapping TypeName="CloudCashModel.Prestamo">
+      <EntityTypeMapping TypeName="CloudCashModel.Prestamos">
         <MappingFragment StoreEntitySet="Prestamos">
           <ScalarProperty Name="id_Prestamo" ColumnName="id_Prestamo" />
           <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
@@ -30,8 +30,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CloudCashModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Tarjetas">
-      <EntityTypeMapping TypeName="CloudCashModel.Tarjeta">
+      <EntityTypeMapping TypeName="CloudCashModel.Tarjetas">
         <MappingFragment StoreEntitySet="Tarjetas">
           <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
           <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
@@ -47,7 +58,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TCreditos">
-      <EntityTypeMapping TypeName="CloudCashModel.TCredito">
+      <EntityTypeMapping TypeName="CloudCashModel.TCreditos">
         <MappingFragment StoreEntitySet="TCreditos">
           <ScalarProperty Name="id_Credito" ColumnName="id_Credito" />
           <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
@@ -55,7 +66,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TDebitos">
-      <EntityTypeMapping TypeName="CloudCashModel.TDebito">
+      <EntityTypeMapping TypeName="CloudCashModel.TDebitos">
         <MappingFragment StoreEntitySet="TDebitos">
           <ScalarProperty Name="id_Debito" ColumnName="id_Debito" />
           <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
@@ -63,7 +74,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TipoDivisas">
-      <EntityTypeMapping TypeName="CloudCashModel.TipoDivisa">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoDivisas">
         <MappingFragment StoreEntitySet="TipoDivisas">
           <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
           <ScalarProperty Name="Abreviado" ColumnName="Abreviado" />
@@ -72,7 +83,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TipoTarjetas">
-      <EntityTypeMapping TypeName="CloudCashModel.TipoTarjeta">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoTarjetas">
         <MappingFragment StoreEntitySet="TipoTarjetas">
           <ScalarProperty Name="id_TipoTarjeta" ColumnName="id_TipoTarjeta" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -80,7 +91,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TipoUsuarios">
-      <EntityTypeMapping TypeName="CloudCashModel.TipoUsuario">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoUsuarios">
         <MappingFragment StoreEntitySet="TipoUsuarios">
           <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
@@ -88,7 +99,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="CloudCashModel.Usuario">
+      <EntityTypeMapping TypeName="CloudCashModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
           <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
           <ScalarProperty Name="cedula" ColumnName="cedula" />
@@ -105,8 +116,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CloudCashModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="SP_CrearTarjetaCredito" FunctionName="CloudCashModel.Store.SP_CrearTarjetaCredito" />
     <FunctionImportMapping FunctionImportName="SP_CrearTarjetaDebito" FunctionName="CloudCashModel.Store.SP_CrearTarjetaDebito" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CloudCashModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CloudCashModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CloudCashModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CloudCashModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CloudCashModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CloudCashModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_IngresarAdministrador" FunctionName="CloudCashModel.Store.SP_IngresarAdministrador" />
     <FunctionImportMapping FunctionImportName="SP_IngresarCliente" FunctionName="CloudCashModel.Store.SP_IngresarCliente" />
     <FunctionImportMapping FunctionImportName="SP_IniciarSesion" FunctionName="CloudCashModel.Store.SP_IniciarSesion">
@@ -145,5 +178,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CloudCashModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CloudCashModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>

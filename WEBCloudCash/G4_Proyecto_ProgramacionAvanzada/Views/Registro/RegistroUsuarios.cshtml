@@ -1,4 +1,4 @@
-﻿@model G4_Proyecto_ProgramacionAvanzada.Entities.entUsuarios
+﻿@model WEBCloudCash.Entities.entUsuarios
 @{
     ViewBag.Title = "Registrar usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,9 +13,6 @@
                     @* Para uso de administrador *@
                     @using (Html.BeginForm("RegistroUsuarios", "Registro", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
                     {
-
-
-
                         <br />
                         <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; text-align: center;">Registrar Clientes</h3>
                         if (ViewBag.mensaje != null)

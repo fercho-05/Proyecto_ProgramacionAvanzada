@@ -36,7 +36,7 @@ namespace APICloudCash.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("RecuperarContrasena")]
         public string RecuperarContrasena(entUsuarios entUsuario) {
             try
@@ -51,13 +51,17 @@ namespace APICloudCash.Controllers
                     {
                         string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "Templates\\RecuperacionContrasena.html";
                         string html = File.ReadAllText(urlHtml);
-                        html = html.Replace("@@Nombre", datos.nombre + " "+ datos.apellidoUno+" "+datos.apellidoDos);
+                        html = html.Replace("@@Nombre", datos.nombre + " " + datos.apellidoUno + " " + datos.apellidoDos);
                         html = html.Replace("@@Contrasena", datos.contrasena);
                         util.EnvioCorreos(datos.correo, "Recuperar Contraseña", html);
+                        return "OK";
+                    }
+                    else {
+                        return "NO DATA";
                     }
 
                 }
-                return "OK";
+                
             }
             catch (Exception e)
             {

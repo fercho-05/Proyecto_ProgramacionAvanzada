@@ -247,6 +247,11 @@
     <Content Include="Template\img\bg-img\creditcard.jpg" />
     <Content Include="Template\img\bg-img\login.jpg" />
     <Content Include="Template\img\bg-img\promociones.jpg" />
+    <Content Include="Template\img\cloudcashlogo-blue.png" />
+    <Content Include="Template\img\cloudcashlogo-nb-black-small.png" />
+    <Content Include="Template\img\cloudcashlogo-nb-black.png" />
+    <Content Include="Template\img\cloudcashlogo-nb.png" />
+    <Content Include="Template\img\cloudcashlogo.png" />
     <Content Include="Template\img\core-img\calendar.png" />
     <Content Include="Template\img\core-img\call.png" />
     <Content Include="Template\img\core-img\call2.png" />
@@ -1462,7 +1467,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout_Login.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\LogIn.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -1526,6 +1530,7 @@
     <Content Include="Views\Authenticated\PagarServicios.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\EnvioDinero.cshtml" />
+    <Content Include="Views\Login\RecuperarContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
