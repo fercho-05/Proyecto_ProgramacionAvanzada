@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="G4_Proyecto_ProgramacionAvanzada.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="WEBCloudCash.MvcApplication" Language="C#" %>

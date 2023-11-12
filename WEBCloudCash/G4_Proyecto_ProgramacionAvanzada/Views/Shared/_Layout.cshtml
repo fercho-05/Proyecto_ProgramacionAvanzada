@@ -8,14 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Title -->
     <title>CloudCash</title>
-
-    <!-- Favicon -->
     <link rel="icon" href="~/Template/img/core-img/favicon.ico">
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="~/Template/style.css">
     <style>
         #botongenerico{
@@ -26,7 +20,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
@@ -52,18 +45,15 @@
 
                         <!-- Top Info -->
                         <div class="top-contact-info d-flex align-items-center">
-                            @if (Session["NombreCompleto"] != null)
-                            {
-                                @Session["NombreCompleto"]
 
-                                <a style="margin-bottom: 1rem;" href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Cerrar Sesión</a>
-                            }
-                            else
-                            {
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Avenida 999, SJO, CR"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Avenida 999, SJO, CR</span></a>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="cloudcash@cloudcash.com"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash@cloudcash.com</span></a>
-                                <a style="margin-bottom: 1rem;" href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-2 botongenerico" data-delay="700ms">Iniciar Sesión</a>
-                            }   
+                            <a href="#" ><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Oficinas Real Cariari, San José, CR</span></a>
+                            <a href="#" ><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash999@gmail.com</span></a>
+
+                                @if(ViewBag.IniciarSesion == null)
+                                {
+                                    <a  href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-4   h-25 justify-content-center" data-delay="700ms">Iniciar Sesión</a>
+                                }
+                            
                         </div>
                     </div>
                 </div>
@@ -113,12 +103,7 @@
                                             <li><a href="@Url.Action("EnvioDinero", "Home")">Envío de Dinero</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="@Url.Action("Contact", "Home")">Contacto</a></li>
-
-                                    @* Opción solo para uso de administradores *@
-                                    @* Se debe realizar la validación para solo mostrar a administradores*@
-                                    <li><a href="@Url.Action("RegistroUsuarios", "Registro")">Registrar usuarios(Admin)</a></li>
-                                    
+                                    <li><a href="@Url.Action("Contact", "Home")">Contacto</a></li>                                    
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -126,7 +111,7 @@
 
                         <!-- Contact -->
                         <div class="contact">
-                            <a style="color:#FFFFFF;" href="#"><img src="~/Template/img/core-img/call2.png" alt=""> +506 2222 2222</a>
+                            <a style="color:#FFFFFF;" href="#"><img src="~/Template/img/core-img/call2.png" alt=""> +506 8480 6994</a>
                         </div>
                     </nav>
                 </div>
@@ -151,7 +136,6 @@
                             <ul>
                                 <li><a href="@Url.Action("Perfil", "Home")">Tarjeta de crédito</a></li>
                                 <li><a href="@Url.Action("Perfil", "Home")">Tarjeta de débito</a></li>
-                                <li><a href="@Url.Action("Perfil", "Home")">Crédito de vivienda</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -208,7 +192,7 @@
                                 <a href="#"></a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 CloudCash &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This Template was made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <script>document.write(new Date().getFullYear());</script> Todos los derechos reservados | Proyecto realizado para Programación Avanzada con <i class="fa fa-heart-o" aria-hidden="true"></i>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
