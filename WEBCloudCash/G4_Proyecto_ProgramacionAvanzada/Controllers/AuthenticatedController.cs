@@ -34,6 +34,12 @@ namespace G4_Proyecto_ProgramacionAvanzada.Controllers
         public ActionResult MiCredito()
         {
             return View();
+        } 
+        
+        [HttpGet]
+        public ActionResult TarjetaCredito()
+        {
+            return View();
         }
     }
 }
