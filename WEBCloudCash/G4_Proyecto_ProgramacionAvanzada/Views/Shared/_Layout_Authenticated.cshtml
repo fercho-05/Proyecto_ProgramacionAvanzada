@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="~/Template/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="icon" href="~/template/img/core-img/favicon.ico">
+    <link rel="stylesheet" href="~/Template/assets/css/CardView.css">
+
 </head>
 <body>
     <div class="container-scroller">
@@ -39,13 +41,24 @@
                         <span style="color:white;" class="menu-title">Mi Perfil</span>
                     </a>
                 </li>
+
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="@Url.Action("Productos","Authenticated")">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <span class="menu-icon">
                             <i class="mdi mdi-cards"></i>
                         </span>
                         <span style="color:white;" class="menu-title">Mis Productos</span>
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu"> <!--ESTOS PRODUCTOS SE MOSTRARAN DEPENDIENDO DE CUALES TENGA EL USUARIO-->
+                            <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="@Url.Action("TarjetaCredito","Authenticated")">Tarjetas de Crédito</a></li>
+                            <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="@Url.Action("TarjetaDebito","Authenticated")">Tarjetas de Débito</a></li>
+                            <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="pages/ui-features/typography.html">Cuenta de Ahorro</a></li>
+                            <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="pages/ui-features/typography.html">Cuenta Corriente</a></li>
+                            <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="pages/ui-features/typography.html">Cuenta de Planilla</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="@Url.Action("EnviarDinero","Authenticated")">

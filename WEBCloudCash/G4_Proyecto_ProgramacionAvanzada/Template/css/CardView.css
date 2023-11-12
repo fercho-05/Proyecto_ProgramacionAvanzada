@@ -148,3 +148,22 @@ body {
     border: 1.5px solid #1A73E8;
     box-shadow: none;
 }
+
+
+.row{
+    transition: transform .2s;
+}
+
+.row:hover{
+    transform: scale(1.5);
+}
+
+
+#productoHover a{
+    transition: 0.2s !important;
+
+}
+
+#productoHover a:hover{
+     font-size: bigger !important;
+}

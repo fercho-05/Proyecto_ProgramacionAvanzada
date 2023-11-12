@@ -27,16 +27,16 @@ namespace APICloudCash
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Administradore> Administradores { get; set; }
-        public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Prestamo> Prestamos { get; set; }
-        public virtual DbSet<Tarjeta> Tarjetas { get; set; }
-        public virtual DbSet<TCredito> TCreditos { get; set; }
-        public virtual DbSet<TDebito> TDebitos { get; set; }
-        public virtual DbSet<TipoDivisa> TipoDivisas { get; set; }
-        public virtual DbSet<TipoTarjeta> TipoTarjetas { get; set; }
-        public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Administradores> Administradores { get; set; }
+        public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<Prestamos> Prestamos { get; set; }
+        public virtual DbSet<Tarjetas> Tarjetas { get; set; }
+        public virtual DbSet<TCreditos> TCreditos { get; set; }
+        public virtual DbSet<TDebitos> TDebitos { get; set; }
+        public virtual DbSet<TipoDivisas> TipoDivisas { get; set; }
+        public virtual DbSet<TipoTarjetas> TipoTarjetas { get; set; }
+        public virtual DbSet<TipoUsuarios> TipoUsuarios { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     
         public virtual ObjectResult<string> SP_CrearTarjetaCredito(Nullable<long> id_Cliente, Nullable<int> numeroTarjeta, string nombrePoseedor, Nullable<System.DateTime> fechaVencimiento, Nullable<short> cvc, Nullable<long> saldo, Nullable<int> id_TipoDivisa, Nullable<bool> activa)
         {

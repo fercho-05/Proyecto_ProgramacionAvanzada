@@ -1,4 +1,5 @@
 ﻿using APICloudCash.Entities;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +72,6 @@ namespace APICloudCash.Controllers
 
         }
 
-
         [HttpGet]
         [Route("ListarTipoUsuarios")]
         public List<System.Web.Mvc.SelectListItem> ListarTipoUsuarios()
@@ -112,7 +112,6 @@ namespace APICloudCash.Controllers
             }
 
         }
-
         
 
         [HttpGet]
@@ -178,9 +177,28 @@ namespace APICloudCash.Controllers
         }
 
         [HttpPost]
-        [Route("IngresarTarjetaDebito")]
-        public string IngresarTarjetaCredito(entTDebitos entTCredito)
+        [Route("IngresarTarjetaCredito")]
+        public string IngresarTarjetaCredito(entTCreditos entTCredito)
         {
+
+            var tarjetaCreada = true;
+            int cuentaCC=0;
+
+            while (tarjetaCreada == true) { //Loop para generar una cuenta que no este creada
+                cuentaCC = GenerarCuentaCC();
+                var resp = MostrarTarjeta(entTCredito);
+                if (resp == null) {
+                    tarjetaCreada = false;
+                }
+
+            }
+
+            entTCredito.numeroTarjeta = cuentaCC; //Almacenamiento de cuenta Cloud Cash
+            entTCredito.cvc = GenerarCVC(); //Generar el codigo CVC
+            entTCredito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
+
+
+
 
             try
             {
@@ -206,6 +224,102 @@ namespace APICloudCash.Controllers
                 return e.Message;
             }
 
+
+        }
+
+
+        [HttpGet]
+        [Route("ListarUsuariosPorCedula")]
+        public List<Usuarios> ListarUsuariosPorCedula(entUsuarios entUsuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    var datos = (from x in context.Usuarios
+                                 where x.nombre.Contains(entUsuario.cedula)
+                                 select x).ToList();
+
+                    return datos;
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return new List<Usuarios>();
+            }
+        }
+
+        [HttpGet]
+        [Route("MostrarTarjeta")]
+        public Tarjetas MostrarTarjeta(entTarjetas entTarjeta)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    var datos = (from x in context.Tarjetas
+                                 where x.numeroTarjeta == entTarjeta.numeroTarjeta
+                                 select x).FirstOrDefault();
+
+                    return datos;
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return  null;
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("MostrarUsuario")]
+        public Usuarios MostrarUsuario(Usuarios entUsuario) {
+
+            try {
+                using (var context = new DBCC())
+                {
+                    var usuario = (from x in context.Usuarios
+                                   where x.id_Usuario == entUsuario.id_Usuario
+                                   select x).FirstOrDefault();
+                    return usuario;
+
+            }
+            }catch (Exception e)
+            {
+                return null;
+            }
+
+
+        }
+
+
+
+        Random random = new Random();
+
+        public int GenerarCuentaCC() {
+
+            
+            long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 10000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
+            string cuenta = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
+            int cuentaCC = int.Parse(cuenta);
+            return cuentaCC;
+
+        }
+
+        public short GenerarCVC()
+        {
+
+            long cvcSinRellenar = random.Next(1, 1000);//3dig cvc. Genera un numero entre 1 y 999,
+            string cvcRellenado = cvcSinRellenar.ToString("D3");//La convierte en string, finalmente la rellena en el caso que no cumpla con los 3 digitos necesarios
+            short cvc = short.Parse(cvcRellenado);
+            return cvc;
 
         }
 
