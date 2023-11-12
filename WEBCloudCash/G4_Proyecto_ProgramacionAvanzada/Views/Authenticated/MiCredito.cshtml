@@ -4,5 +4,90 @@
     Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
 }
 
-<h2>Mi Crédito</h2>
 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<div class="container">
+    <div style="text-align:center;">
+        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Mi Crédito de Vivienda</h2>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6 mx-auto">
+            <div class="card card-body text-center mt-5">
+                <h1 class="heading display-5 pb-3">Detalle</h1>
+                <form id="loan-form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">CRC</span>
+                            </div>
+                            <input type="number" id="amount" placeholder="Monto del crédito" class="form-control" name="" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Porcentaje</span>
+                            </div>
+                            <input type="number" id="interest" placeholder="Interés" class="form-control" name="" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" id="years" placeholder="Plazo en años" class="form-control" name="" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="" value="Calcular" class="btn btn-dark btn-block">
+                    </div>
+                </form>
+                <!-- Loader  -->
+                <div id="loading">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Loading Gif" style="height: 100px;" class="img-fluid">
+                </div>
+                <!-- Result  -->
+                <div id="results" class="pt-4">
+                    <h5>Resultados:</h5>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Pago Mensual</span>
+                            </div>
+                            <input style="background-color: #2A3038;" type="number" id="monthly-payment" class="form-control" name="" value="" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Pago Total</span>
+                            </div>
+                            <input style="background-color: #2A3038;" type="number" id="total-payment" class="form-control" name="" value="" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Intereses Totales</span>
+                            </div>
+                            <input style="background-color: #2A3038;" type="number" id="total-interest" class="form-control" name="" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    #loading, #results {
+        display: none;
+    }
+</style>
+
+<script src="~/Funciones/creditoVivienda.js"></script>
