@@ -41,5 +41,31 @@ namespace WEBCloudCash.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult TarjetaDebito()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CuentaAhorro()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CuentaCorriente()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CuentaPlanilla()
+        {
+            return View();
+        }
+
+   
     }
 }
