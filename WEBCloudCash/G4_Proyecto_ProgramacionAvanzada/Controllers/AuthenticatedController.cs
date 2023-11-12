@@ -34,6 +34,12 @@ namespace WEBCloudCash.Controllers
         public ActionResult MiCredito()
         {
             return View();
+        } 
+        
+        [HttpGet]
+        public ActionResult TarjetaCredito()
+        {
+            return View();
         }
     }
 }
