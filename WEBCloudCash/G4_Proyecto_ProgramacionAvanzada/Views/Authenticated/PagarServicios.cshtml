@@ -4,5 +4,145 @@
     Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
 }
 
-<h2>Pagar Servicios</h2>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 text-center">
+                <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Pagar Servicios</h2>
+
+
+                <div class="col-12">
+                    <div class="d-flex flex-column">
+                        <select id="tipoServicio" class="form-control mb-3">
+                            <option value="" disabled selected>Seleccione el Servicio</option>
+                            <option value="cel">Celular</option>
+                            <option value="wifi">Internet</option>
+                            <option value="light">Luz</option>
+                            <option value="tv">Cable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="pagoCelular" class="text-center" style="padding: 2rem; display: none;">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Pago celular</h3>
+                    <p style="color: black;" class="hidden mb-6 font-bold xs:block">
+                        El pago de su celular desde la comodidad de su banca en línea.
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        @using (Html.BeginForm("ACCION", "CONTROLLER", FormMethod.Post, new { @class = "d-flex flex-column" }))
+                        {
+                            <div class="input-group">
+                                <span class="input-group-text" style="background: none; border: none; padding: 0;">
+                                    <img style="width: 32px; height: 32px; border-radius: 50%; margin-right:1rem;" src="/Template/img/costa-rica.png" alt="Costa Rica">
+                                </span>
+                                @Html.TextBox("TELEFONO", "", new { @class = "form-control form-control-sm mb-2", @placeholder = "+50688886666", @type = "tel", @pattern = "[0-9]{12}", @maxlength = "12", @oninput = "predefinirPrefijo()" })
+                            </div>
+                            <div class="col-12" id="botonTransfiere" text-align:center;">
+                                <button type="submit" class="btn btn-primary mb-3">
+                                    <span class="ps-3">Pagar</span>
+                                    <span class="fas fa-arrow-right"></span>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+                <!--PAGO DE INTERNET-->
+
+                <div id="pagoInternet" class="text-center" style="padding: 2rem; display: none;">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Pago internet</h3>
+                    <p style="color: black;" class="hidden mb-6 font-bold xs:block">
+                        El pago de su internet desde la comodidad de su banca en línea. Ingrese su número de suscriptor.
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        @using (Html.BeginForm("ACCION", "CONTROLLER", FormMethod.Post, new { @class = "d-flex flex-column" }))
+                        {
+                            <div class="input-group">
+                                <span class="input-group-text" style="background: none; border: none; padding: 0;">
+                                    <img style="width: 32px; height: 32px; border-radius: 50%; margin-right:1rem;" src="/Template/img/costa-rica.png" alt="Costa Rica">
+                                </span>
+                                @Html.TextBox("WIFI", "", new { @class = "form-control form-control-sm mb-2", @placeholder = "12345678", @type = "tel", @pattern = "[0-9]{8}", @maxlength = "8", @oninput = "validarTelefono()" })
+                            </div>
+                            <div class="col-12" id="botonTransfiere" text-align:center;">
+                                <button type="submit" class="btn btn-primary mb-3">
+                                    <span class="ps-3">Pagar</span>
+                                    <span class="fas fa-arrow-right"></span>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+                <!--PAGO DE LUZ-->
+
+                <div id="pagoLuz" class="text-center" style="padding: 2rem; display: none;">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Pago electricidad</h3>
+                    <p style="color: black;" class="hidden mb-6 font-bold xs:block">
+                        El pago de su electricidad desde la comodidad de su banca en línea. Ingrese su número de suscriptor.
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        @using (Html.BeginForm("ACCION", "CONTROLLER", FormMethod.Post, new { @class = "d-flex flex-column" }))
+                        {
+                            <div class="input-group">
+                                <span class="input-group-text" style="background: none; border: none; padding: 0;">
+                                    <img style="width: 32px; height: 32px; border-radius: 50%; margin-right:1rem;" src="/Template/img/costa-rica.png" alt="Costa Rica">
+                                </span>
+                                @Html.TextBox("LUZ", "", new { @class = "form-control form-control-sm mb-2", @placeholder = "12345678", @type = "tel", @pattern = "[0-9]{8}", @maxlength = "8", @oninput = "validarTelefono()" })
+                            </div>
+                            <div class="col-12" id="botonTransfiere" text-align:center;">
+                                <button type="submit" class="btn btn-primary mb-3">
+                                    <span class="ps-3">Pagar</span>
+                                    <span class="fas fa-arrow-right"></span>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+                <!--PAGO DE tv-->
+
+                <div id="pagoTV" class="text-center" style="padding: 2rem; display: none;">
+                    <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Pago TV</h3>
+                    <p style="color: black;" class="hidden mb-6 font-bold xs:block">
+                        El pago de su televisión por cable desde la comodidad de su banca en línea. Ingrese su número de suscriptor.
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center">
+
+                        @using (Html.BeginForm("ACCION", "CONTROLLER", FormMethod.Post, new { @class = "d-flex flex-column" }))
+                        {
+                            <div class="input-group">
+                                <span class="input-group-text" style="background: none; border: none; padding: 0;">
+                                    <img style="width: 32px; height: 32px; border-radius: 50%; margin-right:1rem;" src="/Template/img/costa-rica.png" alt="Costa Rica">
+                                </span>
+                                @Html.TextBox("tv", "", new { @class = "form-control form-control-sm mb-2", @placeholder = "1111111", @type = "tel", @pattern = "[0-9]{7}", @maxlength = "7", @oninput = "validarTelefono()" })
+                            </div>
+                            <div class="col-12" id="botonTransfiere" text-align:center;">
+                                <button type="submit" class="btn btn-primary mb-3">
+                                    <span class="ps-3">Pagar</span>
+                                    <span class="fas fa-arrow-right"></span>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="~/Funciones/ValidacionesServicios.js"></script>
