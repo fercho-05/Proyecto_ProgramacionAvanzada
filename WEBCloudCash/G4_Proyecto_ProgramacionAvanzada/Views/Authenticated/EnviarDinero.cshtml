@@ -4,5 +4,115 @@
     Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
 }
 
-<h2>Enviar Dinero</h2>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Enviar Dinero</h2>
+                <div class="row">
+                    <div class="container">
+                        @using (Html.BeginForm("NombreDeTuAccion", "NombreDeTuControlador", FormMethod.Post))
+                        {
+                            <div class="container">
+                                <div class="container p-0">
+                                    <div class="card px-4">
+                                        <p class="h8 py-3">Detalles de Transferencia</p>
+                                        <div class="row gx-3">
+                                            <div class="col-12">
+                                                <div class="d-flex flex-column">
+                                                    <p class="text mb-1">Tipo de Cuenta</p>
+                                                    <select id="tipoCuenta" class="form-control mb-3">
+                                                        <option value="" disabled selected>Seleccione Origen de Cuenta</option>
+                                                        <option value="costarricense">Cuenta Costarricense</option>
+                                                        <option value="internacional">Cuenta Internacional</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--CUENTA INTERNACIONAL SOLO INGRESA NOMBRE COMPLETO-->
+                                            <div class="col-12" id="nombreCompletoInternacional" style="display: none;">
+                                                <div class="d-flex flex-column">
+                                                    <p class="text mb-1">Nombre Completo</p>
+                                                    @Html.TextBox("nombreCompletoInt", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Johh Doe" })
+                                                </div>
+                                            </div>
+                                            <!-- CAMPOS PARA CUENTA CR -->
+                                            <div class="col-12" id="datosCostarricense" style="display: none;">
+                                                <div class="row gx-3">
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Cédula Receptor</p>
+                                                            @Html.TextBox("cedula", "", new { @onkeyup = "ConsultarNombre()", @class = "form-control mb-3", @type = "text", @placeholder = "123456789" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Nombre</p>
+                                                            @Html.TextBox("nombre", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Juan", @style = "background-color: #363E48;", @readonly = "readonly" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Primer Apellido</p>
+                                                            @Html.TextBox("apellidoUno", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Mora", @style = "background-color: #363E48;", @readonly = "readonly" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="text mb-1">Segundo Apellido</p>
+                                                            @Html.TextBox("apellidoDos", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Mata", @style = "background-color: #363E48;", @readonly = "readonly" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Mostrar campo IBAN, MONTO, ASUNTO Y BOTON TRANSFERIR una vez que se haya ingresado el origen de la cuenta-->
+                                            <div class="col-12" id="cuentaIban" style="display: none;">
+                                                <div class="d-flex flex-column">
+                                                    <p class="text mb-1">Cuenta IBAN</p>
+                                                    @Html.TextBox("cuentaIBAN", "", new { @id = "ibanInput", @class = "form-control mb-3", @type = "text", @placeholder = "CR05015202001026284066" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12" id="montoTransferirContainer" style="display: none;">
+                                                <div class="d-flex flex-column">
+                                                    <p class="text mb-1">Monto a Transferir</p>
+                                                    @Html.TextBox("montoTransferir", "", new { @class = "form-control mb-3", @type = "number", @placeholder = "0000" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12" id="asuntoContainer" style="display: none;">
+                                                <div class="d-flex flex-column">
+                                                    <p class="text mb-1">Asunto</p>
+                                                    @Html.TextBox("asunto", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Asunto" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12" id="botonTransfiere" style="display: none; text-align:center;">
+                                                <button type="submit" class="btn btn-primary mb-3">
+                                                    <span class="ps-3">Transferir</span>
+                                                    <span class="fas fa-arrow-right"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>      
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Funciones/EnviarDineroValidaciones.js"></script>
+<script src="~/Funciones/ApiConsultarNombres.js"></script>
+
+
+
+
 
