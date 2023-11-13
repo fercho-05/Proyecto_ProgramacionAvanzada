@@ -38,15 +38,15 @@ namespace APICloudCash
         public virtual DbSet<TipoUsuarios> TipoUsuarios { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
     
-        public virtual ObjectResult<string> SP_CrearTarjetaCredito(Nullable<long> id_Cliente, Nullable<int> numeroTarjeta, string nombrePoseedor, Nullable<System.DateTime> fechaVencimiento, Nullable<short> cvc, Nullable<long> saldo, Nullable<int> id_TipoDivisa, Nullable<bool> activa)
+        public virtual ObjectResult<string> SP_CrearTarjetaCredito(Nullable<long> id_Cliente, string numeroTarjeta, string nombrePoseedor, Nullable<System.DateTime> fechaVencimiento, Nullable<short> cvc, Nullable<long> saldo, Nullable<int> id_TipoDivisa, Nullable<bool> activa)
         {
             var id_ClienteParameter = id_Cliente.HasValue ?
                 new ObjectParameter("id_Cliente", id_Cliente) :
                 new ObjectParameter("id_Cliente", typeof(long));
     
-            var numeroTarjetaParameter = numeroTarjeta.HasValue ?
+            var numeroTarjetaParameter = numeroTarjeta != null ?
                 new ObjectParameter("numeroTarjeta", numeroTarjeta) :
-                new ObjectParameter("numeroTarjeta", typeof(int));
+                new ObjectParameter("numeroTarjeta", typeof(string));
     
             var nombrePoseedorParameter = nombrePoseedor != null ?
                 new ObjectParameter("nombrePoseedor", nombrePoseedor) :
@@ -75,15 +75,15 @@ namespace APICloudCash
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_CrearTarjetaCredito", id_ClienteParameter, numeroTarjetaParameter, nombrePoseedorParameter, fechaVencimientoParameter, cvcParameter, saldoParameter, id_TipoDivisaParameter, activaParameter);
         }
     
-        public virtual ObjectResult<string> SP_CrearTarjetaDebito(Nullable<long> id_Cliente, Nullable<int> numeroTarjeta, string nombrePoseedor, Nullable<System.DateTime> fechaVencimiento, Nullable<short> cvc, Nullable<long> saldo, Nullable<int> id_TipoDivisa, Nullable<bool> activa)
+        public virtual ObjectResult<string> SP_CrearTarjetaDebito(Nullable<long> id_Cliente, string numeroTarjeta, string nombrePoseedor, Nullable<System.DateTime> fechaVencimiento, Nullable<short> cvc, Nullable<long> saldo, Nullable<int> id_TipoDivisa, Nullable<bool> activa)
         {
             var id_ClienteParameter = id_Cliente.HasValue ?
                 new ObjectParameter("id_Cliente", id_Cliente) :
                 new ObjectParameter("id_Cliente", typeof(long));
     
-            var numeroTarjetaParameter = numeroTarjeta.HasValue ?
+            var numeroTarjetaParameter = numeroTarjeta != null ?
                 new ObjectParameter("numeroTarjeta", numeroTarjeta) :
-                new ObjectParameter("numeroTarjeta", typeof(int));
+                new ObjectParameter("numeroTarjeta", typeof(string));
     
             var nombrePoseedorParameter = nombrePoseedor != null ?
                 new ObjectParameter("nombrePoseedor", nombrePoseedor) :

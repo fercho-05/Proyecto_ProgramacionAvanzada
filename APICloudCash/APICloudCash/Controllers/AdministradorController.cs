@@ -149,12 +149,23 @@ namespace APICloudCash.Controllers
         public string IngresarTarjetaDebito(entTDebitos entTDebito)
         {
 
+            entTDebito.numeroTarjeta = GenerarCuentaNoCreada(); //Generar de cuenta Cloud Cash
+            entTDebito.cvc = GenerarCVC(); //Generar el codigo CVC
+            entTDebito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
+            entUsuarios entUsuario = new entUsuarios();
+            entUsuario.id_Usuario = entTDebito.id_Cliente;
+            var usuario = MostrarUsuario(entUsuario);
+            entTDebito.nombrePoseedor = usuario.nombre + " " + usuario.apellidoUno + " " + usuario.apellidoDos;
+
+
             try
             {
                 using (var context = new DBCC())
                 {
+                    context.Configuration.LazyLoadingEnabled = false;
 
                     return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
+
                         entTDebito.id_Cliente,
                         entTDebito.numeroTarjeta,
                         entTDebito.nombrePoseedor,
@@ -165,6 +176,7 @@ namespace APICloudCash.Controllers
                         entTDebito.activa
 
                         ).FirstOrDefault();//Devuelve el registro
+
                 }
 
             }
@@ -181,31 +193,23 @@ namespace APICloudCash.Controllers
         public string IngresarTarjetaCredito(entTCreditos entTCredito)
         {
 
-            var tarjetaCreada = true;
-            string cuentaCC="";
-
-            while (tarjetaCreada == true) { //Loop para generar una cuenta que no este creada
-                cuentaCC = GenerarCuentaCC();
-                var resp = MostrarTarjeta(entTCredito);
-                if (resp == null) {
-                    tarjetaCreada = false;
-                }
-
-            }
-
-            entTCredito.numeroTarjeta = cuentaCC; //Almacenamiento de cuenta Cloud Cash
+            entTCredito.numeroTarjeta = GenerarCuentaNoCreada(); //Generar de cuenta Cloud Cash
             entTCredito.cvc = GenerarCVC(); //Generar el codigo CVC
             entTCredito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
-
-
+            entUsuarios entUsuario = new entUsuarios();
+            entUsuario.id_Usuario = entTCredito.id_Cliente;
+            var usuario = MostrarUsuario(entUsuario);
+            entTCredito.nombrePoseedor = usuario.nombre + " " + usuario.apellidoUno + " " + usuario.apellidoDos; 
 
 
             try
             {
                 using (var context = new DBCC())
                 {
+                    context.Configuration.LazyLoadingEnabled = false;
 
-                    return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
+                    return context.SP_CrearTarjetaCredito( //Procedimiento Almacenado
+
                         entTCredito.id_Cliente,
                         entTCredito.numeroTarjeta,
                         entTCredito.nombrePoseedor,
@@ -216,6 +220,7 @@ namespace APICloudCash.Controllers
                         entTCredito.activa
 
                         ).FirstOrDefault();//Devuelve el registro
+
                 }
 
             }
@@ -228,7 +233,7 @@ namespace APICloudCash.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet]//Hacer un buscador
         [Route("ListarUsuariosPorCedula")]
         public List<Usuarios> ListarUsuariosPorCedula(entUsuarios entUsuario)
         {
@@ -280,7 +285,7 @@ namespace APICloudCash.Controllers
 
         [HttpGet]
         [Route("MostrarUsuario")]
-        public Usuarios MostrarUsuario(Usuarios entUsuario) {
+        public Usuarios MostrarUsuario(entUsuarios entUsuario) {
 
             try {
                 using (var context = new DBCC())
@@ -291,7 +296,7 @@ namespace APICloudCash.Controllers
                     return usuario;
 
             }
-            }catch (Exception e)
+            }catch (Exception)
             {
                 return null;
             }
@@ -307,10 +312,28 @@ namespace APICloudCash.Controllers
 
             
             long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 10000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
-            string cuenta = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
-            string cuentaCC = cuenta;
+            string cuentaCC = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
             return cuentaCC;
 
+        }
+
+        public string GenerarCuentaNoCreada() {
+
+            var tarjetaCreada = true;
+            string cuentaCC="";
+            entTCreditos entTCredito = new entTCreditos();
+            while (tarjetaCreada == true)
+            { //Loop para generar una cuenta que no este creada
+                cuentaCC = GenerarCuentaCC();
+                entTCredito.numeroTarjeta = cuentaCC;
+                var resp = MostrarTarjeta(entTCredito);
+                if (resp == null)
+                {
+                    tarjetaCreada = false;
+                }
+
+            }
+            return cuentaCC;
         }
 
         public short GenerarCVC()

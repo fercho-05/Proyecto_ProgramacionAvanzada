@@ -16,8 +16,8 @@ namespace APICloudCash.Entities
         public long saldo { get; set; }
         public int id_TipoDivisa { get; set; }
         public bool activa { get; set; }
-        public int id_TipoTarjeta { get; set; } 
+        public int id_TipoTarjeta { get; set; }
+        public string mensaje { get; set; }
 
     }
-
 }

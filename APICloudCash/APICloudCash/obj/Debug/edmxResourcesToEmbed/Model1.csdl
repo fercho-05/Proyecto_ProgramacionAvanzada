@@ -38,8 +38,8 @@
     </Key>
     <Property Name="id_Tarjeta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="id_Cliente" Type="Int64" Nullable="false" />
-    <Property Name="numeroTarjeta" Type="Int32" Nullable="false" />
-    <Property Name="nombrePoseedor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numeroTarjeta" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombrePoseedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="cvc" Type="Int16" Nullable="false" />
     <Property Name="saldo" Type="Int64" Nullable="false" />
@@ -287,7 +287,7 @@
     </AssociationSet>
     <FunctionImport Name="SP_CrearTarjetaCredito" ReturnType="Collection(String)">
       <Parameter Name="id_Cliente" Mode="In" Type="Int64" />
-      <Parameter Name="numeroTarjeta" Mode="In" Type="Int32" />
+      <Parameter Name="numeroTarjeta" Mode="In" Type="String" />
       <Parameter Name="nombrePoseedor" Mode="In" Type="String" />
       <Parameter Name="fechaVencimiento" Mode="In" Type="DateTime" />
       <Parameter Name="cvc" Mode="In" Type="Int16" />
@@ -297,7 +297,7 @@
     </FunctionImport>
     <FunctionImport Name="SP_CrearTarjetaDebito" ReturnType="Collection(String)">
       <Parameter Name="id_Cliente" Mode="In" Type="Int64" />
-      <Parameter Name="numeroTarjeta" Mode="In" Type="Int32" />
+      <Parameter Name="numeroTarjeta" Mode="In" Type="String" />
       <Parameter Name="nombrePoseedor" Mode="In" Type="String" />
       <Parameter Name="fechaVencimiento" Mode="In" Type="DateTime" />
       <Parameter Name="cvc" Mode="In" Type="Int16" />
