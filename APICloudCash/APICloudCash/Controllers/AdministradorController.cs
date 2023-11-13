@@ -182,7 +182,7 @@ namespace APICloudCash.Controllers
         {
 
             var tarjetaCreada = true;
-            int cuentaCC=0;
+            string cuentaCC="";
 
             while (tarjetaCreada == true) { //Loop para generar una cuenta que no este creada
                 cuentaCC = GenerarCuentaCC();
@@ -303,12 +303,12 @@ namespace APICloudCash.Controllers
 
         Random random = new Random();
 
-        public int GenerarCuentaCC() {
+        public string GenerarCuentaCC() {
 
             
             long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 10000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
             string cuenta = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
-            int cuentaCC = int.Parse(cuenta);
+            string cuentaCC = cuenta;
             return cuentaCC;
 
         }
