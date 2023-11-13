@@ -37,7 +37,7 @@
           </Key>
           <Property Name="id_Tarjeta" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_Cliente" Type="bigint" Nullable="false" />
-          <Property Name="numeroTarjeta" Type="bigint" Nullable="false" />
+          <Property Name="numeroTarjeta" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="nombrePoseedor" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="fechaVencimiento" Type="date" Nullable="false" />
           <Property Name="cvc" Type="smallint" Nullable="false" />
@@ -221,7 +221,7 @@
         </Association>
         <Function Name="SP_CrearTarjetaCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Cliente" Type="bigint" Mode="In" />
-          <Parameter Name="numeroTarjeta" Type="bigint" Mode="In" />
+          <Parameter Name="numeroTarjeta" Type="varchar" Mode="In" />
           <Parameter Name="nombrePoseedor" Type="varchar" Mode="In" />
           <Parameter Name="fechaVencimiento" Type="datetime" Mode="In" />
           <Parameter Name="cvc" Type="smallint" Mode="In" />
@@ -231,7 +231,7 @@
         </Function>
         <Function Name="SP_CrearTarjetaDebito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Cliente" Type="bigint" Mode="In" />
-          <Parameter Name="numeroTarjeta" Type="bigint" Mode="In" />
+          <Parameter Name="numeroTarjeta" Type="varchar" Mode="In" />
           <Parameter Name="nombrePoseedor" Type="varchar" Mode="In" />
           <Parameter Name="fechaVencimiento" Type="datetime" Mode="In" />
           <Parameter Name="cvc" Type="smallint" Mode="In" />
@@ -361,7 +361,7 @@
           </Key>
           <Property Name="id_Tarjeta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_Cliente" Type="Int64" Nullable="false" />
-          <Property Name="numeroTarjeta" Type="Int64" Nullable="false" />
+          <Property Name="numeroTarjeta" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombrePoseedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="cvc" Type="Int16" Nullable="false" />
@@ -610,7 +610,7 @@
           </AssociationSet>
           <FunctionImport Name="SP_CrearTarjetaCredito" ReturnType="Collection(String)">
             <Parameter Name="id_Cliente" Mode="In" Type="Int64" />
-            <Parameter Name="numeroTarjeta" Mode="In" Type="Int64" />
+            <Parameter Name="numeroTarjeta" Mode="In" Type="String" />
             <Parameter Name="nombrePoseedor" Mode="In" Type="String" />
             <Parameter Name="fechaVencimiento" Mode="In" Type="DateTime" />
             <Parameter Name="cvc" Mode="In" Type="Int16" />
@@ -620,7 +620,7 @@
           </FunctionImport>
           <FunctionImport Name="SP_CrearTarjetaDebito" ReturnType="Collection(String)">
             <Parameter Name="id_Cliente" Mode="In" Type="Int64" />
-            <Parameter Name="numeroTarjeta" Mode="In" Type="Int64" />
+            <Parameter Name="numeroTarjeta" Mode="In" Type="String" />
             <Parameter Name="nombrePoseedor" Mode="In" Type="String" />
             <Parameter Name="fechaVencimiento" Mode="In" Type="DateTime" />
             <Parameter Name="cvc" Mode="In" Type="Int16" />

@@ -164,7 +164,7 @@ namespace APICloudCash.Controllers
                 {
                     context.Configuration.LazyLoadingEnabled = false;
 
-                    return context.SP_CrearTarjetaCredito( //Procedimiento Almacenado
+                    return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
 
                         entTDebito.id_Cliente,
                         entTDebito.numeroTarjeta,
@@ -308,20 +308,19 @@ namespace APICloudCash.Controllers
 
         Random random = new Random();
 
-        public long GenerarCuentaCC() {
+        public string GenerarCuentaCC() {
 
             
             long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 10000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
-            string cuenta = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
-            long cuentaCC = long.Parse(cuenta);
+            string cuentaCC = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
             return cuentaCC;
 
         }
 
-        public long GenerarCuentaNoCreada() {
+        public string GenerarCuentaNoCreada() {
 
             var tarjetaCreada = true;
-            long cuentaCC = 0;
+            string cuentaCC="";
             entTCreditos entTCredito = new entTCreditos();
             while (tarjetaCreada == true)
             { //Loop para generar una cuenta que no este creada

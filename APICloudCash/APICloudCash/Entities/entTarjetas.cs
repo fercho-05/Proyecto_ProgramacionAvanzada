@@ -9,7 +9,7 @@ namespace APICloudCash.Entities
     {
         public long id_Tarjeta { get; set; }
         public long id_Cliente { get; set; }
-        public long numeroTarjeta { get; set; }
+        public string numeroTarjeta { get; set; }
         public string nombrePoseedor { get; set; }
         public System.DateTime fechaVencimiento { get; set; }
         public short cvc { get; set; }
