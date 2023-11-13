@@ -24,6 +24,8 @@
 
 </head>
 <body>
+
+
     <div class="container-scroller">
         <!-- partial:partials/_sidebar.html -->
         <nav style="background-color: #b30000; " class="sidebar sidebar-offcanvas" id="sidebar">
@@ -50,7 +52,8 @@
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu"> <!--ESTOS PRODUCTOS SE MOSTRARAN DEPENDIENDO DE CUALES TENGA EL USUARIO-->
+                        <ul class="nav flex-column sub-menu">
+                            <!--ESTOS PRODUCTOS SE MOSTRARAN DEPENDIENDO DE CUALES TENGA EL USUARIO-->
                             <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="@Url.Action("TarjetaCredito","Authenticated")">Tarjetas de Crédito</a></li>
                             <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="@Url.Action("TarjetaDebito","Authenticated")">Tarjetas de Débito</a></li>
                             <li class="nav-item"> <a id="productoHover" style="color:white;" class="nav-link" href="@Url.Action("CuentaAhorro","Authenticated")">Cuenta de Ahorro</a></li>
@@ -181,3 +184,4 @@
     <!-- End custom js for this page -->
 </body>
 </html>
+

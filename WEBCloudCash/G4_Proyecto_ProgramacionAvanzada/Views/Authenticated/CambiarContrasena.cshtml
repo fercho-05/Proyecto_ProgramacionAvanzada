@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
+}
+
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Contact Area -->
+                <div class="contact-form-area contact-page">
+                    @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                    {
+                        <br />
+                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Actualizar Contraseña</h2>
+                        <div class="row">
+                            <div class="col-lg-12 mb-4">
+                                <div class="form-outline">
+                                    @Html.TextBox("contrasenavieja", "", new { @class = "form-control form-control-lg", @type = "password", @placeholder = "Contraseña Actual", @style = "color: white; background-color: #363E48;" })
+                                    <label style="color: black;" class="form-label">Contraseña Actual</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <div class="form-outline">
+                                    @Html.TextBox("cedula", "", new { @class = "form-control form-control-lg", @type = "password", @placeholder = "Nueva Contraseña", @style = "color: white; background-color: #363E48;" })
+                                    <label style="color: black;" class="form-label">Nueva contraseña</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <div class="form-outline">
+                                    @Html.TextBox("cedula", "", new { @class = "form-control form-control-lg", @type = "password", @placeholder = "Confirme su nueva contraseña", @style = "color: white; background-color: #363E48;" })
+                                    <label style="color: black;" class="form-label">Confirme su nueva contraseña</label>
+                                </div>
+                            </div>
+                            <div class="col-12" style="text-align:center;">
+                                <button style="background-color: #293033; border: none; transition: background-color 0.3s; padding: 0.5rem 0.8rem 0.5rem 0.8rem;"
+                                        type="submit" class="btn btn-primary mb-3" onmouseover="this.style.backgroundColor='#B30000';" onmouseout="this.style.backgroundColor='#293033';">
+                                    <span class="ps-3">Actualizar</span>
+                                    <span class="fas fa-arrow-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

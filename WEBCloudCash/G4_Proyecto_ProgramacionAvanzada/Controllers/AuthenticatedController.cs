@@ -66,6 +66,12 @@ namespace WEBCloudCash.Controllers
             return View();
         }
 
-   
+        [HttpGet]
+        public ActionResult CambiarContrasena()
+        {
+            return View();
+        }
+
+
     }
 }
