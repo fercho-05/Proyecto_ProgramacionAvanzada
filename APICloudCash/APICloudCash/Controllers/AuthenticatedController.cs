@@ -55,7 +55,6 @@ namespace APICloudCash.Controllers
                                           .Where(u => u.cedula == cedula)
                                           .Select(u => u.id_Usuario)
                                           .FirstOrDefault();
-
                     if (idUsuario != 0)
                     {
 
@@ -63,14 +62,11 @@ namespace APICloudCash.Controllers
                                                .Where(c => c.id_Usuario == idUsuario)
                                                .Select(c => c.id_Cliente)
                                                .FirstOrDefault();
-
                         if (idCliente != 0)
                         {
-
                             var tarjetas = context.Tarjetas
                                                   .Where(t => t.id_Cliente == idCliente)
                                                   .ToList();
-
                             var entTarjetas = tarjetas.Select(t => new entTarjetas
                             {
                                 id_Tarjeta = t.id_Tarjeta,
@@ -97,8 +93,6 @@ namespace APICloudCash.Controllers
                 return null;
             }
         }
-
-
 
     }
 }
