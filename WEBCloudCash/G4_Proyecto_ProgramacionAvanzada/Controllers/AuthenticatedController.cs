@@ -36,18 +36,21 @@ namespace WEBCloudCash.Controllers
         public ActionResult MiCredito()
         {
             return View();
-        } 
-        
+        }
+
         [HttpGet]
         public ActionResult TarjetaCredito()
         {
-            return View();
+            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las tarjetas usando la cedula almacenada en la variable de sesion
+            var model = new modTarjeta();
+            model.Tarjetas = model.ListarTarjetasPorCedula(cedula);
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult TarjetaDebito()
         {
-            string cedula = Session["CedulaUsuario"] as string;
+            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las tarjetas usando la cedula almacenada en la variable de sesion
             var model = new modTarjeta();
             model.Tarjetas = model.ListarTarjetasPorCedula(cedula);
             return View(model);

@@ -26,63 +26,74 @@
                         <div class="row">
                             @foreach (var tarjeta in Model.Tarjetas)
                             {
-                                <div class="col-12 mt-4 align-items-center justify-content-center">
-                                    <div style="text-align: center; background-color: #B30000;" class="card p-3">
-                                        <p class="mb-0 fw-bold h4">Tarjeta de débito</p>
+                                if (tarjeta.id_TipoTarjeta == 1) //esto valida si la tarjeta es solo de debito
+                                {
+                                    <div class="col-12 mt-4 align-items-center justify-content-center">
+                                        <div style="text-align: center; background-color: #B30000;" class="card p-3">
+                                            <p class="mb-0 fw-bold h4">Tarjeta de débito</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div style="background-color: navajowhite; border: none; " class="card p-3">
-                                        <div style="border-color:white;" class="card-body border p-0">
-                                            <div class="collapse show p-3 pt-0" id="collapseExample">
-                                                <div class="row">
-                                                    <div class="col-lg-5 mb-lg-0 mb-3 d-flex align-items-center justify-content-center">
-                                                        <p class="mb-0">
-                                                            <img src="~/Template/img/visa.png" alt="" class="img-fluid">
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-lg-7">
-                                                        <form action="" class="form">
-                                                            <div class="row">
-                                                                <div class="col-12">
-                                                                    <div class="form__div">
-                                                                        <input style="border: none; color: black;" type="text" class="form-control" value="@tarjeta.numeroTarjeta" placeholder="1234567891123456" readonly>
-                                                                        <label style="color: black; " for="" class="form__label">Número de tarjeta</label>
+                                    <div class="col-12">
+                                        <div style="background-color: navajowhite; border: none; " class="card p-3">
+                                            <div style="border-color:white;" class="card-body border p-0">
+                                                <div class="collapse show p-3 pt-0" id="collapseExample">
+                                                    <div class="row">
+                                                        <div class="col-lg-5 mb-lg-0 mb-3 d-flex align-items-center justify-content-center">
+                                                            <p class="mb-0">
+                                                                @if (tarjeta.numeroTarjeta.StartsWith("4")) //aqui se valida si la tarjeta empieza con 4 entonces pone la imagen de visa
+                                                                {
+                                                                    <img src="~/Template/img/visa.png" alt="" class="img-fluid">
+                                                                }
+                                                                else if (tarjeta.numeroTarjeta.StartsWith("5")) // si no empieza con 4 pone la imagen de mastercard
+                                                                {
+                                                                    <img src="~/Template/img/mastercard.png" alt="" class="img-fluid">
+                                                                }
+                                                             
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-7">
+                                                            <form action="" class="form">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="form__div">
+                                                                            <input style="border: none; color: black;" type="text" class="form-control" value="@tarjeta.numeroTarjeta" placeholder="1234567891123456" readonly>
+                                                                            <label style="color: black; " for="" class="form__label">Número de tarjeta</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="col-6">
-                                                                    <div class="form__div">
-                                                                        <input style="border: none; color: black;" type="text" class="form-control" value="@tarjeta.fechaVencimiento" placeholder=" " readonly>
-                                                                        <label style="color: black; " for="" class="form__label">MM / yy</label>
+                                                                    <div class="col-6">
+                                                                        <div class="form__div">
+                                                                            <input style="border: none; color: black;" type="text" class="form-control" value="@tarjeta.fechaVencimiento.ToString("MM/yy")" placeholder=" " readonly>
+                                                                            <label style="color: black; " for="" class="form__label">MM / yy</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="col-6">
-                                                                    <div class="form__div">
-                                                                        <input style="border: none; color: black;" type="password" class="form-control" value="@tarjeta.cvc" placeholder=" " readonly>
-                                                                        <label style="color: black; " for="" class="form__label">cvc</label>
+                                                                    <div class="col-6">
+                                                                        <div class="form__div">
+                                                                            <input style="border: none; color: black;" type="password" class="form-control" value="@tarjeta.cvc" placeholder=" " readonly>
+                                                                            <label style="color: black; " for="" class="form__label">cvc</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form__div">
-                                                                        <input style="border: none; color: black;" type="text" class="form-control" value="@tarjeta.nombrePoseedor" placeholder=" " readonly>
-                                                                        <label style="color: black; " for="" class="form__label">Nombre en la tarjeta</label>
+                                                                    <div class="col-12">
+                                                                        <div class="form__div">
+                                                                            <input style="border: none; color: black;" type="text" class="form-control" value="@tarjeta.nombrePoseedor" placeholder=" " readonly>
+                                                                            <label style="color: black; " for="" class="form__label">Nombre en la tarjeta</label>
+                                                                        </div>
                                                                     </div>
+
+
                                                                 </div>
-
-                                                                <!-- Otros campos de tarjeta aquí -->
-
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             }
                         </div>
+
 
 
                         <!--AQUI TERMINA UNA TARJETA-->

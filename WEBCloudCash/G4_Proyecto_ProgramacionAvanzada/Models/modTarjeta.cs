@@ -14,7 +14,7 @@ namespace WEBCloudCash.Models
 
         public string urlApi = ConfigurationManager.AppSettings["urlApi"];
 
-        public List<entTarjetas> Tarjetas { get; set; } //aqui voy a guardar la lista de las tarjetas para luego usarla en vista de tarjetas
+        public List<entTarjetas> Tarjetas { get; set; } //esto lo utilizaré para guardar la lista de las tarjetas para luego usarla en vista de tarjetas
 
         public List<entTarjetas> ListarTarjetasPorCedula(string cedula)
         {
