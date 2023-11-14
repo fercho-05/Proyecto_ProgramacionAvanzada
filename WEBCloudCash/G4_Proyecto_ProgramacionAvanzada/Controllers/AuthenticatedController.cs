@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using WEBCloudCash.Models;
 
 namespace WEBCloudCash.Controllers
 {
@@ -45,7 +47,10 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult TarjetaDebito()
         {
-            return View();
+            string cedula = Session["CedulaUsuario"] as string;
+            var model = new modTarjeta();
+            model.Tarjetas = model.ListarTarjetasPorCedula(cedula);
+            return View(model);
         }
 
         [HttpGet]
