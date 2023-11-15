@@ -441,7 +441,8 @@ namespace APICloudCash.Controllers
                 context.Errores.Add(user);
                 context.SaveChanges();
             }
-
         }
+
+
     }
 }
