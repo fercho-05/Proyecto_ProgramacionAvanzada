@@ -88,6 +88,21 @@ namespace WEBCloudCash.Controllers
             return View();
         }
 
+        //CONSULTA CLIENTES
+        [HttpGet]
+        public ActionResult ListadoClientes()
+        {
+            var datos = modUsuario.ListarClientesTabla().Where(x => x.id_TipoUsuario != 1).ToList();
+            return View(datos);
+        }
+
+        [HttpGet]
+        public ActionResult ListadoAdministradores()
+        {
+            var datos = modUsuario.ListarClientesTabla().Where(x => x.id_TipoUsuario != 2).ToList();
+            return View(datos);
+        }
+
         //REGISTRO DE TARJETAS
         [HttpGet]
         public ActionResult RegistroTarjetas()

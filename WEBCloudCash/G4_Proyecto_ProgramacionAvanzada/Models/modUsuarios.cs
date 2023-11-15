@@ -77,8 +77,17 @@ namespace WEBCloudCash.Models
                 return resp.Content.ReadFromJsonAsync<List<SelectListItem>>().Result;
             }
         }
-        
 
+        public List<entUsuarios> ListarClientesTabla()
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ListarClientesTabla";
+                var res = client.GetAsync(url).Result;
+                return res.Content.ReadFromJsonAsync<List<entUsuarios>>().Result;
+            }
+        }
+        
 
 
     }

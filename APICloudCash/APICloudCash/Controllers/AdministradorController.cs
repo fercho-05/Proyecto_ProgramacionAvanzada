@@ -314,6 +314,25 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListarClientesTabla")]
+        public List<Usuarios> ListarClientesTabla()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    return (from x in context.Usuarios
+                            select x).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return new List<Usuarios>();
+            }
+        }
+
         [HttpGet]//Hacer un buscador
         [Route("ListarUsuariosPorCedula")]
         public List<Usuarios> ListarUsuariosPorCedula(entUsuarios entUsuario)

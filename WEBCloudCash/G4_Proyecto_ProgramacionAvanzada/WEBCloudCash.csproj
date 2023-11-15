@@ -2436,6 +2436,8 @@
     <Content Include="Views\Administrador\PerfilAdministrador.cshtml" />
     <Content Include="Views\Shared\_Layout_Administrador.cshtml" />
     <Content Include="Views\Administrador\RegistroTarjetas.cshtml" />
+    <Content Include="Views\Administrador\ListadoClientes.cshtml" />
+    <Content Include="Views\Administrador\ListadoAdministradores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
