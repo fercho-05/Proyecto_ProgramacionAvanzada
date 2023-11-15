@@ -46,14 +46,20 @@
                         <!-- Top Info -->
                         <div class="top-contact-info d-flex align-items-center">
 
-                            <a href="#" ><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Oficinas Real Cariari, San José, CR</span></a>
-                            <a href="#" ><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash999@gmail.com</span></a>
 
-                                @if(ViewBag.IniciarSesion == null)
-                                {
-                                    <a  href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-4   h-25 justify-content-center" data-delay="700ms">Iniciar Sesión</a>
-                                }
-                            
+
+                            @if (Session["CodigoUsuario"] == null)
+                            {
+                                <a href="#"><img src="~/Template/img/core-img/placeholder.png" alt=""> <span>Oficinas Real Cariari, San José, CR</span></a>
+                                <a href="#"><img src="~/Template/img/core-img/message.png" alt=""> <span>cloudcash999@gmail.com</span></a>
+                                <a href="@Url.Action("LogIn", "Login")" id="botongenerico" class="btn credit-btn ml-4   h-25 justify-content-center" data-delay="700ms">Iniciar Sesión</a>
+                            }
+                            else
+                            {
+                                @Session["NombreCompleto"];
+                                <a href="@Url.Action("CerrarSesion", "Login")" id="botongenerico" class="btn credit-btn ml-4   h-25 justify-content-center" data-delay="700ms">Cerrar Sesión</a>
+                            }
+
                         </div>
                     </div>
                 </div>

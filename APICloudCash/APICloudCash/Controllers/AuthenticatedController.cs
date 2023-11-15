@@ -9,8 +9,6 @@ namespace APICloudCash.Controllers
 {
     public class AuthenticatedController : ApiController
     {
-   
-
         [HttpGet]
         [Route("ListarClientes")]
         public List<System.Web.Mvc.SelectListItem> ListarClientes()
@@ -37,9 +35,22 @@ namespace APICloudCash.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
         [HttpGet]
@@ -88,9 +99,22 @@ namespace APICloudCash.Controllers
 
                 return null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<entTarjetas>();
             }
         }
 

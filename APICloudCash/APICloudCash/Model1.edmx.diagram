@@ -28,6 +28,7 @@
         <AssociationConnector Association="CloudCashModel.FK_TCreditos_Tarjetas" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_TDebitos_Tarjetas" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Usuarios_TipoUsuarios" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CloudCashModel.Errores" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Runtime.Remoting.Contexts;
 using System.Web.Http;
 
 namespace APICloudCash.Controllers
@@ -36,7 +37,20 @@ namespace APICloudCash.Controllers
                 } 
             }catch (Exception e)
             {
-                return e.Message;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return string.Empty;
             }
         }
 
@@ -61,7 +75,20 @@ namespace APICloudCash.Controllers
                 }
             }
             catch (Exception e) {
-                return e.Message;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return string.Empty;
             }
         }
 
@@ -69,16 +96,36 @@ namespace APICloudCash.Controllers
         [Route("ListarTipoUsuarios")]
         public List<System.Web.Mvc.SelectListItem> ListarTipoUsuarios()
         {
-            using (var context = new DBCC()) 
+            try
             {
-                var datos = (from x in context.TipoUsuarios select x).ToList();//Entity Framework
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.TipoUsuarios select x).ToList();//Entity Framework
 
-                var lista = new List<System.Web.Mvc.SelectListItem>();
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
 
-                foreach (var x in datos) {
-                    lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoUsuario.ToString(), Text = x.descripcion });
+                    foreach (var x in datos)
+                    {
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoUsuario.ToString(), Text = x.descripcion });
+                    }
+                    return lista;
                 }
-                return lista;    
+            }
+            catch (Exception e) {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
 
@@ -86,17 +133,37 @@ namespace APICloudCash.Controllers
         [Route("ListarTipoDivisas")]
         public List<System.Web.Mvc.SelectListItem> ListarTipoDivisas()
         {
-            using (var context = new DBCC())
+            try
             {
-                var datos = (from x in context.TipoDivisas select x).ToList();//Entity Framework
-
-                var lista = new List<System.Web.Mvc.SelectListItem>();
-
-                foreach (var x in datos)
+                using (var context = new DBCC())
                 {
-                    lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoDivisa.ToString(), Text = x.Abreviado });
+                    var datos = (from x in context.TipoDivisas select x).ToList();//Entity Framework
+
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var x in datos)
+                    {
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoDivisa.ToString(), Text = x.Abreviado });
+                    }
+                    return lista;
                 }
-                return lista;
+            }
+            catch (Exception e)
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
 
@@ -152,7 +219,20 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return string.Empty;
             }
         }
 
@@ -189,7 +269,20 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return string.Empty;
             }
         }
 
@@ -197,17 +290,37 @@ namespace APICloudCash.Controllers
         [Route("ListarTipoTarjetas")]
         public List<System.Web.Mvc.SelectListItem> ListarTipoTarjetas()
         {
-            using (var context = new DBCC())
+            try
             {
-                var datos = (from x in context.TipoTarjetas select x).ToList();//Entity Framework
-
-                var lista = new List<System.Web.Mvc.SelectListItem>();
-
-                foreach (var x in datos)
+                using (var context = new DBCC())
                 {
-                    lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoTarjeta.ToString(), Text = x.descripcion });
+                    var datos = (from x in context.TipoTarjetas select x).ToList();//Entity Framework
+
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var x in datos)
+                    {
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoTarjeta.ToString(), Text = x.descripcion });
+                    }
+                    return lista;
                 }
-                return lista;
+            }
+            catch (Exception e)
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
 
@@ -215,17 +328,37 @@ namespace APICloudCash.Controllers
         [Route("ListarMarcasTarjetas")]
         public List<System.Web.Mvc.SelectListItem> ListarMarcasTarjetas()
         {
-            using (var context = new DBCC())
+            try
             {
-                var datos = (from x in context.MarcasTarjetas select x).ToList();//Entity Framework
-
-                var lista = new List<System.Web.Mvc.SelectListItem>();
-
-                foreach (var x in datos)
+                using (var context = new DBCC())
                 {
-                    lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_MarcaTarjeta.ToString(), Text = x.descripcion });
+                    var datos = (from x in context.MarcasTarjetas select x).ToList();//Entity Framework
+
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var x in datos)
+                    {
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_MarcaTarjeta.ToString(), Text = x.descripcion });
+                    }
+                    return lista;
                 }
-                return lista;
+            }
+            catch (Exception e)
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
 
@@ -252,9 +385,22 @@ namespace APICloudCash.Controllers
                     return lista;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
 
@@ -276,8 +422,21 @@ namespace APICloudCash.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
                 return new List<Usuarios>();
             }
         }
@@ -296,12 +455,22 @@ namespace APICloudCash.Controllers
                                  select x).FirstOrDefault();
 
                     return datos;
-
                 }
-
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
                 return  null;
             }
         }
@@ -317,14 +486,24 @@ namespace APICloudCash.Controllers
                                    where x.id_Usuario == entUsuario.id_Usuario
                                    select x).FirstOrDefault();
                     return usuario;
-
             }
-            }catch (Exception)
+            }catch (Exception e)
             {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
                 return null;
             }
-
-
         }
 
 
@@ -335,7 +514,6 @@ namespace APICloudCash.Controllers
             long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 1000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
             string cuentaCC = cuentaTarjetaSinRellenar.ToString().PadLeft(15, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
             return cuentaCC;
-
         }
 
         public string GenerarCuentaNoCreada(int marcaTarjeta) 
@@ -354,7 +532,6 @@ namespace APICloudCash.Controllers
                 {
                     tarjetaCreada = false;
                 }
-
             }
             cuentaCC = marcaTarjetaText + cuentaCC;
             return cuentaCC;
@@ -362,13 +539,10 @@ namespace APICloudCash.Controllers
 
         public short GenerarCVC()
         {
-
             long cvcSinRellenar = random.Next(1, 1000);//3dig cvc. Genera un numero entre 1 y 999,
             string cvcRellenado = cvcSinRellenar.ToString("D3");//La convierte en string, finalmente la rellena en el caso que no cumpla con los 3 digitos necesarios
             short cvc = short.Parse(cvcRellenado);
             return cvc;
-
         }
-
     }
 }

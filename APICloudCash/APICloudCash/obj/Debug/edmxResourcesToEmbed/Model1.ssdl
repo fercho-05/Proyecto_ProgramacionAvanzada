@@ -14,6 +14,14 @@
     <Property Name="id_Cliente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_Usuario" Type="bigint" Nullable="false" />
   </EntityType>
+  <EntityType Name="Errores">
+    <Key>
+      <PropertyRef Name="idError" />
+    </Key>
+    <Property Name="idError" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="mensajeError" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
   <EntityType Name="MarcasTarjetas">
     <Key>
       <PropertyRef Name="id_MarcaTarjeta" />
@@ -327,6 +335,7 @@
   <EntityContainer Name="CloudCashModelStoreContainer">
     <EntitySet Name="Administradores" EntityType="Self.Administradores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Errores" EntityType="Self.Errores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MarcasTarjetas" EntityType="Self.MarcasTarjetas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Prestamos" EntityType="Self.Prestamos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />

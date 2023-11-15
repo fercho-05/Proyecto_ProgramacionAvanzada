@@ -19,6 +19,5 @@ namespace APICloudCash.Entities
         public int id_TipoTarjeta { get; set; }
         public int id_MarcaTarjeta { get; set; }
         public string mensaje { get; set; }
-
     }
 }

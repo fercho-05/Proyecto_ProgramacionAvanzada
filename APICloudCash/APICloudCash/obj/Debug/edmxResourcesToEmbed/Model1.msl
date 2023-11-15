@@ -189,5 +189,14 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CloudCashModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CloudCashModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="Errores">
+      <EntityTypeMapping TypeName="CloudCashModel.Errores">
+        <MappingFragment StoreEntitySet="Errores">
+          <ScalarProperty Name="mensajeError" ColumnName="mensajeError" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="idError" ColumnName="idError" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

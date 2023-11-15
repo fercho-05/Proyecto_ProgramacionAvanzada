@@ -18,22 +18,30 @@ namespace APICloudCash.Controllers
         [Route("IniciarSesion")]
         public SP_IniciarSesion_Result IniciarSesion(entUsuarios entUsuario) //Se recibe un objeto de tipo Usuario
         {
-
             try
             {
                 using (var context = new DBCC())
                 {
-
                     return context.SP_IniciarSesion(entUsuario.nombreUsuario, entUsuario.contrasena).FirstOrDefault(); //Con SP(Procedimiento Almacenamiento)
+                }
+            }
+            catch (Exception e)
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
 
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
                 }
 
-            }
-            catch (Exception)
-            {
                 return null;
             }
-
         }
 
         [HttpPost]
@@ -65,9 +73,21 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
-            }
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
 
+                    var user = new Errores();
+
+                    user.fecha = DateTime.Now;
+                    user.mensajeError = e.Message.ToString();
+
+                    context.Errores.Add(user);
+                    context.SaveChanges();
+                }
+
+                return string.Empty;
+            }
         }
     }
 
