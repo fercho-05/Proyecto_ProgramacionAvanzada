@@ -60,7 +60,7 @@ namespace APICloudCash.Controllers
                         entAdministrador.apellidoDos,
                         entAdministrador.telefono,
                         entAdministrador.correo,
-                        entAdministrador.activo
+                        true
                         ).FirstOrDefault();
                 }
             }
@@ -145,36 +145,17 @@ namespace APICloudCash.Controllers
                 {
                     context.Configuration.LazyLoadingEnabled = false;
 
-                    var user = new Tarjetas();
-                    user.id_Cliente = entTDebito.id_Cliente;
-                    user.numeroTarjeta = entTDebito.numeroTarjeta;
-                    user.nombrePoseedor = entTDebito.nombrePoseedor;
-                    user.fechaVencimiento = entTDebito.fechaVencimiento;
-                    user.cvc = entTDebito.cvc;
-                    user.saldo = entTDebito.saldo;
-                    user.id_TipoDivisa = entTDebito.id_TipoDivisa;
-                    user.activa = true;
-                    user.id_TipoTarjeta = entTDebito.id_TipoTarjeta;
-                    user.id_MarcaTarjeta = entTDebito.id_MarcaTarjeta;
-
-                    context.Tarjetas.Add(user);
-                    context.SaveChanges();
-
-                    return "OK";
-
-                    /**********************NO ESTÁ FUNCIONANDO EL SP, HAY QUE REVISAR*************************/
-
-                    //return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
-                    //    entTDebito.id_Cliente,
-                    //    entTDebito.numeroTarjeta,
-                    //    entTDebito.nombrePoseedor,
-                    //    entTDebito.fechaVencimiento,
-                    //    entTDebito.cvc,
-                    //    entTDebito.saldo,
-                    //    entTDebito.id_TipoDivisa,
-                    //    entTDebito.id_MarcaTarjeta,
-                    //    true
-                    //    ).FirstOrDefault();//Devuelve el registro
+                    return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
+                        entTDebito.id_Cliente,
+                        entTDebito.numeroTarjeta,
+                        entTDebito.nombrePoseedor,
+                        entTDebito.fechaVencimiento,
+                        entTDebito.cvc,
+                        entTDebito.saldo,
+                        entTDebito.id_TipoDivisa,
+                        entTDebito.id_MarcaTarjeta,
+                        true
+                        ).FirstOrDefault();//Devuelve el registro
                 }
             }
             catch (Exception e)
