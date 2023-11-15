@@ -48,7 +48,8 @@ namespace WEBCloudCash.Models
             }
         }
 
-        public List<SelectListItem> ListarTipoUsuarios() {
+        public List<SelectListItem> ListarTipoUsuarios()
+        {
             using (var client = new HttpClient())
             {
                 string url = urlApi + "ListarTipoUsuarios";
@@ -57,7 +58,8 @@ namespace WEBCloudCash.Models
             }
         }
 
-        public string RecuperarContrasena(entUsuarios entUsuario) {
+        public string RecuperarContrasena(entUsuarios entUsuario)
+        {
 
             using (var client = new HttpClient())
             {
@@ -87,10 +89,22 @@ namespace WEBCloudCash.Models
                 return res.Content.ReadFromJsonAsync<List<entUsuarios>>().Result;
             }
         }
-        
+
+        public string cambiarContrasena(entUsuarios usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "CambiarContrasena";
+                JsonContent contenido = JsonContent.Create(usuario);
+                var resp = client.PostAsync(url, contenido).Result;
+                var result = resp.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+
+
+
+        }
 
 
     }
-
-
 }

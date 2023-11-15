@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
+
 
 namespace APICloudCash.Controllers
 {
@@ -116,5 +116,46 @@ namespace APICloudCash.Controllers
             }
         }
 
+
+
+        [HttpPost]
+        [Route("CambiarContrasena")]
+        public string CambiarContrasena(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datosBase = context.Usuarios
+                                          .Where(u => u.cedula == usuario.cedula)
+                                          .FirstOrDefault();
+
+                    if (datosBase != null)
+                    {
+                        if (usuario.contrasena == datosBase.contrasena)
+                        {
+                            datosBase.contrasena = usuario.nuevaContrasena;
+                            context.SaveChanges();
+                            return ("Actualizada exitosamente");
+                        }
+                        else
+                        {
+                            return ("Contraseña actual incorrecta");
+                        }                       
+                    }
+                    else
+                    {
+                        return "Usuario no encontrado";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Loguea el error para depuración
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+                return "Error: " + e.Message;
+            }
+        }
     }
 }

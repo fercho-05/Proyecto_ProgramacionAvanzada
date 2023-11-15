@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
+using WEBCloudCash.Entities;
 using WEBCloudCash.Models;
+
+
 
 namespace WEBCloudCash.Controllers
 {
     public class AuthenticatedController : Controller
     {
+        modUsuarios modUsuario = new modUsuarios();
+
         [HttpGet]
         public ActionResult Perfil()
         {
@@ -79,6 +81,25 @@ namespace WEBCloudCash.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult CambiarContrasena(entUsuarios usuario)
+        {
+            string respuestaApi = modUsuario.cambiarContrasena(usuario);
+
+            if (respuestaApi?.IndexOf("exitosamente", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
+            else
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
+        
+        }
+
 
 
     }
