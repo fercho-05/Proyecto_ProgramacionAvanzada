@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e153df2afe6645159767878dc7120acd" Name="Diagram1">
+      <Diagram DiagramId="11436f1ff67b4d3d80ba4114fc9655c9" Name="Diagram1">
         <EntityTypeShape EntityType="CloudCashModel.Administradores" Width="1.5" PointX="3.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.Clientes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudCashModel.Errores" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.MarcasTarjetas" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.Prestamos" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.Tarjetas" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.TCreditos" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.TDebitos" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
@@ -28,7 +28,6 @@
         <AssociationConnector Association="CloudCashModel.FK_TCreditos_Tarjetas" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_TDebitos_Tarjetas" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Usuarios_TipoUsuarios" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CloudCashModel.Errores" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
