@@ -74,7 +74,7 @@ namespace APICloudCash.Controllers
                                 numeroTarjeta = t.numeroTarjeta,
                                 nombrePoseedor = t.nombrePoseedor,
                                 fechaVencimiento = t.fechaVencimiento,
-                                cvc = t.cvc,
+                                cvc = (short)t.cvc,
                                 saldo = t.saldo,
                                 id_TipoDivisa = t.id_TipoDivisa,
                                 activa = t.activa,

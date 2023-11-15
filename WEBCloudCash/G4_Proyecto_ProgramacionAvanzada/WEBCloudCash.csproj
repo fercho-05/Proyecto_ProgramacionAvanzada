@@ -151,15 +151,19 @@
     <Compile Include="Controllers\AuthenticatedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Entities\entAdministradores.cs" />
     <Compile Include="Entities\entClientes.cs" />
+    <Compile Include="Entities\entTarjetas.cs" />
+    <Compile Include="Entities\entMarcaTarjeta.cs" />
+    <Compile Include="Entities\entTipoTarjeta.cs" />
     <Compile Include="Entities\entTipoUsuarios.cs" />
     <Compile Include="Entities\entUsuarios.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\modContacto.cs" />
+    <Compile Include="Models\modTarjeta.cs" />
     <Compile Include="Models\modUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2249,7 +2253,7 @@
     <Content Include="Template\fonts\icomoon.eot" />
     <Content Include="Template\fonts\icomoon.ttf" />
     <Content Include="Template\fonts\icomoon.woff" />
-    <Content Include="Views\Registro\RegistroUsuarios.cshtml" />
+    <Content Include="Views\Administrador\RegistroUsuarios.cshtml" />
     <Content Include="Views\Home\TarjetaCredito.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\TarjetaDebito.cshtml" />
@@ -2428,6 +2432,10 @@
     <Content Include="Template\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Views\Authenticated\TarjetaCredito.cshtml" />
     <Content Include="Views\Authenticated\TarjetaDebito.cshtml" />
+    <Content Include="Views\Shared\_Layout_Login.cshtml" />
+    <Content Include="Views\Administrador\PerfilAdministrador.cshtml" />
+    <Content Include="Views\Shared\_Layout_Administrador.cshtml" />
+    <Content Include="Views\Administrador\RegistroTarjetas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

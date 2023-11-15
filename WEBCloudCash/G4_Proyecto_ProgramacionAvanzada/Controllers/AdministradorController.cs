@@ -8,12 +8,18 @@ using System.Web.Mvc;
 
 namespace WEBCloudCash.Controllers
 {
-    public class RegistroController : Controller
+    public class AdministradorController : Controller
     {
-
-
         modUsuarios modUsuario = new modUsuarios();
+        modTarjeta modTarjeta = new modTarjeta();
 
+        [HttpGet]
+        public ActionResult PerfilAdministrador()
+        {
+            return View();
+        }
+
+        //REGISTRO DE USUARIOS
         [HttpGet]
         public ActionResult RegistroUsuarios()
         {
@@ -79,6 +85,66 @@ namespace WEBCloudCash.Controllers
 
             }
             ViewBag.listaTipoUsuarios = modUsuario.ListarTipoUsuarios();
+            return View();
+        }
+
+        //REGISTRO DE TARJETAS
+        [HttpGet]
+        public ActionResult RegistroTarjetas()
+        {
+            ViewBag.listaTipoTarjetas = modTarjeta.ListarTipoTarjetas();
+            ViewBag.listaMarcasTarjetas = modTarjeta.ListarMarcasTarjetas(); 
+            ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+            ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistroTarjetas(entTarjetas entTarjeta)
+        {
+            if (entTarjeta.id_TipoTarjeta == 0)
+            {
+                ViewBag.mensaje = "Seleccione el tipo de tarjeta deseada";
+            }else if (entTarjeta.id_MarcaTarjeta == 0)
+            {
+                ViewBag.mensaje = "Seleccione la marca de tarjeta deseada";
+            }
+            else if (entTarjeta.id_TipoTarjeta == 1) //Débito
+            {
+                var resp = modTarjeta.IngresarTarjetaDebito(entTarjeta);
+                if (resp == "OK")
+                {
+                    ViewBag.mensaje = "Tarjeta de débito registrada con éxito";
+                }
+                else
+                {
+                    ViewBag.listaTipoUsuarios = modUsuario.ListarTipoUsuarios();
+                    if (resp == "ALREADY CREATED")
+                    {
+                        ViewBag.mensaje = "Esta tarjeta de débito ya se encuentra registrada";
+                    }
+                }
+            }
+            else //Crédito
+            {
+                var resp = modTarjeta.IngresarTarjetaCredito(entTarjeta);
+                if (resp == "OK")
+                {
+                    ViewBag.mensaje = "Tarjeta de crédito registrada con éxito";
+                }
+                else
+                {
+                    ViewBag.listaTipoUsuarios = modUsuario.ListarTipoUsuarios();
+                    if (resp == "ALREADY CREATED")
+                    {
+                        ViewBag.mensaje = "Esta tarjeta de crédito ya se encuentra registrada";
+                    }
+                }
+            }
+            ViewBag.listaTipoTarjetas = modTarjeta.ListarTipoTarjetas();
+            ViewBag.listaMarcasTarjetas = modTarjeta.ListarMarcasTarjetas();
+            ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+            ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
             return View();
         }
     }

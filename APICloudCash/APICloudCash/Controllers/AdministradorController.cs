@@ -12,6 +12,7 @@ namespace APICloudCash.Controllers
 {
     public class AdministradorController : ApiController
     {
+        //REGISTROS
         [HttpPost]
         [Route("IngresarCliente")]
         public string IngresarCliente(entClientes entCliente) {
@@ -31,17 +32,12 @@ namespace APICloudCash.Controllers
                         entCliente.correo,
                         true //Siempre que se crea una cuenta por defecto tiene que quedar activa
 
-                        ).FirstOrDefault();//Devuelve el registro
-
-                    
-                }
-               
+                        ).FirstOrDefault();//Devuelve el registro    
+                } 
             }catch (Exception e)
             {
                 return e.Message;
             }
-
-
         }
 
         [HttpPost]
@@ -51,7 +47,6 @@ namespace APICloudCash.Controllers
             try {
                 using (var context = new DBCC())
                 {
-
                     return context.SP_IngresarAdministrador(
                         entAdministrador.cedula,
                         entAdministrador.nombreUsuario,
@@ -63,13 +58,11 @@ namespace APICloudCash.Controllers
                         entAdministrador.correo,
                         entAdministrador.activo
                         ).FirstOrDefault();
-
                 }
             }
             catch (Exception e) {
                 return e.Message;
             }
-
         }
 
         [HttpGet]
@@ -85,11 +78,8 @@ namespace APICloudCash.Controllers
                 foreach (var x in datos) {
                     lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoUsuario.ToString(), Text = x.descripcion });
                 }
-
-                return lista;
-                    
+                return lista;    
             }
-
         }
 
         [HttpGet]
@@ -106,50 +96,15 @@ namespace APICloudCash.Controllers
                 {
                     lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoDivisa.ToString(), Text = x.Abreviado });
                 }
-
                 return lista;
-
-            }
-
-        }
-        
-
-        [HttpGet]
-        [Route("ListarClientes")]
-        public List<System.Web.Mvc.SelectListItem> ListarClientes()
-        {
-            try {
-                using (var context = new DBCC())
-                {
-
-                    var datos = context.SP_ListarClientes().ToList();
-
-                    var lista = new List<System.Web.Mvc.SelectListItem>();
-
-                    foreach (var x in datos)
-
-                     
-                    {
-                        var nombreCompleto = x.nombre + " " + x.apellidoUno + " " + x.apellidoDos;
-                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_Usuario.ToString(), Text = nombreCompleto});
-                    }
-
-                    return lista;
-
-                }
-
-            }
-            catch (Exception) {
-                return null;
             }
         }
 
         [HttpPost]
         [Route("IngresarTarjetaDebito")]
-        public string IngresarTarjetaDebito(entTDebitos entTDebito)
+        public string IngresarTarjetaDebito(entTarjetas entTDebito)
         {
-
-            entTDebito.numeroTarjeta = GenerarCuentaNoCreada(); //Generar de cuenta Cloud Cash
+            entTDebito.numeroTarjeta = GenerarCuentaNoCreada(entTDebito.id_MarcaTarjeta); //Generar de cuenta Cloud Cash
             entTDebito.cvc = GenerarCVC(); //Generar el codigo CVC
             entTDebito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
             entUsuarios entUsuario = new entUsuarios();
@@ -157,50 +112,61 @@ namespace APICloudCash.Controllers
             var usuario = MostrarUsuario(entUsuario);
             entTDebito.nombrePoseedor = usuario.nombre + " " + usuario.apellidoUno + " " + usuario.apellidoDos;
 
-
             try
             {
                 using (var context = new DBCC())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
 
-                    return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
+                    var user = new Tarjetas();
+                    user.id_Cliente = entTDebito.id_Cliente;
+                    user.numeroTarjeta = entTDebito.numeroTarjeta;
+                    user.nombrePoseedor = entTDebito.nombrePoseedor;
+                    user.fechaVencimiento = entTDebito.fechaVencimiento;
+                    user.cvc = entTDebito.cvc;
+                    user.saldo = entTDebito.saldo;
+                    user.id_TipoDivisa = entTDebito.id_TipoDivisa;
+                    user.activa = true;
+                    user.id_TipoTarjeta = entTDebito.id_TipoTarjeta;
+                    user.id_MarcaTarjeta = entTDebito.id_MarcaTarjeta;
 
-                        entTDebito.id_Cliente,
-                        entTDebito.numeroTarjeta,
-                        entTDebito.nombrePoseedor,
-                        entTDebito.fechaVencimiento,
-                        entTDebito.cvc,
-                        entTDebito.saldo,
-                        entTDebito.id_TipoDivisa,
-                        entTDebito.activa
+                    context.Tarjetas.Add(user);
+                    context.SaveChanges();
 
-                        ).FirstOrDefault();//Devuelve el registro
+                    return "OK";
 
+                    /**********************NO ESTÁ FUNCIONANDO EL SP, HAY QUE REVISAR*************************/
+
+                    //return context.SP_CrearTarjetaDebito( //Procedimiento Almacenado
+                    //    entTDebito.id_Cliente,
+                    //    entTDebito.numeroTarjeta,
+                    //    entTDebito.nombrePoseedor,
+                    //    entTDebito.fechaVencimiento,
+                    //    entTDebito.cvc,
+                    //    entTDebito.saldo,
+                    //    entTDebito.id_TipoDivisa,
+                    //    entTDebito.id_MarcaTarjeta,
+                    //    true
+                    //    ).FirstOrDefault();//Devuelve el registro
                 }
-
             }
             catch (Exception e)
             {
                 return e.Message;
             }
-
-
         }
 
         [HttpPost]
         [Route("IngresarTarjetaCredito")]
-        public string IngresarTarjetaCredito(entTCreditos entTCredito)
+        public string IngresarTarjetaCredito(entTarjetas entTCredito)
         {
-
-            entTCredito.numeroTarjeta = GenerarCuentaNoCreada(); //Generar de cuenta Cloud Cash
+            entTCredito.numeroTarjeta = GenerarCuentaNoCreada(entTCredito.id_MarcaTarjeta); //Generar de cuenta Cloud Cash
             entTCredito.cvc = GenerarCVC(); //Generar el codigo CVC
             entTCredito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
             entUsuarios entUsuario = new entUsuarios();
             entUsuario.id_Usuario = entTCredito.id_Cliente;
             var usuario = MostrarUsuario(entUsuario);
             entTCredito.nombrePoseedor = usuario.nombre + " " + usuario.apellidoUno + " " + usuario.apellidoDos; 
-
 
             try
             {
@@ -209,7 +175,6 @@ namespace APICloudCash.Controllers
                     context.Configuration.LazyLoadingEnabled = false;
 
                     return context.SP_CrearTarjetaCredito( //Procedimiento Almacenado
-
                         entTCredito.id_Cliente,
                         entTCredito.numeroTarjeta,
                         entTCredito.nombrePoseedor,
@@ -217,21 +182,81 @@ namespace APICloudCash.Controllers
                         entTCredito.cvc,
                         entTCredito.saldo,
                         entTCredito.id_TipoDivisa,
-                        entTCredito.activa
-
+                        entTCredito.id_MarcaTarjeta,
+                        true
                         ).FirstOrDefault();//Devuelve el registro
-
                 }
-
             }
             catch (Exception e)
             {
                 return e.Message;
             }
-
-
         }
 
+        [HttpGet]
+        [Route("ListarTipoTarjetas")]
+        public List<System.Web.Mvc.SelectListItem> ListarTipoTarjetas()
+        {
+            using (var context = new DBCC())
+            {
+                var datos = (from x in context.TipoTarjetas select x).ToList();//Entity Framework
+
+                var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                foreach (var x in datos)
+                {
+                    lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoTarjeta.ToString(), Text = x.descripcion });
+                }
+                return lista;
+            }
+        }
+
+        [HttpGet]
+        [Route("ListarMarcasTarjetas")]
+        public List<System.Web.Mvc.SelectListItem> ListarMarcasTarjetas()
+        {
+            using (var context = new DBCC())
+            {
+                var datos = (from x in context.MarcasTarjetas select x).ToList();//Entity Framework
+
+                var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                foreach (var x in datos)
+                {
+                    lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_MarcaTarjeta.ToString(), Text = x.descripcion });
+                }
+                return lista;
+            }
+        }
+
+
+        //LISTADOS
+        [HttpGet]
+        [Route("ListarClientesEleccion")]
+        public List<System.Web.Mvc.SelectListItem> ListarClientesEleccion()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = context.SP_ListarClientes().ToList();
+
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var x in datos)
+                    {
+                        string nombreCompleto = x.nombre + " " + x.apellidoUno + " " + x.apellidoDos;
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_Usuario.ToString(), Text = nombreCompleto });
+                    }
+
+                    return lista;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         [HttpGet]//Hacer un buscador
         [Route("ListarUsuariosPorCedula")]
@@ -281,8 +306,6 @@ namespace APICloudCash.Controllers
             }
         }
 
-
-
         [HttpGet]
         [Route("MostrarUsuario")]
         public Usuarios MostrarUsuario(entUsuarios entUsuario) {
@@ -305,19 +328,19 @@ namespace APICloudCash.Controllers
         }
 
 
-
+        //GENERACION DE NUMEROS TARJETAS/CUENTAS RANDOM
         Random random = new Random();
 
         public string GenerarCuentaCC() {
-
-            
-            long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 10000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
-            string cuentaCC = cuentaTarjetaSinRellenar.ToString().PadLeft(16, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
+            long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 1000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,
+            string cuentaCC = cuentaTarjetaSinRellenar.ToString().PadLeft(15, '0');//La convierte en string, finalmente la rellena en el caso que no cumpla con los 6 digitos necesarios
             return cuentaCC;
 
         }
 
-        public string GenerarCuentaNoCreada() {
+        public string GenerarCuentaNoCreada(int marcaTarjeta) 
+        {
+            string marcaTarjetaText = marcaTarjeta.ToString(); //Para conservar el 4 si es visa o 5 mastercard
 
             var tarjetaCreada = true;
             string cuentaCC="";
@@ -333,6 +356,7 @@ namespace APICloudCash.Controllers
                 }
 
             }
+            cuentaCC = marcaTarjetaText + cuentaCC;
             return cuentaCC;
         }
 

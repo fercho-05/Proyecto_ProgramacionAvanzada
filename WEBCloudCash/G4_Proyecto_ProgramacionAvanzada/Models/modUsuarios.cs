@@ -49,16 +49,12 @@ namespace WEBCloudCash.Models
         }
 
         public List<SelectListItem> ListarTipoUsuarios() {
-
             using (var client = new HttpClient())
             {
                 string url = urlApi + "ListarTipoUsuarios";
                 var resp = client.GetAsync(url).Result;
                 return resp.Content.ReadFromJsonAsync<List<SelectListItem>>().Result;
-
-
             }
-
         }
 
         public string RecuperarContrasena(entUsuarios entUsuario) {
@@ -69,11 +65,23 @@ namespace WEBCloudCash.Models
                 JsonContent contenido = JsonContent.Create(entUsuario);
                 var resp = client.PostAsync(url, contenido).Result;
                 return resp.Content.ReadFromJsonAsync<string>().Result;
-
-
             }
-
         }
 
+        public List<SelectListItem> ListarClientesEleccion()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ListarClientesEleccion";
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<SelectListItem>>().Result;
+            }
+        }
+        
+
+
+
     }
+
+
 }

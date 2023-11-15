@@ -1,0 +1,80 @@
+﻿@model WEBCloudCash.Entities.entTarjetas
+
+@{
+    ViewBag.Title = "Registrar tarjeta";
+    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+}
+
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Contact Area -->
+                <div class="contact-form-area contact-page">
+                    @* Para uso de administrador *@
+                    @using (Html.BeginForm("RegistroTarjetas", "Administrador", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                    {
+                        <br />
+                        if (ViewBag.mensaje != null)
+                        {
+                            if (ViewBag.mensaje == "Tarjeta de débito registrada con éxito")
+                            {<div class="alert alert-success" role="alert" style="text-align:center;">
+                                    @ViewBag.mensaje
+                                </div>
+                            }
+                            else
+                            {<div class="alert alert-danger" role="alert" style="text-align:center;">
+                                    @ViewBag.mensaje
+                                </div>
+                            }
+                        }
+
+                        <br />
+                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Registrar Tarjetas</h2>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.DropDownListFor(m => m.id_Cliente, ViewBag.listaClientes as List<SelectListItem>, "Seleccione el cliente asociado", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.DropDownListFor(m => m.id_TipoDivisa, ViewBag.listaTipoDivisas as List<SelectListItem>, "Seleccione el tipo de divisa", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.DropDownListFor(m => m.id_TipoTarjeta, ViewBag.listaTipoTarjetas as List<SelectListItem>, "Seleccione tipo de tarjeta", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.DropDownListFor(m => m.id_MarcaTarjeta, ViewBag.listaMarcasTarjetas as List<SelectListItem>, "Seleccione la marca de la tarjeta", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.saldo, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
+                                    <label style="color: black;" class="form-label">Saldo</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 text-center">
+                                <div class="pt-1 mb-4">
+                                    <input style="color: white; background-color: #363E48;" type="submit" class="btn credit-btn mt-30" value="Registrar">
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

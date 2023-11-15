@@ -37,7 +37,17 @@ namespace WEBCloudCash.Controllers
                 Session["TelefonoUsuario"] = resp.telefono;
                 Session["CorreoUsuario"] = resp.correo;
                 Session["NombreCompleto"] = resp.nombre +" "+ resp.apellidoUno + " "+ resp.apellidoDos;
-                return RedirectToAction("Perfil", "Authenticated");
+                Session["TipoUsuario"] = resp.id_TipoUsuario;
+
+                if (resp.id_TipoUsuario == 2) //Usuario de tipo 2 es un cliente
+                {
+                    return RedirectToAction("Perfil", "Authenticated");
+                }
+                else
+                {
+                    return RedirectToAction("PerfilAdministrador", "Administrador");
+                }
+                
             }
             else
             {
