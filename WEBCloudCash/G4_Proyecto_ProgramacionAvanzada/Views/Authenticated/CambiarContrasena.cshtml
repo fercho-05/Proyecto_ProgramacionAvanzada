@@ -55,9 +55,9 @@
                         <div class="row">
                             <div class="col-lg-12 mb-4">
                                 <div class="form-outline">
-                                    @Html.TextBoxFor(m => m.cedula, new { @id = "cedula", @class = "form-control form-control-lg", @type = "text", @style = "color: white; background-color: #363E48;", @Value = Session["CedulaUsuario"] })
+                                    @Html.TextBoxFor(m => m.cedula, new { @readonly = "@readonly", @id = "cedula", @class = "form-control form-control-lg", @type = "text", @style = "color: white; background-color: #363E48;", @Value = Session["CedulaUsuario"] })
 
-                                    <label style="color: black;" class="form-label">Contraseña Actual</label>
+                                    <label style="color: black;" class="form-label">Cédula</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-4">

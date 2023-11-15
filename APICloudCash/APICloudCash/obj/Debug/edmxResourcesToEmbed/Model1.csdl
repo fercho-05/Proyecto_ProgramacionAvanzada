@@ -16,7 +16,6 @@
     <Property Name="id_Usuario" Type="Int64" Nullable="false" />
     <NavigationProperty Name="Usuarios" Relationship="Self.FK_Clientes_idUsuario" FromRole="Clientes" ToRole="Usuarios" />
     <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_Clientes" FromRole="Clientes" ToRole="Prestamos" />
-    <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Clientes" ToRole="Tarjetas" />
   </EntityType>
   <EntityType Name="Errores">
     <Key>
@@ -63,8 +62,8 @@
     <Property Name="activa" Type="Boolean" Nullable="false" />
     <Property Name="id_TipoTarjeta" Type="Int32" Nullable="false" />
     <Property Name="id_MarcaTarjeta" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Clientes" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Tarjetas" ToRole="Clientes" />
     <NavigationProperty Name="MarcasTarjetas" Relationship="Self.FK_Tarjetas_MarcasTarjetas" FromRole="Tarjetas" ToRole="MarcasTarjetas" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Tarjetas" ToRole="Usuarios" />
     <NavigationProperty Name="TipoDivisas" Relationship="Self.FK_Tarjetas_TipoDivisas" FromRole="Tarjetas" ToRole="TipoDivisas" />
     <NavigationProperty Name="TipoTarjetas" Relationship="Self.FK_Tarjetas_TipoTarjetas" FromRole="Tarjetas" ToRole="TipoTarjetas" />
     <NavigationProperty Name="TCreditos" Relationship="Self.FK_TCreditos_Tarjetas" FromRole="Tarjetas" ToRole="TCreditos" />
@@ -82,8 +81,8 @@
     <Key>
       <PropertyRef Name="id_Debito" />
     </Key>
-    <Property Name="id_Debito" Type="Int64" Nullable="false" />
-    <Property Name="id_Tarjeta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_Debito" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_Tarjeta" Type="Int64" Nullable="false" />
     <NavigationProperty Name="Tarjetas" Relationship="Self.FK_TDebitos_Tarjetas" FromRole="TDebitos" ToRole="Tarjetas" />
   </EntityType>
   <EntityType Name="TipoDivisas">
@@ -130,6 +129,7 @@
     <Property Name="id_TipoUsuario" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Administradores" Relationship="Self.FK_Administradores_idUsuario" FromRole="Usuarios" ToRole="Administradores" />
     <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_idUsuario" FromRole="Usuarios" ToRole="Clientes" />
+    <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Usuarios" ToRole="Tarjetas" />
     <NavigationProperty Name="TipoUsuarios" Relationship="Self.FK_Usuarios_TipoUsuarios" FromRole="Usuarios" ToRole="TipoUsuarios" />
   </EntityType>
   <Association Name="FK_Administradores_idUsuario">
@@ -168,18 +168,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Tarjetas_Clientes">
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
-    <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="id_Cliente" />
-      </Principal>
-      <Dependent Role="Tarjetas">
-        <PropertyRef Name="id_Cliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Tarjetas_MarcasTarjetas">
     <End Role="MarcasTarjetas" Type="Self.MarcasTarjetas" Multiplicity="1" />
     <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
@@ -201,6 +189,18 @@
       </Principal>
       <Dependent Role="Prestamos">
         <PropertyRef Name="id_tipoDivisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tarjetas_Clientes">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_Usuario" />
+      </Principal>
+      <Dependent Role="Tarjetas">
+        <PropertyRef Name="id_Cliente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -289,10 +289,6 @@
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Prestamos" EntitySet="Prestamos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Tarjetas_Clientes" Association="Self.FK_Tarjetas_Clientes">
-      <End Role="Clientes" EntitySet="Clientes" />
-      <End Role="Tarjetas" EntitySet="Tarjetas" />
-    </AssociationSet>
     <AssociationSet Name="FK_Tarjetas_MarcasTarjetas" Association="Self.FK_Tarjetas_MarcasTarjetas">
       <End Role="MarcasTarjetas" EntitySet="MarcasTarjetas" />
       <End Role="Tarjetas" EntitySet="Tarjetas" />
@@ -300,6 +296,10 @@
     <AssociationSet Name="FK_Prestamos_TipoDivisas" Association="Self.FK_Prestamos_TipoDivisas">
       <End Role="TipoDivisas" EntitySet="TipoDivisas" />
       <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tarjetas_Clientes" Association="Self.FK_Tarjetas_Clientes">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
     </AssociationSet>
     <AssociationSet Name="FK_Tarjetas_TipoDivisas" Association="Self.FK_Tarjetas_TipoDivisas">
       <End Role="TipoDivisas" EntitySet="TipoDivisas" />

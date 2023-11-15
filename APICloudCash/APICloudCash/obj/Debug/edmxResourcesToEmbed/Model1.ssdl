@@ -68,8 +68,8 @@
     <Key>
       <PropertyRef Name="id_Debito" />
     </Key>
-    <Property Name="id_Debito" Type="bigint" Nullable="false" />
-    <Property Name="id_Tarjeta" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Debito" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Tarjeta" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoDivisas">
     <Key>
@@ -159,11 +159,11 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Tarjetas_Clientes">
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
     <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="id_Cliente" />
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id_Usuario" />
       </Principal>
       <Dependent Role="Tarjetas">
         <PropertyRef Name="id_Cliente" />
@@ -321,7 +321,7 @@
       <End Role="Prestamos" EntitySet="Prestamos" />
     </AssociationSet>
     <AssociationSet Name="FK_Tarjetas_Clientes" Association="Self.FK_Tarjetas_Clientes">
-      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Tarjetas" EntitySet="Tarjetas" />
     </AssociationSet>
     <AssociationSet Name="FK_Tarjetas_MarcasTarjetas" Association="Self.FK_Tarjetas_MarcasTarjetas">
