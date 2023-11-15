@@ -37,18 +37,8 @@ namespace APICloudCash.Controllers
                 } 
             }catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return string.Empty;
             }
@@ -75,18 +65,8 @@ namespace APICloudCash.Controllers
                 }
             }
             catch (Exception e) {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return string.Empty;
             }
@@ -112,18 +92,8 @@ namespace APICloudCash.Controllers
                 }
             }
             catch (Exception e) {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return new List<System.Web.Mvc.SelectListItem>();
             }
@@ -150,18 +120,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return new List<System.Web.Mvc.SelectListItem>();
             }
@@ -219,18 +179,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return string.Empty;
             }
@@ -269,18 +219,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return string.Empty;
             }
@@ -307,18 +247,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return new List<System.Web.Mvc.SelectListItem>();
             }
@@ -345,18 +275,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return new List<System.Web.Mvc.SelectListItem>();
             }
@@ -387,18 +307,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return new List<System.Web.Mvc.SelectListItem>();
             }
@@ -424,18 +334,8 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return new List<Usuarios>();
             }
@@ -459,18 +359,9 @@ namespace APICloudCash.Controllers
             }
             catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
                 return  null;
             }
         }
@@ -489,18 +380,8 @@ namespace APICloudCash.Controllers
             }
             }catch (Exception e)
             {
-                using (var context = new DBCC())
-                {
-                    context.Configuration.LazyLoadingEnabled = false;
-
-                    var user = new Errores();
-
-                    user.fecha = DateTime.Now;
-                    user.mensajeError = e.Message.ToString();
-
-                    context.Errores.Add(user);
-                    context.SaveChanges();
-                }
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
 
                 return null;
             }
@@ -543,6 +424,24 @@ namespace APICloudCash.Controllers
             string cvcRellenado = cvcSinRellenar.ToString("D3");//La convierte en string, finalmente la rellena en el caso que no cumpla con los 3 digitos necesarios
             short cvc = short.Parse(cvcRellenado);
             return cvc;
+        }
+
+        //LLENAR TABLA DE ERRORES TRAS CAER EN UN CATCH
+        public void ReporteErrores(string mensaje)
+        {
+            using (var context = new DBCC())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+
+                var user = new Errores();
+
+                user.fecha = DateTime.Now;
+                user.mensajeError = mensaje;
+
+                context.Errores.Add(user);
+                context.SaveChanges();
+            }
+
         }
     }
 }
