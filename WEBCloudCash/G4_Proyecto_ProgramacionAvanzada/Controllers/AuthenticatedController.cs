@@ -11,6 +11,7 @@ namespace WEBCloudCash.Controllers
     public class AuthenticatedController : Controller
     {
         modUsuarios modUsuario = new modUsuarios();
+        modCuenta modCuenta = new modCuenta();
 
         [HttpGet]
         public ActionResult Perfil()
@@ -61,19 +62,28 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult CuentaAhorro()
         {
-            return View();
+            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las cuentas usando la cedula almacenada en la variable de sesion
+            var model = new modCuenta();
+            model.Cuentas = model.ListarCuentasPorCedula(cedula);
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult CuentaCorriente()
         {
-            return View();
+            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las cuentas usando la cedula almacenada en la variable de sesion
+            var model = new modCuenta();
+            model.Cuentas = model.ListarCuentasPorCedula(cedula);
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult CuentaPlanilla()
         {
-            return View();
+            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las cuentas usando la cedula almacenada en la variable de sesion
+            var model = new modCuenta();
+            model.Cuentas = model.ListarCuentasPorCedula(cedula);
+            return View(model);
         }
 
         [HttpGet]

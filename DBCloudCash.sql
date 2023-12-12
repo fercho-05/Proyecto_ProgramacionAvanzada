@@ -150,6 +150,69 @@ CREATE TABLE [dbo].[Usuarios](
 ) ON [PRIMARY]
 GO
 
+/****** Object:  Table [dbo].[TipoCuentas]    Script Date: 12/12/2023 11:03:29 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TipoCuentas](
+	[id_TipoCuenta] [int] IDENTITY(1,1) NOT NULL,
+	[descripcion] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_TipoCuentas] PRIMARY KEY CLUSTERED 
+(
+	[id_TipoCuenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Cuentas]    Script Date: 12/12/2023 11:20:04 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Cuentas](
+	[id_Cuenta] [bigint] IDENTITY(1,1) NOT NULL,
+	[id_Cliente] [bigint] NOT NULL,
+	[id_TipoCuenta] [int] NOT NULL,
+	[id_TipoDivisa] [int] NOT NULL,
+	[numeroCuenta] [varchar](30) NOT NULL,
+	[activa] [bit] NOT NULL,
+	[saldo] [bigint] NOT NULL,
+ CONSTRAINT [PK_Cuentas] PRIMARY KEY CLUSTERED 
+(
+	[id_Cuenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Cuentas]  WITH CHECK ADD  CONSTRAINT [FK_Clientes] FOREIGN KEY([id_Cliente])
+REFERENCES [dbo].[Clientes] ([id_Cliente])
+GO
+
+ALTER TABLE [dbo].[Cuentas] CHECK CONSTRAINT [FK_Clientes]
+GO
+
+ALTER TABLE [dbo].[Cuentas]  WITH CHECK ADD  CONSTRAINT [FK_TipoCuenta] FOREIGN KEY([id_TipoCuenta])
+REFERENCES [dbo].[TipoCuentas] ([id_TipoCuenta])
+GO
+
+ALTER TABLE [dbo].[Cuentas] CHECK CONSTRAINT [FK_TipoCuenta]
+GO
+
+ALTER TABLE [dbo].[Cuentas]  WITH CHECK ADD  CONSTRAINT [FK_TipoDivisa] FOREIGN KEY([id_TipoDivisa])
+REFERENCES [dbo].[TipoDivisas] ([id_TipoDivisa])
+GO
+
+ALTER TABLE [dbo].[Cuentas] CHECK CONSTRAINT [FK_TipoDivisa]
+GO
+
+-- 1. CUENTA AHORRO
+-- 2. CUENTA CORRIENTE
+-- 3. CUENTA PLANILLA
 
 
 SET IDENTITY_INSERT [dbo].[Administradores] ON 

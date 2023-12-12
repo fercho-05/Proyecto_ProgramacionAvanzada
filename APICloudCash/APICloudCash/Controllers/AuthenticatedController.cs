@@ -301,6 +301,57 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListarCuentasPorCedula")]
+        public List<entCuentas> ListarCuentas(string cedula)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+
+                    var idUsuario = context.Usuarios
+                                          .Where(u => u.cedula == cedula)
+                                          .Select(u => u.id_Usuario)
+                                          .FirstOrDefault();
+                    var idCliente = context.Clientes
+                                          .Where(u => u.id_Usuario == idUsuario)
+                                          .Select(u => u.id_Cliente)
+                                          .FirstOrDefault();
+                    if (idCliente != 0)
+                    {
+
+                        //CORRECCION PARA QUE FUNCIONE DEBIDO AL CAMBIO EN BD, PROBLEMA CON TABLA CLIENTES
+                        var cuentas = context.Cuentas
+                                                  .Where(t => t.id_Cliente == idUsuario)
+                                                  .ToList();
+                        var entCuentas = cuentas.Select(t => new entCuentas
+                        {
+                            id_Cuenta = t.id_Cuenta,
+                            id_Cliente = t.id_Cliente,
+                            id_TipoCuenta = t.id_TipoCuenta,
+                            saldo = t.saldo,
+                            id_TipoDivisa = t.id_TipoDivisa,
+                            activa = t.activa,
+                            numeroCuenta = t.numeroCuenta
+                        }).ToList();
+
+                        return entCuentas;
+
+                    }
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return new List<entCuentas>();
+            }
+        }
+
 
 
     }
