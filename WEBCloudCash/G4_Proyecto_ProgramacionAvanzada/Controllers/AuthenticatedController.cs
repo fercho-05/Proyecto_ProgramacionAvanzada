@@ -81,7 +81,7 @@ namespace WEBCloudCash.Controllers
         {
             return View();
         }
-
+      
         [HttpPost]
         public ActionResult CambiarContrasena(entUsuarios usuario)
         {
@@ -99,6 +99,83 @@ namespace WEBCloudCash.Controllers
             }
         
         }
+
+        [HttpGet]
+        public ActionResult CambiarUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CambiarUsuario(entUsuarios usuario)
+        {
+            string respuestaApi = modUsuario.cambiarUsuario(usuario);
+
+            if (respuestaApi?.IndexOf("exitosamente", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                ViewBag.mensaje = respuestaApi;
+                Session["userName"] = usuario.nuevoUsuario;
+                return View();
+            }
+            else
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
+
+        }
+
+
+        [HttpGet]
+        public ActionResult CambiarTelefono()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CambiarTelefono(entUsuarios usuario)
+        {
+            string respuestaApi = modUsuario.cambiarTelefono(usuario);
+
+            if (respuestaApi?.IndexOf("exitosamente", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                ViewBag.mensaje = respuestaApi;
+                Session["TelefonoUsuario"] = usuario.nuevoTelefono;
+                return View();
+            }
+            else
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult CambiarCorreo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CambiarCorreo(entUsuarios usuario)
+        {
+            string respuestaApi = modUsuario.cambiarCorreo(usuario);
+
+            if (respuestaApi?.IndexOf("exitosamente", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                ViewBag.mensaje = respuestaApi;
+                Session["CorreoUsuario"] = usuario.nuevoCorreo;
+                return View();
+            }
+            else
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
+
+        }
+
 
 
 

@@ -73,21 +73,21 @@
                                 <div class="form-outline mb-4">
                                     @Html.TextBox("nombreUsuario", Session["userName"], new { @readonly = "@readonly", style = "color: white; background-color: #363E48;", @placeholder = "Nombre de Usuario", @class = "form-control form-control-lg", @type = "text" })
                                     <label style="color: black;" class="form-label">Nombre de usuario</label>
-                                    <a style="margin-left:1rem;" href="#">actualizar</a>
+                                    <a style="margin-left:1rem;" href="@Url.Action("CambiarUsuario","Authenticated")">actualizar</a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-outline mb-4">
                                     @Html.TextBox("telefono", Session["TelefonoUsuario"], new { @readonly = "@readonly", @style = "color: white; background-color: #363E48;", @placeholder = "Teléfono", @class = "form-control form-control-lg", @type = "text" })
                                     <label style="color: black;" class="form-label">Teléfono</label>
-                                    <a style="margin-left:1rem;" href="#">actualizar</a>
+                                    <a style="margin-left:1rem;" href="@Url.Action("CambiarTelefono","Authenticated")">actualizar</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-outline mb-4">
                                     @Html.TextBox("correo", Session["CorreoUsuario"], new { @readonly = "@readonly", @style = "color:white; background-color: #363E48;", @placeholder = "Correo electrónico", @class = "form-control form-control-lg", @type = "email" })
                                     <label style="color: black;" class="form-label">Correo electrónico</label>
-                                    <a style="margin-left:1rem;" href="#">actualizar</a>
+                                    <a style="margin-left:1rem;" href="@Url.Action("CambiarCorreo","Authenticated")">actualizar</a>
                                 </div>
                             </div>
                             <div style="text-align:center;" class="col-lg-12">

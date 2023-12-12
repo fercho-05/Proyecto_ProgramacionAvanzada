@@ -3,7 +3,7 @@
 
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "Cambiar Usuario";
     Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
 }
 
@@ -19,7 +19,7 @@
             <div class="col-12 col-lg-8">
                 <!-- Contact Area -->
                 <div class="contact-form-area contact-page">
-                    @using (Html.BeginForm("CambiarContrasena", "Authenticated", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                    @using (Html.BeginForm("CambiarCorreo", "Authenticated", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
                     {
                         <br />
                         if (ViewBag.mensaje != null)
@@ -51,7 +51,7 @@
 
                         <div id="mensajeContainer" style="text-align:center;"></div>
 
-                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Actualizar Contraseña</h2>
+                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Actualizar Correo Electrónico</h2>
                         <div class="row">
                             <div class="col-lg-12 mb-4">
                                 <div class="form-outline">
@@ -64,20 +64,13 @@
                                 <div class="form-outline">
                                     @Html.TextBoxFor(m => m.contrasena, new { @id = "contrasena", @class = "form-control form-control-lg", @type = "password", @placeholder = "Contraseña Actual", @style = "color: white; background-color: #363E48;" })
 
-                                    <label style="color: black;" class="form-label">Contraseña Actual</label>
+                                    <label style="color: black;" class="form-label">Contraseña</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-4">
                                 <div class="form-outline">
-
-                                    @Html.TextBox("contrasenaNueva", "", new { @id = "newPassword", @class = "form-control form-control-lg", @type = "password", @placeholder = "Nueva Contraseña", @style = "color: white; background-color: #363E48;", @oninput = "validacionContrasenaNueva();" })
-                                    <label style="color: black;" class="form-label">Nueva contraseña</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 mb-4">
-                                <div class="form-outline">
-                                    @Html.TextBoxFor(m => m.nuevaContrasena, new { @id = "nuevaContrasena", @class = "form-control form-control-lg", @type = "password", @placeholder = "Confimar contraseña", @style = "color: white; background-color: #363E48;", @oninput = "validacionContrasenaNueva();" })
-                                    <label style="color: black;" class="form-label">Confirme su nueva contraseña</label>
+                                    @Html.TextBoxFor(m => m.nuevoCorreo, new { @id = "nuevoCorreo", @class = "form-control form-control-lg", @type = "email", @placeholder = "Nuevo Correo", @style = "color: white; background-color: #363E48;"})
+                                    <label style="color: black;" class="form-label">Nuevo Usuario</label>
                                 </div>
                             </div>
                             <div class="col-12" style="text-align:center;">
@@ -113,5 +106,5 @@
 
         return true;
     }
-   
+
 </script>

@@ -105,6 +105,40 @@ namespace WEBCloudCash.Models
 
         }
 
+        public string cambiarUsuario(entUsuarios usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "CambiarUsuario";
+                JsonContent contenido = JsonContent.Create(usuario);
+                var resp = client.PostAsync(url, contenido).Result;
+                var result = resp.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+        }
 
+        public string cambiarTelefono(entUsuarios usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "CambiarTelefono";
+                JsonContent contenido = JsonContent.Create(usuario);
+                var resp = client.PostAsync(url, contenido).Result;
+                var result = resp.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+        }
+
+        public string cambiarCorreo(entUsuarios usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "CambiarCorreo";
+                JsonContent contenido = JsonContent.Create(usuario);
+                var resp = client.PostAsync(url, contenido).Result;
+                var result = resp.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+        }
     }
 }

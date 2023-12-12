@@ -21,6 +21,9 @@ namespace APICloudCash.Entities
         public int id_TipoUsuario { get; set; }
         public string mensaje { get; set; }
         public string nuevaContrasena { get; set; }
+        public string nuevoUsuario { get; set; }
+        public Nullable<int> nuevoTelefono { get; set; }
+        public string nuevoCorreo { get; set; }
 
     }
 }

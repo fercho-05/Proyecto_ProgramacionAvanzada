@@ -159,11 +159,11 @@ namespace APICloudCash.Controllers
                         {
                             datosBase.contrasena = usuario.nuevaContrasena;
                             context.SaveChanges();
-                            return ("Actualizada exitosamente");
+                            return "Actualizada exitosamente";
                         }
                         else
                         {
-                            return ("Contraseña actual incorrecta");
+                            return "Contraseña actual incorrecta";
                         }                       
                     }
                     else
@@ -180,5 +180,128 @@ namespace APICloudCash.Controllers
                 return "Error: " + e.Message;
             }
         }
+
+        [HttpPost]
+        [Route("CambiarUsuario")]
+        public string CambiarUsuario(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datosBase = context.Usuarios
+                                          .Where(u => u.cedula == usuario.cedula)
+                                          .FirstOrDefault();
+
+                    if (datosBase != null)
+                    {
+                        if (usuario.contrasena == datosBase.contrasena)
+                        {
+                            datosBase.nombreUsuario = usuario.nuevoUsuario;
+                            context.SaveChanges();
+                            return "Actualizado exitosamente";
+                        }
+                        else
+                        {
+                            return "Contraseña actual incorrecta";
+                        }
+                    }
+                    else
+                    {
+                        return "Usuario no encontrado";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Loguea el error para depuración
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+                return "Error: " + e.Message;
+            }
+        }
+
+        [HttpPost]
+        [Route("CambiarTelefono")]
+        public string CambiarTelefono(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datosBase = context.Usuarios
+                                          .Where(u => u.cedula == usuario.cedula)
+                                          .FirstOrDefault();
+
+                    if (datosBase != null)
+                    {
+                        if (usuario.contrasena == datosBase.contrasena)
+                        {
+                            datosBase.telefono = usuario.nuevoTelefono;
+                            context.SaveChanges();
+                            return "Actualizado exitosamente";
+                        }
+                        else
+                        {
+                            return "Contraseña actual incorrecta";
+                        }
+                    }
+                    else
+                    {
+                        return "Usuario no encontrado";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Loguea el error para depuración
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+                return "Error: " + e.Message;
+            }
+        }
+
+        [HttpPost]
+        [Route("CambiarCorreo")]
+        public string CambiarCorreo(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datosBase = context.Usuarios
+                                          .Where(u => u.cedula == usuario.cedula)
+                                          .FirstOrDefault();
+
+                    if (datosBase != null)
+                    {
+                        if (usuario.contrasena == datosBase.contrasena)
+                        {
+                            datosBase.correo = usuario.nuevoCorreo;
+                            context.SaveChanges();
+                            return "Actualizado exitosamente";
+                        }
+                        else
+                        {
+                            return "Contraseña actual incorrecta";
+                        }
+                    }
+                    else
+                    {
+                        return "Usuario no encontrado";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Loguea el error para depuración
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+                return "Error: " + e.Message;
+            }
+        }
+
+
+
     }
 }
