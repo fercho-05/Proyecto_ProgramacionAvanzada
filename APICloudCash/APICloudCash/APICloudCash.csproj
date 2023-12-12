@@ -172,8 +172,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Cuentas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\entAdministradores.cs" />
     <Compile Include="Entities\entClientes.cs" />
+    <Compile Include="Entities\entCuentas.cs" />
     <Compile Include="Entities\entErrores.cs" />
     <Compile Include="Entities\entTCreditos.cs" />
     <Compile Include="Entities\entTDebitos.cs" />
@@ -224,6 +228,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TDebitos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoCuentas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoDivisas.cs">

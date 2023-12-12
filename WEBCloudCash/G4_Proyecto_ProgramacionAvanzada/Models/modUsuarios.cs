@@ -41,7 +41,7 @@ namespace WEBCloudCash.Models
         {
             using (var client = new HttpClient())
             {
-                string url = urlApi + "IngresarCliente";
+                string url = urlApi + "IngresarAdministrador";
                 JsonContent contenido = JsonContent.Create(entidad);
                 var resp = client.PostAsync(url, contenido).Result;
                 return resp.Content.ReadFromJsonAsync<string>().Result;

@@ -154,6 +154,7 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Entities\entAdministradores.cs" />
     <Compile Include="Entities\entClientes.cs" />
+    <Compile Include="Entities\entCuentas.cs" />
     <Compile Include="Entities\entTarjetas.cs" />
     <Compile Include="Entities\entMarcaTarjeta.cs" />
     <Compile Include="Entities\entTipoTarjeta.cs" />
@@ -163,6 +164,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\modContacto.cs" />
+    <Compile Include="Models\modCuenta.cs" />
     <Compile Include="Models\modTarjeta.cs" />
     <Compile Include="Models\modUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2438,6 +2440,14 @@
     <Content Include="Views\Administrador\RegistroTarjetas.cshtml" />
     <Content Include="Views\Administrador\ListadoClientes.cshtml" />
     <Content Include="Views\Administrador\ListadoAdministradores.cshtml" />
+    <Content Include="Views\Login\RecuperarContrasena.cshtml" />
+    <Content Include="Views\Authenticated\CambiarContrasena.cshtml" />
+    <Content Include="Views\Authenticated\CambiarCorreo.cshtml" />
+    <Content Include="Views\Authenticated\CambiarTelefono.cshtml" />
+    <Content Include="Views\Authenticated\CambiarUsuario.cshtml" />
+    <Content Include="Views\Authenticated\CuentaAhorro.cshtml" />
+    <Content Include="Views\Authenticated\CuentaCorriente.cshtml" />
+    <Content Include="Views\Authenticated\CuentaPlanilla.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

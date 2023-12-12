@@ -17,6 +17,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Cuentas">
+      <EntityTypeMapping TypeName="CloudCashModel.Cuentas">
+        <MappingFragment StoreEntitySet="Cuentas">
+          <ScalarProperty Name="id_Cuenta" ColumnName="id_Cuenta" />
+          <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+          <ScalarProperty Name="id_TipoCuenta" ColumnName="id_TipoCuenta" />
+          <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
+          <ScalarProperty Name="numeroCuenta" ColumnName="numeroCuenta" />
+          <ScalarProperty Name="activa" ColumnName="activa" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Errores">
       <EntityTypeMapping TypeName="CloudCashModel.Errores">
         <MappingFragment StoreEntitySet="Errores">
@@ -77,6 +90,14 @@
         <MappingFragment StoreEntitySet="TDebitos">
           <ScalarProperty Name="id_Debito" ColumnName="id_Debito" />
           <ScalarProperty Name="id_Tarjeta" ColumnName="id_Tarjeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCuentas">
+      <EntityTypeMapping TypeName="CloudCashModel.TipoCuentas">
+        <MappingFragment StoreEntitySet="TipoCuentas">
+          <ScalarProperty Name="id_TipoCuenta" ColumnName="id_TipoCuenta" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

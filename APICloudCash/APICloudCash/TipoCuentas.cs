@@ -12,25 +12,18 @@ namespace APICloudCash
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoDivisas
+    public partial class TipoCuentas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoDivisas()
+        public TipoCuentas()
         {
             this.Cuentas = new HashSet<Cuentas>();
-            this.Prestamos = new HashSet<Prestamos>();
-            this.Tarjetas = new HashSet<Tarjetas>();
         }
     
-        public int id_TipoDivisa { get; set; }
-        public string Abreviado { get; set; }
-        public string Descripcion { get; set; }
+        public int id_TipoCuenta { get; set; }
+        public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuentas> Cuentas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Prestamos> Prestamos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tarjetas> Tarjetas { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace APICloudCash
         {
             this.Administradores = new HashSet<Administradores>();
             this.Clientes = new HashSet<Clientes>();
-            this.Tarjetas = new HashSet<Tarjetas>();
         }
     
         public long id_Usuario { get; set; }
@@ -39,8 +38,6 @@ namespace APICloudCash
         public virtual ICollection<Administradores> Administradores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clientes> Clientes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tarjetas> Tarjetas { get; set; }
         public virtual TipoUsuarios TipoUsuarios { get; set; }
     }
 }

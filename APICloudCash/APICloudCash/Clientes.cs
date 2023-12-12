@@ -17,14 +17,20 @@ namespace APICloudCash
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Clientes()
         {
+            this.Cuentas = new HashSet<Cuentas>();
             this.Prestamos = new HashSet<Prestamos>();
+            this.Tarjetas = new HashSet<Tarjetas>();
         }
     
         public long id_Cliente { get; set; }
         public long id_Usuario { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cuentas> Cuentas { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prestamos> Prestamos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tarjetas> Tarjetas { get; set; }
     }
 }

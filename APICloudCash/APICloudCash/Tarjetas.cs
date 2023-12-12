@@ -33,8 +33,8 @@ namespace APICloudCash
         public int id_TipoTarjeta { get; set; }
         public int id_MarcaTarjeta { get; set; }
     
+        public virtual Clientes Clientes { get; set; }
         public virtual MarcasTarjetas MarcasTarjetas { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
         public virtual TipoDivisas TipoDivisas { get; set; }
         public virtual TipoTarjetas TipoTarjetas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
