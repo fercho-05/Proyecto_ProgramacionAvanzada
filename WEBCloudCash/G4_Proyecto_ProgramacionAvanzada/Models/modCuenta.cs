@@ -27,6 +27,31 @@ namespace WEBCloudCash.Models
                 return Cuentas;
             }
         }
+        
+        public List<SelectListItem> ListarCuentasPorCed(string cedula)
+        {
+            //Cuentas = new List<entCuentas>();
+            using (var client = new HttpClient())
+            {
+                string url = $"{urlApi}ListarCuentasPorCed?cedula={cedula}";
+                var resp = client.GetAsync(url).Result;
+                if (resp.IsSuccessStatusCode)
+                    return resp.Content.ReadFromJsonAsync<List<SelectListItem>>().Result;
+                else
+                    return new List<SelectListItem>();
+            }
+        }
+
+        public string EnviarDinero(entEnvioDinero envioDinero)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "EnviarDinero";
+                JsonContent contenido = JsonContent.Create(envioDinero);
+                var resp = client.PostAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
 
     }
 }

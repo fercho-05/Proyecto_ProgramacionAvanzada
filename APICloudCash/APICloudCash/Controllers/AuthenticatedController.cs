@@ -327,6 +327,56 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListarCuentasPorCed")]
+        public List<System.Web.Mvc.SelectListItem> ListarCuentasPorCed(string cedula)
+        {
+            try
+            {
+
+                using (var context = new DBCC())
+                {
+                    var idUsuario = context.Usuarios
+                                              .Where(u => u.cedula == cedula)
+                                              .Select(u => u.id_Usuario)
+                                              .FirstOrDefault();
+                    var idCliente = context.Clientes
+                                          .Where(u => u.id_Usuario == idUsuario)
+                                          .Select(u => u.id_Cliente)
+                                          .FirstOrDefault();
+                    if (idCliente != 0)
+                    {
+                        var cuentas = context.Cuentas
+                                                  .Where(t => t.id_Cliente == idCliente)
+                                                  .ToList();
+
+                        var combo = new List<System.Web.Mvc.SelectListItem>();
+                        foreach (var item in cuentas)
+                            {
+                                combo.Add(new System.Web.Mvc.SelectListItem
+                                {
+                                    Value = item.id_Cuenta.ToString(),
+                                    Text = item.numeroCuenta.ToString()
+                                });
+                            }
+
+                        return combo;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return null;
+            }
+        }
+
         [HttpPost]
         [Route("EnviarDinero")]
         public string EnviarDinero(entEnvioDinero envioDinero)

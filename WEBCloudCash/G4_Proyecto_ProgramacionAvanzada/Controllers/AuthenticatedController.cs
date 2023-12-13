@@ -27,14 +27,26 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult EnviarDinero()
         {
-            //var cedula = Session["CedulaUsuario"]?.ToString();
-            //List<entCuentas> cuentas = modCuenta.ListarCuentasPorCedula(cedula);
-            //ViewBag.cuentas = new SelectList(cuentas, "id_Cuenta", "numeroCuenta");
-            //ViewBag.cuentas = new SelectList(cuentas);
-            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las cuentas usando la cedula almacenada en la variable de sesion
-            var model = new modCuenta();
-            model.Cuentas = model.ListarCuentasPorCedula(cedula);
-            return View(model);
+            var cedula = Session["CedulaUsuario"]?.ToString();
+            ViewBag.cuentas = modCuenta.ListarCuentasPorCed(cedula);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EnviarDinero(entEnvioDinero envioDinero)
+        {
+            string respuestaApi = modCuenta.EnviarDinero(envioDinero);
+
+            if (respuestaApi?.IndexOf("exitosa", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
+            else
+            {
+                ViewBag.mensaje = respuestaApi;
+                return View();
+            }
         }
 
         [HttpGet]

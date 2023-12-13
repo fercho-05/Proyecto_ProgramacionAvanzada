@@ -26,7 +26,7 @@ $(document).ready(function () {
             valorOriginal = ibanInput.replace(/[^a-zA-Z]/g, '').toUpperCase();
         } else {
             // LUEGO DE INGRESAR LAS LETRAS DEL PAIS YA SOLO PERMITIR NUMS
-            valorOriginal = valorOriginal.substring(0, 2) + ibanInput.substring(2,34).replace(/[^0-9]/g, '');
+            valorOriginal = valorOriginal.substring(0, 2) + ibanInput.substring(2,30).replace(/[^0-9]/g, '');
         }
         $(this).val(valorOriginal);       
     });

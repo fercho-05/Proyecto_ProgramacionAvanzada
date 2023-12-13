@@ -1,4 +1,4 @@
-﻿@model WEBCloudCash.Models.modCuenta
+﻿@model WEBCloudCash.Entities.entEnvioDinero
 
 @{
     ViewBag.Title = "EnviarDinero";
@@ -16,26 +16,20 @@
                 <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Enviar Dinero</h2>
                 <div class="row">
                     <div class="container">
-                        @if (Model.Cuentas.Count() > 0)
+                        @if (ViewBag.cuentas != null)
                         {
                             using (Html.BeginForm("NombreDeTuAccion", "NombreDeTuControlador", FormMethod.Post))
                             {
+
                                 <div class="container">
                                     <div class="container p-0">
                                         <div class="card px-4">
                                             <p class="h8 py-3">Detalles de Transferencia</p>
-                                            <div class="row gx-3">
-
+                                            <div class="row gx-3">   
                                                 <div class="col-12">
                                                     <div class="d-flex flex-column">
                                                         <p class="text mb-1">Número de Cuenta</p>
-                                                        <select id="origenCuenta" class="form-control mb-3" required>
-                                                            <option value="" disabled selected>Seleccione Cuenta Origen</option>
-                                                            @foreach (var cuenta in Model.Cuentas)
-                                                            {
-                                                                <option value="@cuenta.id_Cuenta">@cuenta.numeroCuenta</option>
-                                                            }
-                                                        </select>
+                                                        @Html.DropDownListFor(m => m.id_Cuenta , ViewBag.cuentas as List<SelectListItem>, new { @class = "form-control" })
                                                     </div>
                                                 </div>
 
