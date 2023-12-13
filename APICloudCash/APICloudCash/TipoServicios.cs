@@ -12,26 +12,20 @@ namespace APICloudCash
     using System;
     using System.Collections.Generic;
     
-    public partial class Cuentas
+    public partial class TipoServicios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cuentas()
+        public TipoServicios()
         {
-            this.EnvioDinero = new HashSet<EnvioDinero>();
+            this.FacturacionServicios = new HashSet<FacturacionServicios>();
         }
     
-        public long id_Cuenta { get; set; }
-        public long id_Cliente { get; set; }
-        public int id_TipoCuenta { get; set; }
-        public int id_TipoDivisa { get; set; }
-        public string numeroCuenta { get; set; }
-        public bool activa { get; set; }
-        public long saldo { get; set; }
+        public int id_TipoServicio { get; set; }
+        public string descripcion { get; set; }
+        public long monto { get; set; }
+        public bool activo { get; set; }
     
-        public virtual Clientes Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EnvioDinero> EnvioDinero { get; set; }
-        public virtual TipoCuentas TipoCuentas { get; set; }
-        public virtual TipoDivisas TipoDivisas { get; set; }
+        public virtual ICollection<FacturacionServicios> FacturacionServicios { get; set; }
     }
 }

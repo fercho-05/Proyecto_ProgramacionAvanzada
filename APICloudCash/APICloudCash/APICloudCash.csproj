@@ -178,16 +178,25 @@
     <Compile Include="Entities\entAdministradores.cs" />
     <Compile Include="Entities\entClientes.cs" />
     <Compile Include="Entities\entCuentas.cs" />
+    <Compile Include="Entities\entEnvioDinero.cs" />
     <Compile Include="Entities\entErrores.cs" />
+    <Compile Include="Entities\entPrestamos.cs" />
     <Compile Include="Entities\entTCreditos.cs" />
     <Compile Include="Entities\entTDebitos.cs" />
+    <Compile Include="Entities\entTipoPrestamos.cs" />
     <Compile Include="Entities\entTipoTarjeta.cs" />
     <Compile Include="Entities\entMarcaTarjeta.cs" />
     <Compile Include="Entities\entTipoUsuarios.cs" />
     <Compile Include="Entities\entUsuarios.cs" />
     <Compile Include="Entities\entTarjetas.cs" />
     <Compile Include="Entities\Utilitario.cs" />
+    <Compile Include="EnvioDinero.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Errores.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacturacionServicios.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -234,6 +243,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoDivisas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoPrestamos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoServicios.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoTarjetas.cs">

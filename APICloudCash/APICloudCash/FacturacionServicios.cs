@@ -12,19 +12,16 @@ namespace APICloudCash
     using System;
     using System.Collections.Generic;
     
-    public partial class Prestamos
+    public partial class FacturacionServicios
     {
-        public long id_Prestamo { get; set; }
+        public int id_FacturacionServicio { get; set; }
+        public int id_TipoServicio { get; set; }
         public long id_Cliente { get; set; }
-        public long id_TipoPrestamo { get; set; }
-        public int id_tipoDivisa { get; set; }
-        public double monto { get; set; }
-        public int plazo { get; set; }
-        public int tasaInteres { get; set; }
-        public bool activo { get; set; }
+        public long subtotal { get; set; }
+        public long impuestos { get; set; }
+        public long total { get; set; }
     
         public virtual Clientes Clientes { get; set; }
-        public virtual TipoDivisas TipoDivisas { get; set; }
-        public virtual TipoPrestamos TipoPrestamos { get; set; }
+        public virtual TipoServicios TipoServicios { get; set; }
     }
 }

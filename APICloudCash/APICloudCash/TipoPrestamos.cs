@@ -12,19 +12,18 @@ namespace APICloudCash
     using System;
     using System.Collections.Generic;
     
-    public partial class Prestamos
+    public partial class TipoPrestamos
     {
-        public long id_Prestamo { get; set; }
-        public long id_Cliente { get; set; }
-        public long id_TipoPrestamo { get; set; }
-        public int id_tipoDivisa { get; set; }
-        public double monto { get; set; }
-        public int plazo { get; set; }
-        public int tasaInteres { get; set; }
-        public bool activo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoPrestamos()
+        {
+            this.Prestamos = new HashSet<Prestamos>();
+        }
     
-        public virtual Clientes Clientes { get; set; }
-        public virtual TipoDivisas TipoDivisas { get; set; }
-        public virtual TipoPrestamos TipoPrestamos { get; set; }
+        public long id_TipoPrestamo { get; set; }
+        public string descripcion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prestamos> Prestamos { get; set; }
     }
 }

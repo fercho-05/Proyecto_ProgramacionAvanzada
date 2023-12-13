@@ -1,0 +1,79 @@
+﻿@model List<WEBCloudCash.Entities.entPrestamos>
+
+@{
+    ViewBag.Title = "ListadoPrestamos";
+    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información de Usuarios</h4>
+
+            <table id="tableData" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="color:white">Cédula</th>
+                        <th style="color:white">Nombre</th>
+                        <th style="color:white">Telefono</th>
+                        <th style="color:white">Correo</th>
+                        <th style="color:white">Fecha Registro</th>
+                        <th style="color:white">Estado</th>
+                        <th style="color:white">Tipo de Usuario</th>
+                        <th style="color:white">Estado</th>
+                        <th style="color:white">Actualizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.cedula</td>
+                            <td>@item.nombre @item.apellidoUno @item.apellidoDos</td>
+                            <td>@item.telefono</td>
+                            <td>@item.correo</td>
+                            <td>@item.fechaRegistro</td>
+
+                            @if (item.activo)
+                            {
+                                <td>Activo</td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                            }
+
+                            @if (item.id_TipoUsuario == 1)
+                            {
+                                <td>Admin</td>
+                            }
+                            else
+                            {
+                                <td>User</td>
+                            }
+
+                            <td style="text-align:center"><a href="@Url.Action("ActualizarEstadoUsuario","Administrador", new { q = item.id_Usuario })"><i class="mdi mdi-power"></i></a></td>
+
+                            <td style="text-align:center"><a href="@Url.Action("ActualizarUsuario","Administrador", new { q = item.id_Usuario })"><i class="mdi mdi-account-convert"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+
+
+
