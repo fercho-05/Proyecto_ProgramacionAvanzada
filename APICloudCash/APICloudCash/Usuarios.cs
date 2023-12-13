@@ -33,6 +33,7 @@ namespace APICloudCash
         public System.DateTime fechaRegistro { get; set; }
         public bool activo { get; set; }
         public int id_TipoUsuario { get; set; }
+        public string foto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Administradores> Administradores { get; set; }

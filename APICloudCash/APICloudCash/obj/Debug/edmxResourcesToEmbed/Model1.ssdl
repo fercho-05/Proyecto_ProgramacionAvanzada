@@ -160,6 +160,7 @@
     <Property Name="fechaRegistro" Type="datetime" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
     <Property Name="id_TipoUsuario" Type="int" Nullable="false" />
+    <Property Name="foto" Type="varchar" MaxLength="500" />
   </EntityType>
   <Association Name="FK_Administradores_idUsuario">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />

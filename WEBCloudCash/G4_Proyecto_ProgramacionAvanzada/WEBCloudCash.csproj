@@ -2460,9 +2460,12 @@
     <Content Include="Views\Administrador\ListadoCuentas.cshtml" />
     <Content Include="Views\Administrador\RegistroServicios.cshtml" />
     <Content Include="Views\Administrador\ListadoServicios.cshtml" />
+    <Content Include="Views\Authenticated\VerEnvios.cshtml" />
+    <Content Include="Views\Authenticated\AgregarFoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

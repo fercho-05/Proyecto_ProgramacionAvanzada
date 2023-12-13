@@ -176,6 +176,7 @@
           <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -198,6 +199,7 @@
           <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="id_TipoUsuario" ColumnName="id_TipoUsuario" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

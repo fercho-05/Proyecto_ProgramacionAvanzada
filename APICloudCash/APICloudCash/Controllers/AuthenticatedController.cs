@@ -534,7 +534,35 @@ namespace APICloudCash.Controllers
         }
 
 
+        [HttpPut]
+        [Route("AgregarFoto")]
+        public string AgregarFoto(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.Usuarios
+                                 where x.id_Usuario == usuario.id_Usuario
+                                 select x).FirstOrDefault();
 
+                    if (datos != null)
+                    {
+                        datos.foto = usuario.foto;
+                        context.SaveChanges();
+                    }
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
 
 
 

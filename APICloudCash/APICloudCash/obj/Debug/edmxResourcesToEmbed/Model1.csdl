@@ -191,6 +191,7 @@
     <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="activo" Type="Boolean" Nullable="false" />
     <Property Name="id_TipoUsuario" Type="Int32" Nullable="false" />
+    <Property Name="foto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Administradores" Relationship="Self.FK_Administradores_idUsuario" FromRole="Usuarios" ToRole="Administradores" />
     <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_idUsuario" FromRole="Usuarios" ToRole="Clientes" />
     <NavigationProperty Name="TipoUsuarios" Relationship="Self.FK_Usuarios_TipoUsuarios" FromRole="Usuarios" ToRole="TipoUsuarios" />
@@ -548,6 +549,7 @@
     <Property Type="DateTime" Name="fechaRegistro" Nullable="false" Precision="23" />
     <Property Type="Boolean" Name="activo" Nullable="false" />
     <Property Type="Int32" Name="id_TipoUsuario" Nullable="false" />
+    <Property Type="String" Name="foto" Nullable="true" MaxLength="500" />
   </ComplexType>
   <ComplexType Name="SP_ListarClientes_Result">
     <Property Type="Int64" Name="id_Usuario" Nullable="false" />

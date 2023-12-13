@@ -38,6 +38,7 @@ namespace WEBCloudCash.Controllers
                 Session["CorreoUsuario"] = resp.correo;
                 Session["NombreCompleto"] = resp.nombre +" "+ resp.apellidoUno + " "+ resp.apellidoDos;
                 Session["TipoUsuario"] = resp.id_TipoUsuario;
+                Session["Foto"] = resp.foto;
 
                 if (resp.id_TipoUsuario == 2) //Usuario de tipo 2 es un cliente
                 {

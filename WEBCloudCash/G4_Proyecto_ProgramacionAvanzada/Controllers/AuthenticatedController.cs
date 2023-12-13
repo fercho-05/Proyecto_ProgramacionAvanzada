@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WEBCloudCash.Models;
+using System.IO;
+using System.Web;
 
 
 
@@ -226,8 +228,39 @@ namespace WEBCloudCash.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult AgregarFoto()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult AgregarFoto(HttpPostedFileBase ImgPerfil)
+        {
+            var usuario = new entUsuarios();
+            usuario.id_Usuario = (long)Session["CodigoUsuario"];
 
+            if (ImgPerfil != null)
+            {
+                string extension = Path.GetExtension(Path.GetFileName(ImgPerfil.FileName));
+                string ruta = AppDomain.CurrentDomain.BaseDirectory + "Images\\" + usuario.id_Usuario + extension;
+                ImgPerfil.SaveAs(ruta);
 
+                usuario.foto = "/Images/" + usuario.id_Usuario + extension;
+                usuario.id_Usuario = usuario.id_Usuario;
+            }
+            string respuesta = modUsuario.AgregarFoto(usuario);
+
+            if (respuesta == "OK")
+            {
+                Session["Foto"] = usuario.foto;
+                return RedirectToAction("Perfil", "Authenticated");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se ha podido agregar la foto";
+                return View();
+            }
+        }
     }
 }

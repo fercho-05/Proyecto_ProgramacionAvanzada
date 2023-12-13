@@ -181,5 +181,17 @@ namespace WEBCloudCash.Models
                 return result;
             }
         }
+
+
+        public string AgregarFoto(entUsuarios entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "AgregarFoto";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
     }
 }

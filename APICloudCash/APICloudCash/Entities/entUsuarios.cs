@@ -24,6 +24,7 @@ namespace APICloudCash.Entities
         public string nuevoUsuario { get; set; }
         public Nullable<int> nuevoTelefono { get; set; }
         public string nuevoCorreo { get; set; }
+        public string foto { get; set; }
 
     }
 }

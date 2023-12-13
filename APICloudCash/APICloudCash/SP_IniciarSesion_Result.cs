@@ -25,5 +25,6 @@ namespace APICloudCash
         public System.DateTime fechaRegistro { get; set; }
         public bool activo { get; set; }
         public int id_TipoUsuario { get; set; }
+        public string foto { get; set; }
     }
 }
