@@ -35,8 +35,11 @@ CREATE TABLE [dbo].[CreditoVivienda](
  CONSTRAINT [PK_CreditoVivienda] PRIMARY KEY CLUSTERED 
 (
 	[id_CreditoVivienda] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_CreditoVivienda_Cliente] UNIQUE ([id_Cliente])  
+) ON [PRIMARY];
+GO
+
 GO
 /****** Object:  Table [dbo].[Cuentas]    Script Date: 13/12/2023 12:54:03 ******/
 CREATE TABLE [dbo].[Cuentas](
@@ -225,10 +228,10 @@ INSERT [dbo].[Clientes] ([id_Cliente], [id_Usuario]) VALUES (6, 6)
 GO
 SET IDENTITY_INSERT [dbo].[CreditoVivienda] ON 
 GO
-INSERT [dbo].[CreditoVivienda] ([id_CreditoVivienda], [PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (1, 5, 20, 5000, 2, 2, CAST(N'2023-12-13T12:33:05.573' AS DateTime), 1)
-GO
-INSERT [dbo].[CreditoVivienda] ([id_CreditoVivienda], [PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (2, 4, 50, 500000, 2, 1, CAST(N'2023-12-13T12:41:53.650' AS DateTime), 1)
-GO
+INSERT INTO [dbo].[CreditoVivienda] ([PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (5, 20, 5000, 2, 2, CAST(N'2023-12-13T12:33:05.573' AS DateTime), 1);
+
+--INSERT [dbo].[CreditoVivienda] ([id_CreditoVivienda], [PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (4, 50, 500000, 2, 1, CAST(N'2023-12-13T12:41:53.650' AS DateTime), 1)
+--GO
 SET IDENTITY_INSERT [dbo].[CreditoVivienda] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Errores] ON 
