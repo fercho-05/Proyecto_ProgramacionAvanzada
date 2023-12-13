@@ -14,7 +14,6 @@
     </Key>
     <Property Name="id_Cliente" Type="Int64" Nullable="false" />
     <Property Name="id_Usuario" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="FacturacionServicios" Relationship="Self.FK_Cliente" FromRole="Clientes" ToRole="FacturacionServicios" />
     <NavigationProperty Name="Cuentas" Relationship="Self.FK_Clientes" FromRole="Clientes" ToRole="Cuentas" />
     <NavigationProperty Name="CreditoVivienda" Relationship="Self.FK_Clientes_CreditoVivienda" FromRole="Clientes" ToRole="CreditoVivienda" />
     <NavigationProperty Name="Usuarios" Relationship="Self.FK_Clientes_idUsuario" FromRole="Clientes" ToRole="Usuarios" />
@@ -70,19 +69,6 @@
     <Property Name="idError" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="mensajeError" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-  </EntityType>
-  <EntityType Name="FacturacionServicios">
-    <Key>
-      <PropertyRef Name="id_FacturacionServicio" />
-    </Key>
-    <Property Name="id_FacturacionServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_TipoServicio" Type="Int32" Nullable="false" />
-    <Property Name="id_Cliente" Type="Int64" Nullable="false" />
-    <Property Name="subtotal" Type="Int64" Nullable="false" />
-    <Property Name="impuestos" Type="Int64" Nullable="false" />
-    <Property Name="total" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Clientes" Relationship="Self.FK_Cliente" FromRole="FacturacionServicios" ToRole="Clientes" />
-    <NavigationProperty Name="TipoServicios" Relationship="Self.FK_TipoServicio" FromRole="FacturacionServicios" ToRole="TipoServicios" />
   </EntityType>
   <EntityType Name="MarcasTarjetas">
     <Key>
@@ -149,16 +135,6 @@
     <NavigationProperty Name="Cuentas" Relationship="Self.FK_TipoDivisa" FromRole="TipoDivisas" ToRole="Cuentas" />
     <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_TipoDivisas" FromRole="TipoDivisas" ToRole="Tarjetas" />
   </EntityType>
-  <EntityType Name="TipoServicios">
-    <Key>
-      <PropertyRef Name="id_TipoServicio" />
-    </Key>
-    <Property Name="id_TipoServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="monto" Type="Int64" Nullable="false" />
-    <Property Name="activo" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="FacturacionServicios" Relationship="Self.FK_TipoServicio" FromRole="TipoServicios" ToRole="FacturacionServicios" />
-  </EntityType>
   <EntityType Name="TipoTarjetas">
     <Key>
       <PropertyRef Name="id_TipoTarjeta" />
@@ -205,18 +181,6 @@
       </Principal>
       <Dependent Role="Administradores">
         <PropertyRef Name="id_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Cliente">
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
-    <End Role="FacturacionServicios" Type="Self.FacturacionServicios" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="id_Cliente" />
-      </Principal>
-      <Dependent Role="FacturacionServicios">
-        <PropertyRef Name="id_Cliente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -316,18 +280,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TipoServicio">
-    <End Role="TipoServicios" Type="Self.TipoServicios" Multiplicity="1" />
-    <End Role="FacturacionServicios" Type="Self.FacturacionServicios" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoServicios">
-        <PropertyRef Name="id_TipoServicio" />
-      </Principal>
-      <Dependent Role="FacturacionServicios">
-        <PropertyRef Name="id_TipoServicio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Tarjetas_MarcasTarjetas">
     <End Role="MarcasTarjetas" Type="Self.MarcasTarjetas" Multiplicity="1" />
     <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
@@ -407,24 +359,18 @@
     <EntitySet Name="Cuentas" EntityType="Self.Cuentas" />
     <EntitySet Name="EnvioDinero" EntityType="Self.EnvioDinero" />
     <EntitySet Name="Errores" EntityType="Self.Errores" />
-    <EntitySet Name="FacturacionServicios" EntityType="Self.FacturacionServicios" />
     <EntitySet Name="MarcasTarjetas" EntityType="Self.MarcasTarjetas" />
     <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" />
     <EntitySet Name="TCreditos" EntityType="Self.TCreditos" />
     <EntitySet Name="TDebitos" EntityType="Self.TDebitos" />
     <EntitySet Name="TipoCuentas" EntityType="Self.TipoCuentas" />
     <EntitySet Name="TipoDivisas" EntityType="Self.TipoDivisas" />
-    <EntitySet Name="TipoServicios" EntityType="Self.TipoServicios" />
     <EntitySet Name="TipoTarjetas" EntityType="Self.TipoTarjetas" />
     <EntitySet Name="TipoUsuarios" EntityType="Self.TipoUsuarios" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
     <AssociationSet Name="FK_Administradores_idUsuario" Association="Self.FK_Administradores_idUsuario">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Administradores" EntitySet="Administradores" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Cliente" Association="Self.FK_Cliente">
-      <End Role="Clientes" EntitySet="Clientes" />
-      <End Role="FacturacionServicios" EntitySet="FacturacionServicios" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes" Association="Self.FK_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
@@ -457,10 +403,6 @@
     <AssociationSet Name="FK_TipoDivisa" Association="Self.FK_TipoDivisa">
       <End Role="TipoDivisas" EntitySet="TipoDivisas" />
       <End Role="Cuentas" EntitySet="Cuentas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TipoServicio" Association="Self.FK_TipoServicio">
-      <End Role="TipoServicios" EntitySet="TipoServicios" />
-      <End Role="FacturacionServicios" EntitySet="FacturacionServicios" />
     </AssociationSet>
     <AssociationSet Name="FK_Tarjetas_MarcasTarjetas" Association="Self.FK_Tarjetas_MarcasTarjetas">
       <End Role="MarcasTarjetas" EntitySet="MarcasTarjetas" />

@@ -15,7 +15,6 @@ namespace WEBCloudCash.Controllers
         modTarjeta modTarjeta = new modTarjeta();
         modCreditos modCreditos = new modCreditos();
         modCuenta modCuenta = new modCuenta();
-        modServicios modServicio = new modServicios();
 
         [HttpGet]
         public ActionResult PerfilAdministrador()

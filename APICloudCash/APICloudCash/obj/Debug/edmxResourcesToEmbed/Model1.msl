@@ -65,18 +65,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FacturacionServicios">
-      <EntityTypeMapping TypeName="CloudCashModel.FacturacionServicios">
-        <MappingFragment StoreEntitySet="FacturacionServicios">
-          <ScalarProperty Name="id_FacturacionServicio" ColumnName="id_FacturacionServicio" />
-          <ScalarProperty Name="id_TipoServicio" ColumnName="id_TipoServicio" />
-          <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
-          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
-          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
-          <ScalarProperty Name="total" ColumnName="total" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="MarcasTarjetas">
       <EntityTypeMapping TypeName="CloudCashModel.MarcasTarjetas">
         <MappingFragment StoreEntitySet="MarcasTarjetas">
@@ -132,16 +120,6 @@
           <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
           <ScalarProperty Name="Abreviado" ColumnName="Abreviado" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoServicios">
-      <EntityTypeMapping TypeName="CloudCashModel.TipoServicios">
-        <MappingFragment StoreEntitySet="TipoServicios">
-          <ScalarProperty Name="id_TipoServicio" ColumnName="id_TipoServicio" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="monto" ColumnName="monto" />
-          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
