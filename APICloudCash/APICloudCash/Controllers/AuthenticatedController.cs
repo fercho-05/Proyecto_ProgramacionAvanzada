@@ -456,6 +456,8 @@ namespace APICloudCash.Controllers
                               {
                                   id_Cliente = c.id_Cliente,
                                   id_CreditoVivienda = c.id_CreditoVivienda,
+                                  id_TipoDivisa = c.id_TipoDivisa,
+                                  Monto = c.Monto,
                                   PorcentajeInteres = c.PorcentajeInteres,
                                   PlazoAnnios = c.PlazoAnnios,
                                   FechaAprobacion = c.FechaAprobacion

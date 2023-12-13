@@ -14,6 +14,41 @@ CREATE TABLE [dbo].[Administradores](
 GO
 
 
+/****** Object:  Table [dbo].[CreditoVivienda]    Script Date: 12/13/2023 10:12:51 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CreditoVivienda](
+	[id_CreditoVivienda] [bigint] IDENTITY(1,1) NOT NULL,
+	[PorcentajeInteres] [int] NOT NULL,
+	[PlazoAnnios] [int] NOT NULL,
+	[Monto] [int] NOT NULL,
+	[id_Cliente] [bigint] NOT NULL,
+	[id_TipoDivisa] [int] NOT NULL,
+	[FechaAprobacion] [datetime] NOT NULL,
+ CONSTRAINT [PK_CreditoVivienda] PRIMARY KEY CLUSTERED 
+(
+	[id_CreditoVivienda] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CreditoVivienda]  WITH CHECK ADD  CONSTRAINT [FK_Clientes_CreditoVivienda] FOREIGN KEY([id_Cliente])
+REFERENCES [dbo].[Clientes] ([id_Cliente])
+GO
+
+
+ALTER TABLE [dbo].[CreditoVivienda]  WITH CHECK ADD  CONSTRAINT [FK_TipoDivisa_CreditoVivienda] FOREIGN KEY([id_TipoDivisa])
+REFERENCES [dbo].[TipoDivisas] ([id_TipoDivisa])
+GO
+
+ALTER TABLE [dbo].[CreditoVivienda] CHECK CONSTRAINT [FK_Clientes_CreditoVivienda]
+GO
+
+
 /****** Object:  Table [dbo].[EnvioDinero]    Script Date: 12/13/2023 1:44:58 AM ******/
 SET ANSI_NULLS ON
 GO
