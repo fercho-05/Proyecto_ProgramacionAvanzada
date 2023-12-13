@@ -17,6 +17,7 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult Perfil()
         {
+            ViewBag.mensaje = TempData["ViewBagMensaje"];
             return View();
         }
         [HttpGet]
@@ -27,6 +28,7 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult EnviarDinero()
         {
+            ViewBag.mensaje = TempData["ViewBagMensaje"];
             var cedula = Session["CedulaUsuario"]?.ToString();
             ViewBag.cuentas = modCuenta.ListarCuentasPorCed(cedula);
             return View();
@@ -36,15 +38,21 @@ namespace WEBCloudCash.Controllers
         public ActionResult EnviarDinero(entEnvioDinero envioDinero)
         {
             string respuestaApi = modCuenta.EnviarDinero(envioDinero);
+            var cedula = Session["CedulaUsuario"]?.ToString();
+            //ViewBag.cuentas = modCuenta.ListarCuentasPorCed(cedula);
 
             if (respuestaApi?.IndexOf("exitosa", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 ViewBag.mensaje = respuestaApi;
-                return RedirectToAction("Perfil", "Authenticated");
+                TempData["ViewBagMensaje"] = ViewBag.mensaje;
+                return RedirectToAction("EnviarDinero", "Authenticated");
             }
             else
             {
                 ViewBag.mensaje = respuestaApi;
+
+                // Almacena la información en TempData antes de redirigir
+                TempData["ViewBagMensaje"] = ViewBag.mensaje;
                 return RedirectToAction("EnviarDinero", "Authenticated");
             }
         }

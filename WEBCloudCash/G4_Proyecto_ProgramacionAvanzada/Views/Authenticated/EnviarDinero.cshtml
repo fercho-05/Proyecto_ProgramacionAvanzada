@@ -20,16 +20,42 @@
                         {
                             using (Html.BeginForm("EnviarDinero", "Authenticated", FormMethod.Post))
                             {
+                                if (ViewBag.mensaje != null)
+                                {
+                                    if (ViewBag.mensaje.ToString()== "Transferencia exitosa")
+                                    {<div class="alert alert-success" role="alert" id="success" style="text-align:center;">
+                                            @ViewBag.mensaje
+                                        </div>
+                                    }
+                                    else
+                                    {<div class="alert alert-info" id="danger" role="alert" style="text-align:center;">
+                                            @ViewBag.mensaje
+                                        </div>
+                                    }
+                                    <script>
+                                        setTimeout(function () {
+                                            var success = document.getElementById("success");
+                                            var danger = document.getElementById("danger");
+
+                                            if (success) {
+                                                success.style.display = "none";
+                                            }
+                                            if (danger) {
+                                                danger.style.display = "none";
+                                            }
+                                        }, 4000);
+                                    </script>
+                                }
 
                                 <div class="container">
                                     <div class="container p-0">
                                         <div class="card px-4">
                                             <p class="h8 py-3">Detalles de Transferencia</p>
                                             <div class="row gx-3">
-                                                <div class="col-12">
+                                                <div class="col-12" style="">
                                                     <div class="d-flex flex-column">
                                                         <p class="text mb-1">Número de Cuenta</p>
-                                                        @Html.DropDownListFor(m => m.id_Cuenta, ViewBag.cuentas as List<SelectListItem>, new { @class = "form-control" })
+                                                        @Html.DropDownListFor(m => m.id_Cuenta, new SelectList(ViewBag.cuentas, "Value", "Text"), "Seleccione cuenta", new { @class = "form-control mb-3", @required = "required" })
                                                     </div>
                                                 </div>
 
