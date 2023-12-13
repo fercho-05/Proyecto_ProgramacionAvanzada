@@ -165,7 +165,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\modContacto.cs" />
+    <Compile Include="Models\modCreditoVivienda.cs" />
     <Compile Include="Models\modCuenta.cs" />
     <Compile Include="Models\modCreditos.cs" />
     <Compile Include="Models\modTarjeta.cs" />
