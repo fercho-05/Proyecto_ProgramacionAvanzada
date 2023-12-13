@@ -30,7 +30,6 @@ namespace WEBCloudCash.Models
         
         public List<SelectListItem> ListarCuentasPorCed(string cedula)
         {
-            //Cuentas = new List<entCuentas>();
             using (var client = new HttpClient())
             {
                 string url = $"{urlApi}ListarCuentasPorCed?cedula={cedula}";

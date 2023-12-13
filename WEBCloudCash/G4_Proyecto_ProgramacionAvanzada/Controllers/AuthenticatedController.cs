@@ -40,12 +40,12 @@ namespace WEBCloudCash.Controllers
             if (respuestaApi?.IndexOf("exitosa", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 ViewBag.mensaje = respuestaApi;
-                return View();
+                return RedirectToAction("Perfil", "Authenticated");
             }
             else
             {
                 ViewBag.mensaje = respuestaApi;
-                return View();
+                return RedirectToAction("EnviarDinero", "Authenticated");
             }
         }
 
