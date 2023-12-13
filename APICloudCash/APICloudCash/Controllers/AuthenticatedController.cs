@@ -479,6 +479,61 @@ namespace APICloudCash.Controllers
                 return null;
             }
         }
+        [HttpGet]
+        [Route("VerEnvios")]
+        public List<entEnvioDinero> VerEnvios(string cedula)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var idCliente = context.Usuarios
+                                          .Where(u => u.cedula == cedula)
+                                          .Join(context.Clientes,
+                                                u => u.id_Usuario,
+                                                c => c.id_Usuario,
+                                                (u, c) => c.id_Cliente)
+                                          .FirstOrDefault();
+
+                    if (idCliente != 0)
+                    {
+                        var envioDinero = context.EnvioDinero
+                                                   .Join(context.Cuentas,
+                                                         ed => ed.id_Cuenta,
+                                                         c => c.id_Cuenta,
+                                                         (ed, c) => new { EnvioDinero = ed, Cuenta = c })
+                                                   .Where(joinResult => joinResult.Cuenta.id_Cliente == idCliente)
+                                                   .Select(joinResult => joinResult.EnvioDinero)
+                                                   .ToList();
+
+                        var entEnvioDinero = envioDinero.Select(t => new entEnvioDinero
+                        {
+                            numeroCuentaReceptor = t.numeroCuentaReceptor,
+                            id_Cuenta = t.id_Cuenta,
+                            id_EnvioDinero = t.id_EnvioDinero,
+                            nombreReceptor = t.nombreReceptor,
+                            monto = t.monto,
+                            asunto = t.asunto
+
+                        }).ToList();
+
+                        return entEnvioDinero;
+
+                    }
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return new List<entEnvioDinero>();
+            }
+        }
+
+
 
 
 
