@@ -88,20 +88,66 @@ namespace WEBCloudCash.Controllers
             return View();
         }
 
-        //CONSULTA CLIENTES
+        //CONSULTA USUARIOS
         [HttpGet]
-        public ActionResult ListadoClientes()
+        public ActionResult ListadoUsuarios()
         {
-            var datos = modUsuario.ListarClientesTabla().Where(x => x.id_TipoUsuario != 1).ToList();
+            var datos = modUsuario.ListarClientesTabla();
             return View(datos);
         }
 
+        //INACTIVAR/ACTIVAR USUARIOS
         [HttpGet]
-        public ActionResult ListadoAdministradores()
+        public ActionResult ActualizarEstadoUsuario(long q)
         {
-            var datos = modUsuario.ListarClientesTabla().Where(x => x.id_TipoUsuario != 2).ToList();
+            var usuario = new entUsuarios();
+            usuario.id_Usuario = q;
+
+            var resp = modUsuario.ActualizarEstadoUsuario(usuario);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("ListadoUsuarios", "Administrador");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se pudo actualizar el estado del usuario";
+                return View();
+            }
+        }
+
+        //ACTUALIZAR Y ELIMINAR USUARIOS
+        [HttpGet]
+        public ActionResult ActualizarUsuario(long q)
+        {
+            var datos = modUsuario.MostrarUsuario(q);
             return View(datos);
         }
+
+        [HttpPost]
+        public ActionResult ActualizarUsuario(entUsuarios usuario)
+        {
+            var resp = modUsuario.ActualizarUsuario(usuario);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("ListadoUsuarios", "Administrador");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se pudo actualizar el usuario";
+                return View();
+            }
+        }
+       
+        [HttpGet]
+        public ActionResult EliminarUsuario(long q)
+        {
+            modUsuario.EliminarUsuario(q);
+            return RedirectToAction("ListadoUsuarios", "Administrador");    
+        }
+
+
 
         //REGISTRO DE TARJETAS
         [HttpGet]

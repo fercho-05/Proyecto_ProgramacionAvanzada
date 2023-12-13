@@ -22,6 +22,9 @@
     <!-- End layout styles -->
     <link rel="icon" href="~/Template/img/core-img/favicon.ico">
 
+    <!-- Datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+
 </head>
 <body>
 
@@ -96,21 +99,22 @@
                         <ul class="nav flex-column sub-menu">
                             @* LISTAS VARIAS QUE EL ADMINISTRADOR PODRÁ VER *@
                             <li class="nav-item menu-items">
-                                <a class="nav-link" href="@Url.Action("ListadoClientes","Administrador")">
+                                <a class="nav-link" href="@Url.Action("ListadoUsuarios","Administrador")">
                                     <span class="menu-icon">
                                         <i class="mdi mdi-account-badge-horizontal"></i>
                                     </span>
-                                    <span style="color:white;" class="menu-title">Listado de Clientes</span>
+                                    <span style="color:white;" class="menu-title">Listado de Usuarios</span>
                                 </a>
                             </li>
                             <li class="nav-item menu-items">
-                                <a class="nav-link" href="@Url.Action("ListadoAdministradores","Administrador")">
+                                <a class="nav-link" href="@Url.Action("ListadoTarjetas","Administrador")">
                                     <span class="menu-icon">
                                         <i class="mdi mdi-account-badge-horizontal"></i>
                                     </span>
-                                    <span style="color:white;" class="menu-title">Listado de Administradores</span>
+                                    <span style="color:white;" class="menu-title">Listado de Tarjetas</span>
                                 </a>
                             </li>
+
                         </ul>
                     </div>
                 </li>
@@ -129,7 +133,7 @@
 
 
 
-                
+
 
             </ul>
         </nav>
@@ -222,6 +226,11 @@
     <script src="~/Template/assets/js/misc.js"></script>
     <script src="~/Template/assets/js/settings.js"></script>
     <script src="~/Template/assets/js/todolist.js"></script>
+
+    <!-- Datatables -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
