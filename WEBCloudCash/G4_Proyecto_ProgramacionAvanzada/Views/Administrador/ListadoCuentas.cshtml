@@ -31,11 +31,14 @@
 
                             @if (item.id_TipoCuenta == 1)
                             {
+                                <td>Ahorros</td>
+                            }
+                            else if (item.id_TipoCuenta == 2)
+                            {
                                 <td>Corriente</td>
                             }
-                            else
-                            {
-                                <td>Ahorros</td>
+                            else { 
+                                <td>Planilla</td> 
                             }
 
                             @if (item.id_TipoDivisa == 1)
