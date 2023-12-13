@@ -107,6 +107,119 @@ namespace APICloudCash.Controllers
             }
         }
 
+        //CUENTAS
+        [HttpPost]
+        [Route("RegistrarCuenta")]
+        public string RegistrarCuenta(entCuentas entCuentas)
+        {
+
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var user = new Cuentas();
+
+                    user.id_Cliente = entCuentas.id_Cliente;
+                    user.id_TipoCuenta = entCuentas.id_TipoCuenta;
+                    user.id_TipoDivisa = entCuentas.id_TipoDivisa;
+                    user.numeroCuenta = GenerarNumCuenta(); //Asignar aleatoreamente
+                    user.saldo = entCuentas.saldo;
+                    user.activa = true;
+
+                    context.Cuentas.Add(user);
+                    context.SaveChanges();
+
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
+        [HttpGet]
+        [Route("ListarTipoCuentas")]
+        public List<System.Web.Mvc.SelectListItem> ListarTipoCuentas()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.TipoCuentas select x).ToList();
+
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var x in datos)
+                    {
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoCuenta.ToString(), Text = x.descripcion });
+                    }
+                    return lista;
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return new List<System.Web.Mvc.SelectListItem>();
+            }
+        }
+
+
+        [HttpGet]
+        [Route("ListarCuentas")]
+        public List<Cuentas> ListarCuentas()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    return (from x in context.Cuentas
+                            select x).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return new List<Cuentas>();
+            }
+        }
+
+        [HttpPut]
+        [Route("ActualizarEstadoCuenta")]
+        public string ActualizarEstadoCuenta(entCuentas cuenta)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.Cuentas
+                                 where x.id_Cuenta == cuenta.id_Cuenta
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        datos.activa = (datos.activa == true ? false : true);
+                        context.SaveChanges();
+                    }
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
 
         [HttpGet]
         [Route("ListarTarjetas")]
@@ -648,6 +761,13 @@ namespace APICloudCash.Controllers
 
         //GENERACION DE NUMEROS TARJETAS/CUENTAS RANDOM
         Random random = new Random();
+
+        public string GenerarNumCuenta()
+        {
+            long cuentaSinRellenar = (long)(random.NextDouble() * 1000000000000000);
+            string cuenta = cuentaSinRellenar.ToString().PadLeft(15, '0');
+            return cuenta;
+        }
 
         public string GenerarCuentaCC() {
             long cuentaTarjetaSinRellenar = (long)(random.NextDouble() * 1000000000000000);//16dig cuenta. Genera un numero entre 0 y 9999 9999 9999 9999,

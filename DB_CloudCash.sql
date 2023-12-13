@@ -232,6 +232,9 @@ INSERT INTO [dbo].[CreditoVivienda] ([PorcentajeInteres], [PlazoAnnios], [Monto]
 
 --INSERT [dbo].[CreditoVivienda] ([id_CreditoVivienda], [PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (4, 50, 500000, 2, 1, CAST(N'2023-12-13T12:41:53.650' AS DateTime), 1)
 --GO
+INSERT INTO TipoCuentas (descripcion) VALUES ('Corriente')
+INSERT INTO TipoCuentas (descripcion) VALUES ('Ahorros')
+
 SET IDENTITY_INSERT [dbo].[CreditoVivienda] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Errores] ON 

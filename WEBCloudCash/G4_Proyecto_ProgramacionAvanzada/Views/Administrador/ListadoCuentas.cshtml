@@ -1,0 +1,89 @@
+﻿@model List<WEBCloudCash.Entities.entCuentas>
+
+@{
+    ViewBag.Title = "ListadoCuentas";
+    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información de Créditos para Vivienda</h4>
+
+            <table id="tableData" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="color:white">Cliente</th>
+                        <th style="color:white">Cuenta</th>
+                        <th style="color:white">Divisa</th>
+                        <th style="color:white">Número</th>
+                        <th style="color:white">Saldo</th>
+
+                        <th style="color:white">Estado</th>
+                        <th style="color:white">Activar/Inactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.id_Cliente</td>
+
+                            @if (item.id_TipoCuenta == 1)
+                            {
+                                <td>Corriente</td>
+                            }
+                            else
+                            {
+                                <td>Ahorros</td>
+                            }
+
+                            @if (item.id_TipoDivisa == 1)
+                            {
+                                <td>Colones</td>
+                            }
+                            else
+                            {
+                                <td>Dolares</td>
+                            }
+
+                            <td>@item.numeroCuenta</td>
+                            <td>@item.saldo</td>
+
+                            @if (item.activa)
+                            {
+                                <td>Activo</td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                            }
+
+                            <td style="text-align:center"><a href="@Url.Action("ActualizarEstadoCuenta","Administrador", new { q = item.id_Cuenta })"><i class="mdi mdi-power"></i></a></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+

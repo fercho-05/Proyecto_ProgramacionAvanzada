@@ -13,6 +13,7 @@ namespace WEBCloudCash.Controllers
         modUsuarios modUsuario = new modUsuarios();
         modTarjeta modTarjeta = new modTarjeta();
         modCreditos modCreditos = new modCreditos();
+        modCuenta modCuenta = new modCuenta();
 
         [HttpGet]
         public ActionResult PerfilAdministrador()
@@ -297,6 +298,73 @@ namespace WEBCloudCash.Controllers
             else
             {
                 ViewBag.MensajeUsuario = "No se pudo actualizar el estado de la tarjeta";
+                return View();
+            }
+        }
+
+        //CUENTAS
+        [HttpGet]
+        public ActionResult RegistroCuentas()
+        {
+            ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+            ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+            ViewBag.listaTipoCuentas = modCuenta.ListarTipoCuentas();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistroCuentas(entCuentas entidad)
+        {
+            ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+            ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+            ViewBag.listaTipoCuentas = modCuenta.ListarTipoCuentas();
+
+            var resp = modCuenta.RegistrarCuenta(entidad);
+
+            if (resp == "OK")
+            {
+                ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+                ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+                ViewBag.listaTipoCuentas = modCuenta.ListarTipoCuentas();
+
+                ViewBag.mensaje = "Cuenta creada con éxito";
+                return View();
+
+                //return RedirectToAction("ListadoCuentas", "Administrador");
+            }
+            else
+            {
+                ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+                ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+                ViewBag.listaTipoCuentas = modCuenta.ListarTipoCuentas();
+
+                ViewBag.mensaje = "No se ha creado la cuenta";
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ListadoCuentas()
+        {
+            var datos = modCuenta.ListarCuentas();
+            return View(datos);
+        }
+
+        [HttpGet]
+        public ActionResult ActualizarEstadoCuenta(long q)
+        {
+            var cuenta = new entCuentas();
+            cuenta.id_Cuenta = q;
+
+            var resp = modCuenta.ActualizarEstadoCuenta(cuenta);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("ListadoCuentas", "Administrador");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se pudo actualizar el estado de la cuenta";
                 return View();
             }
         }

@@ -52,5 +52,47 @@ namespace WEBCloudCash.Models
             }
         }
 
+        public List<SelectListItem> ListarTipoCuentas()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ListarTipoCuentas";
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<SelectListItem>>().Result;
+            }
+        }
+
+        public string RegistrarCuenta(entCuentas entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "RegistrarCuenta";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PostAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
+        public List<entCuentas> ListarCuentas()
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ListarCuentas";
+                var res = client.GetAsync(url).Result;
+                return res.Content.ReadFromJsonAsync<List<entCuentas>>().Result;
+            }
+        }
+
+        public string ActualizarEstadoCuenta(entCuentas entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ActualizarEstadoCuenta";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
     }
 }

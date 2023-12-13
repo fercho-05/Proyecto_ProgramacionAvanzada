@@ -2454,6 +2454,8 @@
     <Content Include="Views\Administrador\RegistroCredito.cshtml" />
     <Content Include="Views\Administrador\ListadoCreditos.cshtml" />
     <Content Include="Views\Administrador\ListadoTarjetas.cshtml" />
+    <Content Include="Views\Administrador\RegistroCuentas.cshtml" />
+    <Content Include="Views\Administrador\ListadoCuentas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
