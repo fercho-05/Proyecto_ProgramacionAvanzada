@@ -72,6 +72,167 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("CrearPrestamo")]
+        public string CrearPrestamo(entPrestamos entPrestamo)
+        {
+
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var user = new Prestamos();
+                    user.id_Cliente = entPrestamo.id_Cliente;
+                    user.id_TipoPrestamo = entPrestamo.id_TipoPrestamo;
+                    user.id_tipoDivisa = entPrestamo.id_TipoDivisa;
+                    user.monto = entPrestamo.monto;
+                    user.plazo = entPrestamo.plazo;
+                    user.tasaInteres = entPrestamo.tasaInteres;
+                    user.activo = true;
+
+                    context.Prestamos.Add(user);
+                    context.SaveChanges();
+
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
+        [HttpGet]
+        [Route("ListarTipoPrestamos")]
+        public List<System.Web.Mvc.SelectListItem> ListarTipoPrestamos()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.TipoPrestamos select x).ToList();//Entity Framework
+
+                    var lista = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var x in datos)
+                    {
+                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoPrestamo.ToString(), Text = x.descripcion });
+                    }
+                    return lista;
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return new List<System.Web.Mvc.SelectListItem>();
+            }
+        }
+
+
+        [HttpGet]
+        [Route("ListarTarjetas")]
+        public List<Tarjetas> ListarTarjetas()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    return (from x in context.Tarjetas
+                            select x).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return new List<Tarjetas>();
+            }
+        }
+
+        [HttpPut]
+        [Route("ActualizarEstadoTarjeta")]
+        public string ActualizarEstadoTarjeta(entTarjetas tarjeta)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.Tarjetas
+                                 where x.id_Tarjeta == tarjeta.id_Tarjeta
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        datos.activa = (datos.activa == true ? false : true);
+                        context.SaveChanges();
+                    }
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
+        [HttpGet]
+        [Route("ListarPrestamos")]
+        public List<Prestamos> ListarPrestamos()
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    return (from x in context.Prestamos
+                            select x).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return new List<Prestamos>();
+            }
+        }
+
+        [HttpPut]
+        [Route("ActualizarEstadoPrestamo")]
+        public string ActualizarEstadoPrestamo(entPrestamos prestamo)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.Prestamos
+                                 where x.id_Prestamo == prestamo.id_Prestamo
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        datos.activo = (datos.activo == true ? false : true);
+                        context.SaveChanges();
+                    }
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
         //ACTUALIZAR
         [HttpPut]
         [Route("ActualizarEstadoUsuario")]
@@ -174,7 +335,7 @@ namespace APICloudCash.Controllers
                                        select x).FirstOrDefault();
 
                         //PENDIENTE ELIMINAR MÁS COSAS ASOCIADAS AL CLIENTE
-                        //TARJETAS-CUENTAS.... SINO NO SE VA A ELIMINAR
+                        //TARJETAS-CUENTAS-PRESTAMOS.... SINO NO SE VA A ELIMINAR
 
                         context.Clientes.Remove(cliente);
                         context.Usuarios.Remove(datos);
@@ -434,7 +595,7 @@ namespace APICloudCash.Controllers
             }
         }
 
-        [HttpGet]//Hacer un buscador
+        [HttpGet]
         [Route("ListarUsuariosPorCedula")]
         public List<Usuarios> ListarUsuariosPorCedula(entUsuarios entUsuario)
         {

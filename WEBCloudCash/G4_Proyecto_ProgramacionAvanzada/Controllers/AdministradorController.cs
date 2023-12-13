@@ -12,6 +12,7 @@ namespace WEBCloudCash.Controllers
     {
         modUsuarios modUsuario = new modUsuarios();
         modTarjeta modTarjeta = new modTarjeta();
+        modPrestamos modPrestamo = new modPrestamos();
 
         [HttpGet]
         public ActionResult PerfilAdministrador()
@@ -147,8 +148,6 @@ namespace WEBCloudCash.Controllers
             return RedirectToAction("ListadoUsuarios", "Administrador");    
         }
 
-
-
         //REGISTRO DE TARJETAS
         [HttpGet]
         public ActionResult RegistroTarjetas()
@@ -207,6 +206,47 @@ namespace WEBCloudCash.Controllers
             ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
             ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
             return View();
+        }
+
+
+        //CREAR PRESTAMOS
+        [HttpGet]
+        public ActionResult CrearPrestamo()
+        {
+            ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+            ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+            ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CrearPrestamo(entPrestamos entidad)
+        {
+            ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+            ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+            ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
+            var resp = modPrestamo.CrearPrestamo(entidad);
+
+            if (resp == "OK")
+            {
+                ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+                ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+                ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
+
+                ViewBag.mensaje = "Prestamo creado con éxito";
+                return View();
+
+                //return RedirectToAction("ListadoPrestamos", "Administrador");
+            }
+            else
+            { 
+                ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
+                ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
+                ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
+
+                ViewBag.mensaje = "No se ha creado el prestamo";
+                return View();
+            }
         }
     }
 }
