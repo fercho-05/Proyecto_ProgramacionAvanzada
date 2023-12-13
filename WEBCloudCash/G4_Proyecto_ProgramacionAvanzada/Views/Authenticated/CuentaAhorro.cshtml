@@ -20,60 +20,60 @@
                     <div class="container">
                         <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Cuenta de Ahorro</h2>
                         <div class="row">
+                            @{ bool tieneCuenta = false; }
                             @if (Model.Cuentas.Count() > 0)
                             {
                                 foreach (var cuenta in Model.Cuentas)
                                 {
                                     if (cuenta.id_TipoCuenta == 1)
                                     {
+                                        tieneCuenta = true;
                                         <div class="container">
                                             <!--   Use JavaScript to Populate Card -->
                                             <div style="background-color:; padding: 4rem;" id="root" class="card">
                                                 <h1>@Session["NombreCompleto"]</h1>
-                                                <p style="text-align:center;">Balance @cuenta.saldo</p>
-                                                <p style="text-align:center;">Número @cuenta.numeroCuenta</p>
+                                                <h1>@cuenta.numeroCuenta</h1>
                                             </div>
                                             <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
                                             <div class="update">
                                                 <form style="background-color: #B30000; padding: 1rem;">
-
-                                                    <input class="form-control" type="number" name="amountAdded" id="amountAdded" placeholder="0.00" fdprocessedid="gicnjo">
-                                                    <br>
-                                                    <div class="input-group">
-                                                        <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" class="btn btn-outline-secondary" value="Agregar Ingreso" onclick="addIncome()" fdprocessedid="cmttbr">
-                                                        <br>
-                                                        <br>
-                                                        <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" class="btn btn-outline-secondary" value="Agregar Gasto" onclick="addExpense()" fdprocessedid="i00m5">
-                                                        <br>
-                                                        <br>
-                                                        <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" value="Reset" class="btn btn-outline-secondary" onclick="resetAccount()" fdprocessedid="xkmbte">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span style="background-color: #b30000; color: white;" class="input-group-text">BALANCE</span>
+                                                            </div>
+                                                            <input style="color: white; background-color: #363E48;" type="number" id="interest" placeholder="Interés" class="form-control" name="" value="@cuenta.saldo" readonly>
+                                                        </div>
                                                     </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="container">
-                                            <!--   Use JavaScript to Populate Card -->
-                                            <div style="background-color:; padding: 4rem;" id="root" class="card">
-                                                <h1>No posee este tipo de producto</h1>
-
-                                            </div>
-                                            <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
-                                            <div class="update">
-                                                <form style="background-color: #B30000; padding: 1rem;">
-
-
-                                                    <br>
 
                                                 </form>
                                             </div>
-
+                                       
                                         </div>
                                     }
+
                                 }
+                                if (tieneCuenta == false)
+                                {
+                                    <div class="container">
+                                        <!--   Use JavaScript to Populate Card -->
+                                        <div style="background-color:; padding: 4rem;" id="root" class="card">
+                                            <h1>No posee este tipo de producto</h1>
+
+                                        </div>
+                                        <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
+                                        <div class="update">
+                                            <form style="background-color: #B30000; padding: 1rem;">
+
+
+                                                <br>
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                }                            
                             }
                             else
                             {
@@ -107,82 +107,3 @@
         </div>
     </div>
 </section>
-
-<!--
-<script>
-    let myAccount = {
-        name: 'John Doe',
-        income: 0,
-        expense: 0
-    }
-
-    let addIncome = function () {
-        console.log('add income');
-        amount = parseInt(document.getElementById("amountAdded").value)
-        myAccount.income += amount
-        updateUI()
-    }
-
-    let addExpense = function () {
-        amount = parseInt(document.getElementById("amountAdded").value)
-        myAccount.expense += amount
-        updateUI()
-    }
-
-    let resetAccount = function () {
-        myAccount.income = 0
-        myAccount.expense = 0
-        updateUI()
-    }
-
-    let getAccountSummary = function () {
-        //for ui logic
-        return {
-            balance: myAccount.income - myAccount.expense,
-            income: myAccount.income,
-            expense: myAccount.expense
-        }
-    }
-
-    let printAccountSummary = function (account) {
-        //for developer
-        let accountSummary = getAccountSummary(account)
-        console.log(`
-        Balance: ${accountSummary.balance}
-        Income: ${accountSummary.income}
-        Expense: ${accountSummary.expense}
-    `)
-    }
-
-    // addExpense(account,100)
-    // addIncome(account,200)
-    // printAccountSummary(account)
-
-    let updateUI = function () {
-        //find app
-        var app = document.getElementById("root")
-        app.innerHTML = '';
-        //make elements
-        var h1 = document.createElement("h1")
-        var text = document.createTextNode(`${myAccount.name}`)
-
-        var balance = document.createElement("p")
-        var balanceText = document.createTextNode(`Balance $${getAccountSummary(myAccount).balance}`)
-        var expense = document.createElement("p")
-        var expenseText = document.createTextNode(`Expense $${getAccountSummary(myAccount).expense}`)
-        var income = document.createElement("p")
-        var incomeText = document.createTextNode(`Income $${getAccountSummary(myAccount).income}`)
-        //assign elements
-
-        h1.appendChild(text)
-        balance.appendChild(balanceText)
-        income.appendChild(incomeText)
-        expense.appendChild(expenseText)
-        //append children
-        app.appendChild(h1)
-        app.appendChild(balance)
-        app.appendChild(income)
-        app.appendChild(expense)
-    }
-    updateUI()
-</script>TERMINA OTRA TARJETA-->

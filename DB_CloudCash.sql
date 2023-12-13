@@ -229,9 +229,16 @@ GO
 SET IDENTITY_INSERT [dbo].[CreditoVivienda] ON 
 GO
 INSERT INTO [dbo].[CreditoVivienda] ([PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (5, 20, 5000, 2, 2, CAST(N'2023-12-13T12:33:05.573' AS DateTime), 1);
-
 --INSERT [dbo].[CreditoVivienda] ([id_CreditoVivienda], [PorcentajeInteres], [PlazoAnnios], [Monto], [id_Cliente], [id_TipoDivisa], [FechaAprobacion], [activo]) VALUES (4, 50, 500000, 2, 1, CAST(N'2023-12-13T12:41:53.650' AS DateTime), 1)
 --GO
+
+--TIPOS DE CUENTA
+INSERT INTO [dbo].[TipoCuentas] ([Descripcion]) VALUES ('Ahorros');
+INSERT INTO [dbo].[TipoCuentas] ([Descripcion]) VALUES ('Corriente');
+INSERT INTO [dbo].[TipoCuentas] ([Descripcion]) VALUES ('Planilla');
+
+--
+
 SET IDENTITY_INSERT [dbo].[CreditoVivienda] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Errores] ON 
