@@ -327,6 +327,58 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("EnviarDinero")]
+        public string EnviarDinero(entEnvioDinero envioDinero)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var cuentaOrigen = context.Cuentas
+                                          .Where(u => u.id_Cuenta == envioDinero.id_Cuenta)
+                                          .FirstOrDefault();
+
+                    if (cuentaOrigen != null)
+                    {
+                        if (cuentaOrigen.saldo >= envioDinero.monto)
+                        {
+                            var nuevoEnvio = new EnvioDinero();
+                            nuevoEnvio.id_Cuenta = envioDinero.id_Cuenta;
+                            nuevoEnvio.nombreReceptor = envioDinero.nombreReceptor;
+                            nuevoEnvio.numeroCuentaReceptor = envioDinero.numeroCuentaReceptor;
+                            nuevoEnvio.monto = envioDinero.monto;
+                            nuevoEnvio.asunto = envioDinero.asunto;
+
+                            context.EnvioDinero.Add(nuevoEnvio);
+
+                            cuentaOrigen.saldo -= envioDinero.monto;
+
+                            context.SaveChanges();
+
+                            return "Transferencia exitosa";
+                        }
+                        else
+                        {
+                            return "Fondos insuficientes";
+                        }
+                    }
+                    else
+                    {
+                        return "Cuenta no encontrada";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Loguea el error para depuración
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+                return "Error: " + e.Message;
+            }
+        }
+
+
 
 
     }
