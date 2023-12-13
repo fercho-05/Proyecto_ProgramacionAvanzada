@@ -181,7 +181,7 @@
             <!-- partial:partials/_navbar.html -->
             <nav style="background-color: #191C24; " class="navbar p-0 fixed-top d-flex flex-row">
                 <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo-mini" href="@Url.Action("Index","Home")"><img style="height:3rem; width:6rem;" src=@Session["Foto"] alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" href="@Url.Action("Index","Home")"><img style="height:3rem; width:6rem;" src="~/Template/img/cloudcashlogo-nb-small.png" alt="logo" /></a>
                 </div>
                 <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -195,7 +195,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                 <div class="navbar-profile">
-                                    <img class="img-xs rounded-circle" src="/Template/assets/images/faces/face15.jpg" alt="">
+                                    <img class="img-xs rounded-circle" src=@Session["Foto"] alt="">
                                     <p style="color: white;" class="mb-0 d-none d-sm-block navbar-profile-name">
                                         @if (Session["NombreCompleto"] != null)
                                         {
