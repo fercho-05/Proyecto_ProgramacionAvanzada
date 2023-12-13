@@ -73,24 +73,25 @@ namespace APICloudCash.Controllers
         }
 
         [HttpPost]
-        [Route("CrearPrestamo")]
-        public string CrearPrestamo(entPrestamos entPrestamo)
+        [Route("RegistrarCreditoVivienda")]
+        public string RegistrarCreditoVivienda(entCreditoVivienda entCreditoVivienda)
         {
 
             try
             {
                 using (var context = new DBCC())
                 {
-                    var user = new Prestamos();
-                    user.id_Cliente = entPrestamo.id_Cliente;
-                    user.id_TipoPrestamo = entPrestamo.id_TipoPrestamo;
-                    user.id_tipoDivisa = entPrestamo.id_TipoDivisa;
-                    user.monto = entPrestamo.monto;
-                    user.plazo = entPrestamo.plazo;
-                    user.tasaInteres = entPrestamo.tasaInteres;
+                    var user = new CreditoVivienda();
+                    
+                    user.PorcentajeInteres = entCreditoVivienda.PorcentajeInteres;
+                    user.PlazoAnnios = entCreditoVivienda.PlazoAnnios;
+                    user.Monto = entCreditoVivienda.Monto;
+                    user.id_Cliente = entCreditoVivienda.id_Cliente;
+                    user.id_TipoDivisa = entCreditoVivienda.id_TipoDivisa;
+                    user.FechaAprobacion = DateTime.Now;
                     user.activo = true;
 
-                    context.Prestamos.Add(user);
+                    context.CreditoVivienda.Add(user);
                     context.SaveChanges();
 
 
@@ -103,34 +104,6 @@ namespace APICloudCash.Controllers
                 ReporteErrores(mensaje);
 
                 return string.Empty;
-            }
-        }
-
-        [HttpGet]
-        [Route("ListarTipoPrestamos")]
-        public List<System.Web.Mvc.SelectListItem> ListarTipoPrestamos()
-        {
-            try
-            {
-                using (var context = new DBCC())
-                {
-                    var datos = (from x in context.TipoPrestamos select x).ToList();//Entity Framework
-
-                    var lista = new List<System.Web.Mvc.SelectListItem>();
-
-                    foreach (var x in datos)
-                    {
-                        lista.Add(new System.Web.Mvc.SelectListItem { Value = x.id_TipoPrestamo.ToString(), Text = x.descripcion });
-                    }
-                    return lista;
-                }
-            }
-            catch (Exception e)
-            {
-                string mensaje = e.Message.ToString();
-                ReporteErrores(mensaje);
-
-                return new List<System.Web.Mvc.SelectListItem>();
             }
         }
 
@@ -185,34 +158,34 @@ namespace APICloudCash.Controllers
         }
 
         [HttpGet]
-        [Route("ListarPrestamos")]
-        public List<Prestamos> ListarPrestamos()
+        [Route("ListarCreditos")]
+        public List<CreditoVivienda> ListarCreditos()
         {
             try
             {
                 using (var context = new DBCC())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
-                    return (from x in context.Prestamos
+                    return (from x in context.CreditoVivienda
                             select x).ToList();
                 }
             }
             catch (Exception)
             {
-                return new List<Prestamos>();
+                return new List<CreditoVivienda>();
             }
         }
 
         [HttpPut]
-        [Route("ActualizarEstadoPrestamo")]
-        public string ActualizarEstadoPrestamo(entPrestamos prestamo)
+        [Route("ActualizarEstadoCredito")]
+        public string ActualizarEstadoCredito(entCreditoVivienda credito)
         {
             try
             {
                 using (var context = new DBCC())
                 {
-                    var datos = (from x in context.Prestamos
-                                 where x.id_Prestamo == prestamo.id_Prestamo
+                    var datos = (from x in context.CreditoVivienda
+                                 where x.id_CreditoVivienda == credito.id_CreditoVivienda
                                  select x).FirstOrDefault();
 
                     if (datos != null)

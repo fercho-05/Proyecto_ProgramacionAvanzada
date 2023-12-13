@@ -80,7 +80,26 @@ namespace WEBCloudCash.Models
             }
         }
 
+        public List<entTarjetas> ListarTarjetas()
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ListarTarjetas";
+                var res = client.GetAsync(url).Result;
+                return res.Content.ReadFromJsonAsync<List<entTarjetas>>().Result;
+            }
+        }
 
+        public string ActualizarEstadoTarjeta(entTarjetas entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ActualizarEstadoTarjeta";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
 
 
 

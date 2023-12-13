@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace APICloudCash.Entities
+namespace WEBCloudCash.Entities
 {
     public class entCreditoVivienda
     {
@@ -15,6 +15,5 @@ namespace APICloudCash.Entities
         public int PlazoAnnios { get; set; }
         public DateTime FechaAprobacion { get; set; }
         public bool activo { get; set; }
-
     }
 }

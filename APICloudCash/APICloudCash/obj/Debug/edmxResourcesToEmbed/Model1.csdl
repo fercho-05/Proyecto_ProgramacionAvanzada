@@ -16,9 +16,25 @@
     <Property Name="id_Usuario" Type="Int64" Nullable="false" />
     <NavigationProperty Name="FacturacionServicios" Relationship="Self.FK_Cliente" FromRole="Clientes" ToRole="FacturacionServicios" />
     <NavigationProperty Name="Cuentas" Relationship="Self.FK_Clientes" FromRole="Clientes" ToRole="Cuentas" />
+    <NavigationProperty Name="CreditoVivienda" Relationship="Self.FK_Clientes_CreditoVivienda" FromRole="Clientes" ToRole="CreditoVivienda" />
     <NavigationProperty Name="Usuarios" Relationship="Self.FK_Clientes_idUsuario" FromRole="Clientes" ToRole="Usuarios" />
     <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_Clientes" FromRole="Clientes" ToRole="Prestamos" />
     <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_Clientes" FromRole="Clientes" ToRole="Tarjetas" />
+  </EntityType>
+  <EntityType Name="CreditoVivienda">
+    <Key>
+      <PropertyRef Name="id_CreditoVivienda" />
+    </Key>
+    <Property Name="id_CreditoVivienda" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PorcentajeInteres" Type="Int32" Nullable="false" />
+    <Property Name="PlazoAnnios" Type="Int32" Nullable="false" />
+    <Property Name="Monto" Type="Int32" Nullable="false" />
+    <Property Name="id_Cliente" Type="Int64" Nullable="false" />
+    <Property Name="id_TipoDivisa" Type="Int32" Nullable="false" />
+    <Property Name="FechaAprobacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="activo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_CreditoVivienda" FromRole="CreditoVivienda" ToRole="Clientes" />
+    <NavigationProperty Name="TipoDivisas" Relationship="Self.FK_TipoDivisa_CreditoVivienda" FromRole="CreditoVivienda" ToRole="TipoDivisas" />
   </EntityType>
   <EntityType Name="Cuentas">
     <Key>
@@ -146,6 +162,7 @@
     <Property Name="id_TipoDivisa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Abreviado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CreditoVivienda" Relationship="Self.FK_TipoDivisa_CreditoVivienda" FromRole="TipoDivisas" ToRole="CreditoVivienda" />
     <NavigationProperty Name="Cuentas" Relationship="Self.FK_TipoDivisa" FromRole="TipoDivisas" ToRole="Cuentas" />
     <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_TipoDivisas" FromRole="TipoDivisas" ToRole="Prestamos" />
     <NavigationProperty Name="Tarjetas" Relationship="Self.FK_Tarjetas_TipoDivisas" FromRole="TipoDivisas" ToRole="Tarjetas" />
@@ -240,6 +257,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Clientes_CreditoVivienda">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="CreditoVivienda" Type="Self.CreditoVivienda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="id_Cliente" />
+      </Principal>
+      <Dependent Role="CreditoVivienda">
+        <PropertyRef Name="id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Clientes_idUsuario">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
@@ -273,6 +302,18 @@
       </Principal>
       <Dependent Role="Tarjetas">
         <PropertyRef Name="id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoDivisa_CreditoVivienda">
+    <End Role="TipoDivisas" Type="Self.TipoDivisas" Multiplicity="1" />
+    <End Role="CreditoVivienda" Type="Self.CreditoVivienda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDivisas">
+        <PropertyRef Name="id_TipoDivisa" />
+      </Principal>
+      <Dependent Role="CreditoVivienda">
+        <PropertyRef Name="id_TipoDivisa" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -423,6 +464,7 @@
   <EntityContainer Name="DBCC" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Administradores" EntityType="Self.Administradores" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="CreditoVivienda" EntityType="Self.CreditoVivienda" />
     <EntitySet Name="Cuentas" EntityType="Self.Cuentas" />
     <EntitySet Name="EnvioDinero" EntityType="Self.EnvioDinero" />
     <EntitySet Name="Errores" EntityType="Self.Errores" />
@@ -451,6 +493,10 @@
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Cuentas" EntitySet="Cuentas" />
     </AssociationSet>
+    <AssociationSet Name="FK_Clientes_CreditoVivienda" Association="Self.FK_Clientes_CreditoVivienda">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="CreditoVivienda" EntitySet="CreditoVivienda" />
+    </AssociationSet>
     <AssociationSet Name="FK_Clientes_idUsuario" Association="Self.FK_Clientes_idUsuario">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Clientes" EntitySet="Clientes" />
@@ -462,6 +508,10 @@
     <AssociationSet Name="FK_Tarjetas_Clientes" Association="Self.FK_Tarjetas_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Tarjetas" EntitySet="Tarjetas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoDivisa_CreditoVivienda" Association="Self.FK_TipoDivisa_CreditoVivienda">
+      <End Role="TipoDivisas" EntitySet="TipoDivisas" />
+      <End Role="CreditoVivienda" EntitySet="CreditoVivienda" />
     </AssociationSet>
     <AssociationSet Name="FK_Cuentas_EnvioDinero" Association="Self.FK_Cuentas_EnvioDinero">
       <End Role="Cuentas" EntitySet="Cuentas" />

@@ -14,6 +14,19 @@
     <Property Name="id_Cliente" Type="bigint" Nullable="false" />
     <Property Name="id_Usuario" Type="bigint" Nullable="false" />
   </EntityType>
+  <EntityType Name="CreditoVivienda">
+    <Key>
+      <PropertyRef Name="id_CreditoVivienda" />
+    </Key>
+    <Property Name="id_CreditoVivienda" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PorcentajeInteres" Type="int" Nullable="false" />
+    <Property Name="PlazoAnnios" Type="int" Nullable="false" />
+    <Property Name="Monto" Type="int" Nullable="false" />
+    <Property Name="id_Cliente" Type="bigint" Nullable="false" />
+    <Property Name="id_TipoDivisa" Type="int" Nullable="false" />
+    <Property Name="FechaAprobacion" Type="datetime" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cuentas">
     <Key>
       <PropertyRef Name="id_Cuenta" />
@@ -204,6 +217,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Clientes_CreditoVivienda">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="CreditoVivienda" Type="Self.CreditoVivienda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="id_Cliente" />
+      </Principal>
+      <Dependent Role="CreditoVivienda">
+        <PropertyRef Name="id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Clientes_idUsuario">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
@@ -360,6 +385,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TipoDivisa_CreditoVivienda">
+    <End Role="TipoDivisas" Type="Self.TipoDivisas" Multiplicity="1" />
+    <End Role="CreditoVivienda" Type="Self.CreditoVivienda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDivisas">
+        <PropertyRef Name="id_TipoDivisa" />
+      </Principal>
+      <Dependent Role="CreditoVivienda">
+        <PropertyRef Name="id_TipoDivisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TipoServicio">
     <End Role="TipoServicios" Type="Self.TipoServicios" Multiplicity="1" />
     <End Role="FacturacionServicios" Type="Self.FacturacionServicios" Multiplicity="*" />
@@ -436,6 +473,7 @@
   <EntityContainer Name="CloudCashModelStoreContainer">
     <EntitySet Name="Administradores" EntityType="Self.Administradores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CreditoVivienda" EntityType="Self.CreditoVivienda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EnvioDinero" EntityType="Self.EnvioDinero" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Errores" EntityType="Self.Errores" Schema="dbo" store:Type="Tables" />
@@ -463,6 +501,10 @@
     <AssociationSet Name="FK_Clientes" Association="Self.FK_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_CreditoVivienda" Association="Self.FK_Clientes_CreditoVivienda">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="CreditoVivienda" EntitySet="CreditoVivienda" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_idUsuario" Association="Self.FK_Clientes_idUsuario">
       <End Role="Usuarios" EntitySet="Usuarios" />
@@ -515,6 +557,10 @@
     <AssociationSet Name="FK_TipoDivisa" Association="Self.FK_TipoDivisa">
       <End Role="TipoDivisas" EntitySet="TipoDivisas" />
       <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoDivisa_CreditoVivienda" Association="Self.FK_TipoDivisa_CreditoVivienda">
+      <End Role="TipoDivisas" EntitySet="TipoDivisas" />
+      <End Role="CreditoVivienda" EntitySet="CreditoVivienda" />
     </AssociationSet>
     <AssociationSet Name="FK_TipoServicio" Association="Self.FK_TipoServicio">
       <End Role="TipoServicios" EntitySet="TipoServicios" />

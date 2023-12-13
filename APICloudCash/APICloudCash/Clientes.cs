@@ -19,7 +19,7 @@ namespace APICloudCash
         {
             this.FacturacionServicios = new HashSet<FacturacionServicios>();
             this.Cuentas = new HashSet<Cuentas>();
-            this.Prestamos = new HashSet<Prestamos>();
+            this.CreditoVivienda = new HashSet<CreditoVivienda>();
             this.Tarjetas = new HashSet<Tarjetas>();
         }
     
@@ -30,9 +30,9 @@ namespace APICloudCash
         public virtual ICollection<FacturacionServicios> FacturacionServicios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuentas> Cuentas { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Prestamos> Prestamos { get; set; }
+        public virtual ICollection<CreditoVivienda> CreditoVivienda { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tarjetas> Tarjetas { get; set; }
     }

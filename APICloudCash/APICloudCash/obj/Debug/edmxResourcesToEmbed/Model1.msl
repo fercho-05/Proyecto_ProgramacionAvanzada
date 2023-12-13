@@ -17,6 +17,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CreditoVivienda">
+      <EntityTypeMapping TypeName="CloudCashModel.CreditoVivienda">
+        <MappingFragment StoreEntitySet="CreditoVivienda">
+          <ScalarProperty Name="id_CreditoVivienda" ColumnName="id_CreditoVivienda" />
+          <ScalarProperty Name="PorcentajeInteres" ColumnName="PorcentajeInteres" />
+          <ScalarProperty Name="PlazoAnnios" ColumnName="PlazoAnnios" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+          <ScalarProperty Name="id_TipoDivisa" ColumnName="id_TipoDivisa" />
+          <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Cuentas">
       <EntityTypeMapping TypeName="CloudCashModel.Cuentas">
         <MappingFragment StoreEntitySet="Cuentas">

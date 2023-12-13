@@ -154,12 +154,11 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Entities\entAdministradores.cs" />
     <Compile Include="Entities\entClientes.cs" />
+    <Compile Include="Entities\entCreditoVivienda.cs" />
     <Compile Include="Entities\entCuentas.cs" />
     <Compile Include="Entities\entEnvioDinero.cs" />
-    <Compile Include="Entities\entPrestamos.cs" />
     <Compile Include="Entities\entTarjetas.cs" />
     <Compile Include="Entities\entMarcaTarjeta.cs" />
-    <Compile Include="Entities\entTipoPrestamos.cs" />
     <Compile Include="Entities\entTipoTarjeta.cs" />
     <Compile Include="Entities\entTipoUsuarios.cs" />
     <Compile Include="Entities\entUsuarios.cs" />
@@ -168,7 +167,7 @@
     </Compile>
     <Compile Include="Models\modContacto.cs" />
     <Compile Include="Models\modCuenta.cs" />
-    <Compile Include="Models\modPrestamos.cs" />
+    <Compile Include="Models\modCreditos.cs" />
     <Compile Include="Models\modTarjeta.cs" />
     <Compile Include="Models\modUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2452,8 +2451,8 @@
     <Content Include="Views\Authenticated\CuentaCorriente.cshtml" />
     <Content Include="Views\Authenticated\CuentaPlanilla.cshtml" />
     <Content Include="Views\Administrador\ActualizarUsuario.cshtml" />
-    <Content Include="Views\Administrador\CrearPrestamo.cshtml" />
-    <Content Include="Views\Administrador\ListadoPrestamos.cshtml" />
+    <Content Include="Views\Administrador\RegistroCredito.cshtml" />
+    <Content Include="Views\Administrador\ListadoCreditos.cshtml" />
     <Content Include="Views\Administrador\ListadoTarjetas.cshtml" />
   </ItemGroup>
   <ItemGroup>

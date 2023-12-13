@@ -12,7 +12,7 @@ namespace WEBCloudCash.Controllers
     {
         modUsuarios modUsuario = new modUsuarios();
         modTarjeta modTarjeta = new modTarjeta();
-        modPrestamos modPrestamo = new modPrestamos();
+        modCreditos modCreditos = new modCreditos();
 
         [HttpGet]
         public ActionResult PerfilAdministrador()
@@ -211,29 +211,27 @@ namespace WEBCloudCash.Controllers
 
         //CREAR PRESTAMOS
         [HttpGet]
-        public ActionResult CrearPrestamo()
+        public ActionResult RegistroCredito()
         {
             ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
             ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
-            ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
             return View();
         }
 
         [HttpPost]
-        public ActionResult CrearPrestamo(entPrestamos entidad)
+        public ActionResult RegistroCredito(entCreditoVivienda entidad)
         {
             ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
             ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
-            ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
-            var resp = modPrestamo.CrearPrestamo(entidad);
+
+            var resp = modCreditos.RegistrarCreditoVivienda(entidad);
 
             if (resp == "OK")
             {
                 ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
                 ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
-                ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
 
-                ViewBag.mensaje = "Prestamo creado con éxito";
+                ViewBag.mensaje = "Crédito creado con éxito";
                 return View();
 
                 //return RedirectToAction("ListadoPrestamos", "Administrador");
@@ -242,9 +240,62 @@ namespace WEBCloudCash.Controllers
             { 
                 ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
                 ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
-                ViewBag.listaTipoPrestamos = modPrestamo.ListarTipoPrestamos();
 
-                ViewBag.mensaje = "No se ha creado el prestamo";
+                ViewBag.mensaje = "No se ha creado el crédito";
+                return View();
+            }
+        }
+
+        //PRESTAMOS
+        [HttpGet]
+        public ActionResult ListadoCreditos()
+        {
+            var datos = modCreditos.ListarCreditos();
+            return View(datos);
+        }
+
+        [HttpGet]
+        public ActionResult ActualizarEstadoCredito(long q)
+        {
+            var credito = new entCreditoVivienda();
+            credito.id_CreditoVivienda = q;
+
+            var resp = modCreditos.ActualizarEstadoCredito(credito);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("ListadoCreditos", "Administrador");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se pudo actualizar el estado del crédito";
+                return View();
+            }
+        }
+
+        //TARJETAS
+        [HttpGet]
+        public ActionResult ListadoTarjetas()
+        {
+            var datos = modTarjeta.ListarTarjetas();
+            return View(datos);
+        }
+
+        [HttpGet]
+        public ActionResult ListadoTarjetas(long q)
+        {
+            var tarjeta = new entTarjetas();
+            tarjeta.id_Tarjeta = q;
+
+            var resp = modTarjeta.ActualizarEstadoTarjeta(tarjeta);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("ListadoTarjetas", "Administrador");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se pudo actualizar el estado de la tarjeta";
                 return View();
             }
         }

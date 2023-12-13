@@ -1,6 +1,6 @@
-﻿@model WEBCloudCash.Entities.entPrestamos
+﻿@model WEBCloudCash.Entities.entCreditoVivienda
 @{
-    ViewBag.Title = "CrearPrestamo";
+    ViewBag.Title = "RegistroCredito";
     Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
@@ -11,12 +11,12 @@
                 <!-- Contact Area -->
                 <div class="contact-form-area contact-page">
                     @* Para uso de administrador *@
-                    @using (Html.BeginForm("CrearPrestamo", "Administrador", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
+                    @using (Html.BeginForm("RegistroCredito", "Administrador", FormMethod.Post, new { @class = "pl-5 pr-5 mt-4 mb-4" }))
                     {
                         <br />
                         if (ViewBag.mensaje != null)
                         {
-                            if (ViewBag.mensaje == "Prestamo creado con éxito")
+                            if (ViewBag.mensaje == "Crédito creado con éxito")
                             {<div class="alert alert-success" role="alert" style="text-align:center;">
                                     @ViewBag.mensaje
                                 </div>
@@ -31,19 +31,31 @@
                         <br />
                         <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Registrar Tarjetas</h2>
                         <div class="row">
-
-
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.PorcentajeInteres, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
+                                    <label style="color: black;" class="form-label">Intereses (%)</label>
+                                </div>
+                            </div>
 
                             <div class="col-lg-12">
                                 <div class="form-outline mb-4">
-                                    @Html.DropDownListFor(m => m.id_Cliente, ViewBag.listaClientes as List<SelectListItem>, "Seleccione el cliente asociado", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
+                                    @Html.TextBoxFor(m => m.PlazoAnnios, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
+                                    <label style="color: black;" class="form-label">Plazo (en años)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(m => m.Monto, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
+                                    <label style="color: black;" class="form-label">Monto</label>
                                 </div>
                             </div>
 
 
                             <div class="col-lg-12">
                                 <div class="form-outline mb-4">
-                                    @Html.DropDownListFor(m => m.id_TipoPrestamo, ViewBag.listaTipoPrestamos as List<SelectListItem>, "Seleccione tipo de prestamo", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
+                                    @Html.DropDownListFor(m => m.id_Cliente, ViewBag.listaClientes as List<SelectListItem>, "Seleccione el cliente asociado", new { @class = "form-control form-control-lg", @style = "color: white; background-color: #363E48;\"" })
                                 </div>
                             </div>
 
@@ -53,33 +65,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
-                                <div class="form-outline mb-4">
-                                    @Html.TextBoxFor(m => m.monto, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
-                                    <label style="color: black;" class="form-label">Monto</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-outline mb-4">
-                                    @Html.TextBoxFor(m => m.plazo, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
-                                    <label style="color: black;" class="form-label">Plazo (en meses)</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-12">
-                                <div class="form-outline mb-4">
-                                    @Html.TextBoxFor(m => m.tasaInteres, new { @class = "form-control form-control-lg", @type = "number", @style = "color: white; background-color: #363E48;\"" })
-                                    <label style="color: black;" class="form-label">Tasa de interes (%)</label>
-                                </div>
-                            </div>
-
-
-
                             <div class="col-lg-12 text-center">
                                 <div class="pt-1 mb-4">
-                                    <input style="color: white; background-color: #363E48;" type="submit" class="btn credit-btn mt-30" value="Crear">
+                                    <input style="color: white; background-color: #363E48;" type="submit" class="btn credit-btn mt-30" value="Registrar">
                                 </div>
                             </div>
 
