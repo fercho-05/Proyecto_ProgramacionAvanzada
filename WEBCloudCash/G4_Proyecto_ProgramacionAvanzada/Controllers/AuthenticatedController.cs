@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using WEBCloudCash.Entities;
 using WEBCloudCash.Models;
@@ -26,7 +27,14 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult EnviarDinero()
         {
-            return View();
+            //var cedula = Session["CedulaUsuario"]?.ToString();
+            //List<entCuentas> cuentas = modCuenta.ListarCuentasPorCedula(cedula);
+            //ViewBag.cuentas = new SelectList(cuentas, "id_Cuenta", "numeroCuenta");
+            //ViewBag.cuentas = new SelectList(cuentas);
+            string cedula = Session["CedulaUsuario"] as string; //aqui es para buscar las cuentas usando la cedula almacenada en la variable de sesion
+            var model = new modCuenta();
+            model.Cuentas = model.ListarCuentasPorCedula(cedula);
+            return View(model);
         }
 
         [HttpGet]

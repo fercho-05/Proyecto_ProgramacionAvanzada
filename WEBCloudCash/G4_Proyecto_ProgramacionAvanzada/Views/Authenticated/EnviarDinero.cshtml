@@ -1,4 +1,5 @@
-﻿
+﻿@model WEBCloudCash.Models.modCuenta
+
 @{
     ViewBag.Title = "EnviarDinero";
     Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
@@ -15,93 +16,131 @@
                 <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Enviar Dinero</h2>
                 <div class="row">
                     <div class="container">
-                        @using (Html.BeginForm("NombreDeTuAccion", "NombreDeTuControlador", FormMethod.Post))
+                        @if (Model.Cuentas.Count() > 0)
                         {
-                            <div class="container">
-                                <div class="container p-0">
-                                    <div class="card px-4">
-                                        <p class="h8 py-3">Detalles de Transferencia</p>
-                                        <div class="row gx-3">
-                                            <div class="col-12">
-                                                <div class="d-flex flex-column">
-                                                    <p class="text mb-1">Tipo de Cuenta</p>
-                                                    <select id="tipoCuenta" class="form-control mb-3">
-                                                        <option value="" disabled selected>Seleccione Origen de Cuenta</option>
-                                                        <option value="costarricense">Cuenta Costarricense</option>
-                                                        <option value="internacional">Cuenta Internacional</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!--CUENTA INTERNACIONAL SOLO INGRESA NOMBRE COMPLETO-->
-                                            <div class="col-12" id="nombreCompletoInternacional" style="display: none;">
-                                                <div class="d-flex flex-column">
-                                                    <p class="text mb-1">Nombre Completo</p>
-                                                    @Html.TextBox("nombreCompletoInt", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Johh Doe" })
-                                                </div>
-                                            </div>
-                                            <!-- CAMPOS PARA CUENTA CR -->
-                                            <div class="col-12" id="datosCostarricense" style="display: none;">
-                                                <div class="row gx-3">
-                                                    <div class="col-6">
-                                                        <div class="d-flex flex-column">
-                                                            <p class="text mb-1">Cédula Receptor</p>
-                                                            @Html.TextBox("cedula", "", new { @onkeyup = "ConsultarNombre()", @class = "form-control mb-3", @type = "text", @placeholder = "123456789" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="d-flex flex-column">
-                                                            <p class="text mb-1">Nombre</p>
-                                                            @Html.TextBox("nombre", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Juan", @style = "background-color: #363E48;", @readonly = "readonly" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="d-flex flex-column">
-                                                            <p class="text mb-1">Primer Apellido</p>
-                                                            @Html.TextBox("apellidoUno", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Mora", @style = "background-color: #363E48;", @readonly = "readonly" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="d-flex flex-column">
-                                                            <p class="text mb-1">Segundo Apellido</p>
-                                                            @Html.TextBox("apellidoDos", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Mata", @style = "background-color: #363E48;", @readonly = "readonly" })
-                                                        </div>
+                            using (Html.BeginForm("NombreDeTuAccion", "NombreDeTuControlador", FormMethod.Post))
+                            {
+                                <div class="container">
+                                    <div class="container p-0">
+                                        <div class="card px-4">
+                                            <p class="h8 py-3">Detalles de Transferencia</p>
+                                            <div class="row gx-3">
+
+                                                <div class="col-12">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Número de Cuenta</p>
+                                                        <select id="origenCuenta" class="form-control mb-3" required>
+                                                            <option value="" disabled selected>Seleccione Cuenta Origen</option>
+                                                            @foreach (var cuenta in Model.Cuentas)
+                                                            {
+                                                                <option value="@cuenta.id_Cuenta">@cuenta.numeroCuenta</option>
+                                                            }
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <!-- Mostrar campo IBAN, MONTO, ASUNTO Y BOTON TRANSFERIR una vez que se haya ingresado el origen de la cuenta-->
-                                            <div class="col-12" id="cuentaIban" style="display: none;">
-                                                <div class="d-flex flex-column">
-                                                    <p class="text mb-1">Cuenta IBAN</p>
-                                                    @Html.TextBox("cuentaIBAN", "", new { @id = "ibanInput", @class = "form-control mb-3", @type = "text", @placeholder = "CR05015202001026284066" })
+
+                                                <div class="col-12">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Tipo de Cuenta</p>
+                                                        <select id="tipoCuenta" class="form-control mb-3">
+                                                            <option value="" disabled selected>Seleccione Tipo de Cuenta Destino</option>
+                                                            <option value="costarricense">Cuenta Costarricense</option>
+                                                            <option value="internacional">Cuenta Internacional</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-12" id="montoTransferirContainer" style="display: none;">
-                                                <div class="d-flex flex-column">
-                                                    <p class="text mb-1">Monto a Transferir</p>
-                                                    @Html.TextBox("montoTransferir", "", new { @class = "form-control mb-3", @type = "number", @placeholder = "0000" })
+                                                <!--CUENTA INTERNACIONAL SOLO INGRESA NOMBRE COMPLETO-->
+                                                <div class="col-12" id="nombreCompletoInternacional" style="display: none;">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Nombre Completo</p>
+                                                        @Html.TextBox("nombreCompletoInt", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Johh Doe" })
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-12" id="asuntoContainer" style="display: none;">
-                                                <div class="d-flex flex-column">
-                                                    <p class="text mb-1">Asunto</p>
-                                                    @Html.TextBox("asunto", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Asunto" })
+                                                <!-- CAMPOS PARA CUENTA CR -->
+                                                <div class="col-12" id="datosCostarricense" style="display: none;">
+                                                    <div class="row gx-3">
+                                                        <div class="col-6">
+                                                            <div class="d-flex flex-column">
+                                                                <p class="text mb-1">Cédula Receptor</p>
+                                                                @Html.TextBox("cedula", "", new { @onkeyup = "ConsultarNombre()", @class = "form-control mb-3", @type = "text", @placeholder = "123456789" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="d-flex flex-column">
+                                                                <p class="text mb-1">Nombre</p>
+                                                                @Html.TextBox("nombre", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Juan", @style = "background-color: #363E48;", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="d-flex flex-column">
+                                                                <p class="text mb-1">Primer Apellido</p>
+                                                                @Html.TextBox("apellidoUno", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Mora", @style = "background-color: #363E48;", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="d-flex flex-column">
+                                                                <p class="text mb-1">Segundo Apellido</p>
+                                                                @Html.TextBox("apellidoDos", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Mata", @style = "background-color: #363E48;", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-12" id="botonTransfiere" style="display: none; text-align:center;">
-                                                <button style="background-color: #293033; color:white; border: none; transition: background-color 0.3s; padding: 0.5rem 0.8rem 0.5rem 0.8rem;"
-                                                        type="submit" class="btn btn-primary mb-3" onmouseover="this.style.backgroundColor='#B30000';" onmouseout="this.style.backgroundColor='#293033';" name="" value="Pagar">
-                                                    <span class="ps-3">Transferir</span>
-                                                    <span class="fas fa-arrow-right"></span>
-                                                </button>
+                                                <!-- Mostrar campo IBAN, MONTO, ASUNTO Y BOTON TRANSFERIR una vez que se haya ingresado el origen de la cuenta-->
+                                                <div class="col-12" id="cuentaIban" style="display: none;">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Cuenta IBAN</p>
+                                                        @Html.TextBox("cuentaIBAN", "", new { @id = "ibanInput", @class = "form-control mb-3", @type = "text", @placeholder = "CR05015202001026284066" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12" id="montoTransferirContainer" style="display: none;">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Monto a Transferir</p>
+                                                        @Html.TextBox("montoTransferir", "", new { @class = "form-control mb-3", @type = "number", @placeholder = "0000" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12" id="asuntoContainer" style="display: none;">
+                                                    <div class="d-flex flex-column">
+                                                        <p class="text mb-1">Asunto</p>
+                                                        @Html.TextBox("asunto", "", new { @class = "form-control mb-3", @type = "text", @placeholder = "Asunto" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12" id="botonTransfiere" style="display: none; text-align:center;">
+                                                    <button style="background-color: #293033; color:white; border: none; transition: background-color 0.3s; padding: 0.5rem 0.8rem 0.5rem 0.8rem;"
+                                                            type="submit" class="btn btn-primary mb-3" onmouseover="this.style.backgroundColor='#B30000';" onmouseout="this.style.backgroundColor='#293033';" name="" value="Pagar">
+                                                        <span class="ps-3">Transferir</span>
+                                                        <span class="fas fa-arrow-right"></span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>      
+                            }
+                        }
+                        else
+                        {
+                            <div class="container">
+                                <!--   Use JavaScript to Populate Card -->
+                                <div style="background-color:; padding: 4rem;" id="root" class="card">
+                                    <h1>No posee cuentas para enviar dinero</h1>
+
+                                </div>
+                                <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
+                                <div class="update">
+                                    <form style="background-color: #B30000; padding: 1rem;">
+
+
+                                        <br>
+
+                                    </form>
+                                </div>
+
+                            </div>
                         }
                     </div>
                 </div>
