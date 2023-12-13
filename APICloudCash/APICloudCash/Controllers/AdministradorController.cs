@@ -72,6 +72,124 @@ namespace APICloudCash.Controllers
             }
         }
 
+        //ACTUALIZAR
+        [HttpPut]
+        [Route("ActualizarEstadoUsuario")]
+        public string ActualizarEstadoUsuario(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.Usuarios
+                                 where x.id_Usuario == usuario.id_Usuario
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        datos.activo = (datos.activo == true ? false : true);
+                        context.SaveChanges();
+                    }
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
+        [HttpPut]
+        [Route("ActualizarUsuario")]
+        public string ActualizarUsuario(entUsuarios usuario)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    var datos = (from x in context.Usuarios
+                                 where x.id_Usuario == usuario.id_Usuario
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        datos.cedula = usuario.cedula;
+                        datos.nombre = usuario.nombre;
+                        datos.apellidoUno = usuario.apellidoUno;
+                        datos.apellidoDos = usuario.apellidoDos;
+                        datos.nombreUsuario = usuario.nombreUsuario;
+                        datos.contrasena = usuario.contrasena;
+                        datos.telefono = usuario.telefono;
+                        datos.correo = usuario.correo;
+                        context.SaveChanges();
+                    }
+
+                    return "OK";
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return string.Empty;
+            }
+        }
+
+        [HttpDelete]
+        [Route("EliminarUsuario")]
+        public void EliminarUsuario(long q)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+
+                    //Encuentro al usuario por eliminar
+                    var datos = (from x in context.Usuarios
+                                 where x.id_Usuario == q
+                                 select x).FirstOrDefault();
+
+                    if (datos.id_TipoUsuario == 1)
+                    {
+                        //Si es admin lo busco en tabla Administradores para eliminar
+                        var admin = (from x in context.Administradores
+                                     where x.id_Administrador == q
+                                     select x).FirstOrDefault();
+
+                        context.Administradores.Remove(admin);
+                        context.Usuarios.Remove(datos);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        //Si es cliente lo busco en tabla Clientes para eliminar
+                        var cliente = (from x in context.Clientes
+                                       where x.id_Cliente == q
+                                       select x).FirstOrDefault();
+
+                        //PENDIENTE ELIMINAR MÁS COSAS ASOCIADAS AL CLIENTE
+                        //TARJETAS-CUENTAS.... SINO NO SE VA A ELIMINAR
+
+                        context.Clientes.Remove(cliente);
+                        context.Usuarios.Remove(datos);
+                        context.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+            }
+        }
+
         [HttpGet]
         [Route("ListarTipoUsuarios")]
         public List<System.Web.Mvc.SelectListItem> ListarTipoUsuarios()
@@ -134,9 +252,10 @@ namespace APICloudCash.Controllers
             entTDebito.numeroTarjeta = GenerarCuentaNoCreada(entTDebito.id_MarcaTarjeta); //Generar de cuenta Cloud Cash
             entTDebito.cvc = GenerarCVC(); //Generar el codigo CVC
             entTDebito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
-            entUsuarios entUsuario = new entUsuarios();
-            entUsuario.id_Usuario = entTDebito.id_Cliente;
-            var usuario = MostrarUsuario(entUsuario);
+            
+            //entUsuarios entUsuario = new entUsuarios();
+            //entUsuario.id_Usuario = entTDebito.id_Cliente;
+            var usuario = MostrarUsuario(entTDebito.id_Cliente);
             entTDebito.nombrePoseedor = usuario.nombre + " " + usuario.apellidoUno + " " + usuario.apellidoDos;
 
             try
@@ -174,9 +293,10 @@ namespace APICloudCash.Controllers
             entTCredito.numeroTarjeta = GenerarCuentaNoCreada(entTCredito.id_MarcaTarjeta); //Generar de cuenta Cloud Cash
             entTCredito.cvc = GenerarCVC(); //Generar el codigo CVC
             entTCredito.fechaVencimiento = DateTime.Now.AddYears(4); //Ingresar 4 años a la fecha del registro
-            entUsuarios entUsuario = new entUsuarios();
-            entUsuario.id_Usuario = entTCredito.id_Cliente;
-            var usuario = MostrarUsuario(entUsuario);
+
+            //entUsuarios entUsuario = new entUsuarios();
+            //entUsuario.id_Usuario = entTCredito.id_Cliente;
+            var usuario = MostrarUsuario(entTCredito.id_Cliente);
             entTCredito.nombrePoseedor = usuario.nombre + " " + usuario.apellidoUno + " " + usuario.apellidoDos; 
 
             try
@@ -368,17 +488,21 @@ namespace APICloudCash.Controllers
 
         [HttpGet]
         [Route("MostrarUsuario")]
-        public Usuarios MostrarUsuario(entUsuarios entUsuario) {
+        public Usuarios MostrarUsuario(long q) {
 
-            try {
+            try 
+            {
                 using (var context = new DBCC())
                 {
+                    context.Configuration.LazyLoadingEnabled = false;
                     var usuario = (from x in context.Usuarios
-                                   where x.id_Usuario == entUsuario.id_Usuario
+                                   where x.id_Usuario == q
                                    select x).FirstOrDefault();
+
                     return usuario;
+                }
             }
-            }catch (Exception e)
+            catch (Exception e)
             {
                 string mensaje = e.Message.ToString();
                 ReporteErrores(mensaje);

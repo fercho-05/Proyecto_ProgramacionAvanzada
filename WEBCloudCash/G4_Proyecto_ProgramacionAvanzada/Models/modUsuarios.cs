@@ -58,6 +58,47 @@ namespace WEBCloudCash.Models
             }
         }
 
+        public string ActualizarEstadoUsuario(entUsuarios entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ActualizarEstadoUsuario";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
+        public string ActualizarUsuario(entUsuarios entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ActualizarUsuario";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+        
+        public void EliminarUsuario(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "EliminarUsuario?q=" + q;
+                var resp = client.DeleteAsync(url).Result;
+            }
+        }
+
+        public entUsuarios MostrarUsuario(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "MostrarUsuario?q=" + q;
+                var res = client.GetAsync(url).Result;
+                return res.Content.ReadFromJsonAsync<entUsuarios>().Result;
+            }
+        }
+
         public string RecuperarContrasena(entUsuarios entUsuario)
         {
 

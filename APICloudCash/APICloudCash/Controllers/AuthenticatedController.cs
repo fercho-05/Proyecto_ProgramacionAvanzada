@@ -58,29 +58,6 @@ namespace APICloudCash.Controllers
                                           .FirstOrDefault();
                     if (idUsuario != 0)
                     {
-
-                        //CORRECCION PARA QUE FUNCIONE DEBIDO AL CAMBIO EN BD, PROBLEMA CON TABLA CLIENTES
-                        //var tarjetas = context.Tarjetas
-                        //                          .Where(t => t.id_Cliente == idUsuario)
-                        //                          .ToList();
-                        //var entTarjetas = tarjetas.Select(t => new entTarjetas
-                        //{
-                        //    id_Tarjeta = t.id_Tarjeta,
-                        //    id_Cliente = t.id_Cliente,
-                        //    numeroTarjeta = t.numeroTarjeta,
-                        //    nombrePoseedor = t.nombrePoseedor,
-                        //    fechaVencimiento = t.fechaVencimiento,
-                        //    cvc = (short)t.cvc,
-                        //    saldo = t.saldo,
-                        //    id_TipoDivisa = t.id_TipoDivisa,
-                        //    activa = t.activa,
-                        //    id_TipoTarjeta = t.id_TipoTarjeta
-                        //}).ToList();
-
-                        //return entTarjetas;
-
-
-
                         var idCliente = context.Clientes
                        .Where(c => c.id_Usuario == idUsuario)
                        .Select(c => c.id_Cliente)
@@ -319,9 +296,7 @@ namespace APICloudCash.Controllers
                                           .Select(u => u.id_Cliente)
                                           .FirstOrDefault();
                     if (idCliente != 0)
-                    {
-
-                        //CORRECCION PARA QUE FUNCIONE DEBIDO AL CAMBIO EN BD, PROBLEMA CON TABLA CLIENTES
+                    {        
                         var cuentas = context.Cuentas
                                                   .Where(t => t.id_Cliente == idCliente)
                                                   .ToList();

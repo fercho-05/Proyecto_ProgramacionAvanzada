@@ -1,16 +1,16 @@
 ﻿@model List<WEBCloudCash.Entities.entUsuarios>
 
 @{
-    ViewBag.Title = "ListadoAdministradores";
+    ViewBag.Title = "ListadoClientes";
     Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Información de Administradores</h4>
+            <h4 class="card-title">Información de Usuarios</h4>
 
-            <table class="table table-bordered">
+            <table id="tableData" class="table table-bordered">
                 <thead>
                     <tr>
                         <th style="color:white">Cédula</th>
@@ -20,6 +20,7 @@
                         <th style="color:white">Fecha Registro</th>
                         <th style="color:white">Estado</th>
                         <th style="color:white">Tipo de Usuario</th>
+                        <th style="color:white">Estado</th>
                         <th style="color:white">Actualizar</th>
                     </tr>
                 </thead>
@@ -51,6 +52,8 @@
                                 <td>User</td>
                             }
 
+                            <td style="text-align:center"><a href="@Url.Action("ActualizarEstadoUsuario","Administrador", new { q = item.id_Usuario })"><i class="mdi mdi-power"></i></a></td>
+
                             <td style="text-align:center"><a href="@Url.Action("ActualizarUsuario","Administrador", new { q = item.id_Usuario })"><i class="mdi mdi-account-convert"></i></a></td>
                         </tr>
                     }
@@ -60,3 +63,15 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+

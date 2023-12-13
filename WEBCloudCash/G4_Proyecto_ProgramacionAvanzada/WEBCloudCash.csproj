@@ -2438,8 +2438,7 @@
     <Content Include="Views\Administrador\PerfilAdministrador.cshtml" />
     <Content Include="Views\Shared\_Layout_Administrador.cshtml" />
     <Content Include="Views\Administrador\RegistroTarjetas.cshtml" />
-    <Content Include="Views\Administrador\ListadoClientes.cshtml" />
-    <Content Include="Views\Administrador\ListadoAdministradores.cshtml" />
+    <Content Include="Views\Administrador\ListadoUsuarios.cshtml" />
     <Content Include="Views\Login\RecuperarContrasena.cshtml" />
     <Content Include="Views\Authenticated\CambiarContrasena.cshtml" />
     <Content Include="Views\Authenticated\CambiarCorreo.cshtml" />
@@ -2448,6 +2447,7 @@
     <Content Include="Views\Authenticated\CuentaAhorro.cshtml" />
     <Content Include="Views\Authenticated\CuentaCorriente.cshtml" />
     <Content Include="Views\Authenticated\CuentaPlanilla.cshtml" />
+    <Content Include="Views\Administrador\ActualizarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
