@@ -157,6 +157,7 @@
     <Compile Include="Entities\entCreditoVivienda.cs" />
     <Compile Include="Entities\entCuentas.cs" />
     <Compile Include="Entities\entEnvioDinero.cs" />
+    <Compile Include="Entities\entServicios.cs" />
     <Compile Include="Entities\entTarjetas.cs" />
     <Compile Include="Entities\entMarcaTarjeta.cs" />
     <Compile Include="Entities\entTipoTarjeta.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\modServicios.cs" />
     <Compile Include="Models\modCreditoVivienda.cs" />
     <Compile Include="Models\modCuenta.cs" />
     <Compile Include="Models\modCreditos.cs" />
@@ -2456,6 +2458,8 @@
     <Content Include="Views\Administrador\ListadoTarjetas.cshtml" />
     <Content Include="Views\Administrador\RegistroCuentas.cshtml" />
     <Content Include="Views\Administrador\ListadoCuentas.cshtml" />
+    <Content Include="Views\Administrador\RegistroServicios.cshtml" />
+    <Content Include="Views\Administrador\ListadoServicios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

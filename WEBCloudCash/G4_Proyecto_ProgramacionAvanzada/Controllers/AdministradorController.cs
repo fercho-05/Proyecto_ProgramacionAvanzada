@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace WEBCloudCash.Controllers
 {
@@ -14,6 +15,7 @@ namespace WEBCloudCash.Controllers
         modTarjeta modTarjeta = new modTarjeta();
         modCreditos modCreditos = new modCreditos();
         modCuenta modCuenta = new modCuenta();
+        modServicios modServicio = new modServicios();
 
         [HttpGet]
         public ActionResult PerfilAdministrador()
@@ -365,6 +367,61 @@ namespace WEBCloudCash.Controllers
             else
             {
                 ViewBag.MensajeUsuario = "No se pudo actualizar el estado de la cuenta";
+                return View();
+            }
+        }
+
+
+        //SERVICIOS
+        //CUENTAS
+        [HttpGet]
+        public ActionResult RegistroServicios()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistroServicios(entServicios entidad)
+        {
+            var resp = modServicio.RegistrarServicio(entidad);
+
+            if (resp == "OK")
+            {
+
+                ViewBag.mensaje = "Servicio registrado con éxito";
+                return View();
+
+                //return RedirectToAction("ListadoServicios", "Administrador");
+            }
+            else
+            {
+                ViewBag.mensaje = "No se ha registrado el servicio";
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ListadoServicios()
+        {
+            var datos = modServicio.ListarServicios();
+            return View(datos);
+        }
+
+        [HttpGet]
+        public ActionResult ActualizarEstadoServicio(int q)
+        {
+            var servicio = new entServicios();
+            servicio.id_TipoServicio = q;
+
+            var resp = modServicio.ActualizarEstadoServicio(servicio);
+
+            if (resp == "OK")
+            {
+                return RedirectToAction("ListadoServicios", "Administrador");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se pudo actualizar el estado del servicio";
                 return View();
             }
         }

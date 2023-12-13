@@ -1,0 +1,68 @@
+﻿@model List<WEBCloudCash.Entities.entServicios>
+
+@{
+    ViewBag.Title = "ListadoServicios";
+    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información de Créditos para Vivienda</h4>
+
+            <table id="tableData" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="color:white">Decripción del Servicio</th>
+                        <th style="color:white">Monto</th>
+
+                        <th style="color:white">Estado</th>
+                        <th style="color:white">Activar/Inactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.descripcion</td>
+
+                            <td>@item.monto</td>
+
+                            @if (item.activo)
+                            {
+                                <td>Activo</td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                            }
+
+                            <td style="text-align:center"><a href="@Url.Action("ActualizarEstadoServicio","Administrador", new { q = item.id_TipoServicio })"><i class="mdi mdi-power"></i></a></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+

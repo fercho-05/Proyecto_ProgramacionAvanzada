@@ -184,6 +184,7 @@
     <Compile Include="Entities\entCuentas.cs" />
     <Compile Include="Entities\entEnvioDinero.cs" />
     <Compile Include="Entities\entErrores.cs" />
+    <Compile Include="Entities\entServicios.cs" />
     <Compile Include="Entities\entTCreditos.cs" />
     <Compile Include="Entities\entTDebitos.cs" />
     <Compile Include="Entities\entTipoTarjeta.cs" />
