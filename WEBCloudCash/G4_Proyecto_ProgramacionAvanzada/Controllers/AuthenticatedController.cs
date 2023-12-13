@@ -35,6 +35,14 @@ namespace WEBCloudCash.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult VerEnvios()
+        {
+            var cedula = Session["CedulaUsuario"]?.ToString();
+            var envios = modCuenta.VerEnvios(cedula);
+            return View(envios);
+        }
+
         [HttpPost]
         public ActionResult EnviarDinero(entEnvioDinero envioDinero)
         {

@@ -16,6 +16,7 @@ namespace WEBCloudCash.Models
 
         public List<entCuentas> Cuentas { get; set; } //esto lo utilizaré para guardar la lista de las cuentas
 
+        public List<entEnvioDinero> envios { get; set; }
         public List<entCuentas> ListarCuentasPorCedula(string cedula)
         {
             Cuentas = new List<entCuentas>();
@@ -92,6 +93,18 @@ namespace WEBCloudCash.Models
                 var resp = client.PutAsync(url, contenido).Result;
                 return resp.Content.ReadFromJsonAsync<string>().Result;
             }
+        }
+
+        public List<entEnvioDinero> VerEnvios(string cedula)
+        {      
+            envios = new List<entEnvioDinero>();
+            using (var client = new HttpClient())
+            {
+                string url = $"{urlApi}VerEnvios?cedula={cedula}";
+                var resp = client.GetAsync(url).Result;
+                envios = resp.Content.ReadFromJsonAsync<List<entEnvioDinero>>().Result;
+                return envios;
+            }          
         }
 
     }

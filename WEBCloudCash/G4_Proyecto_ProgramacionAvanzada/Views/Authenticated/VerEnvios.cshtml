@@ -1,0 +1,63 @@
+﻿@model List<WEBCloudCash.Entities.entEnvioDinero>
+
+@{
+    ViewBag.Title = "EnviarDinero";
+    Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
+}
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<section class="contact-area section-padding-40-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Historial de envíos</h2>
+                <div class="row">
+                    <div class="container" style="background-color: #2a3038; padding: 20px; border-radius: 10px;">
+
+                        <table id="tableData" class="table table-bordered" style="width: 100%; color: white;">
+                            <thead>
+                                <tr>
+                                    <th>Envío</th>
+                                    <th>ID Cuenta</th>
+                                    <th>Nombre Receptor</th>
+                                    <th>Cuenta Receptor</th>
+                                    <th>Monto</th>
+                                    <th>Asunto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.id_EnvioDinero</td>
+                                        <td>@item.id_Cuenta</td>
+                                        <td>@item.nombreReceptor</td>
+                                        <td>@item.numeroCuentaReceptor</td>
+                                        <td>@item.monto</td>
+                                        <td>@item.asunto</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
