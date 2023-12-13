@@ -20,59 +20,59 @@
                     <div class="container">
                         <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black; text-align: center;">Cuenta Corriente</h2>
                         <div class="row">
+                            @{ bool tieneCuenta = false; }
                             @if (Model.Cuentas.Count() > 0)
                             {
                                 foreach (var cuenta in Model.Cuentas)
                                 {
-                                    if (cuenta.id_TipoCuenta == 2)
+                                    if (cuenta.id_TipoCuenta == 2) 
                                     {
+                                        tieneCuenta = true;
                                         <div class="container">
                                             <!--   Use JavaScript to Populate Card -->
                                             <div style="background-color:; padding: 4rem;" id="root" class="card">
                                                 <h1>@Session["NombreCompleto"]</h1>
-                                                <p style="text-align:center;">Balance @cuenta.saldo</p>
+                                                <h1>@cuenta.numeroCuenta</h1>
                                             </div>
-                                            <p style="text-align:center;">Número @cuenta.numeroCuenta</p>
                                             <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
                                             <div class="update">
                                                 <form style="background-color: #B30000; padding: 1rem;">
-
-                                                    <input class="form-control" type="number" name="amountAdded" id="amountAdded" placeholder="0.00" fdprocessedid="gicnjo">
-                                                    <br>
-                                                    <div class="input-group">
-                                                        <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" class="btn btn-outline-secondary" value="Agregar Ingreso" onclick="addIncome()" fdprocessedid="cmttbr">
-                                                        <br>
-                                                        <br>
-                                                        <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" class="btn btn-outline-secondary" value="Agregar Gasto" onclick="addExpense()" fdprocessedid="i00m5">
-                                                        <br>
-                                                        <br>
-                                                        <input style="margin: 0 1rem 0 1rem; background-color: #191C24; border: none; border-radius: 10px;" type="button" value="Reset" class="btn btn-outline-secondary" onclick="resetAccount()" fdprocessedid="xkmbte">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span style="background-color: #b30000; color: white;" class="input-group-text">BALANCE</span>
+                                                            </div>
+                                                            <input style="color: white; background-color: #363E48;" type="number" id="interest" placeholder="Interés" class="form-control" name="" value="@cuenta.saldo" readonly>
+                                                        </div>
                                                     </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="container">
-                                            <!--   Use JavaScript to Populate Card -->
-                                            <div style="background-color:; padding: 4rem;" id="root" class="card">
-                                                <h1>No posee este tipo de producto</h1>
-
-                                            </div>
-                                            <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
-                                            <div class="update">
-                                                <form style="background-color: #B30000; padding: 1rem;">
-
-
-                                                    <br>
 
                                                 </form>
                                             </div>
 
                                         </div>
                                     }
+
+                                }
+                                if (tieneCuenta == false)
+                                {
+                                    <div class="container">
+                                        <!--   Use JavaScript to Populate Card -->
+                                        <div style="background-color:; padding: 4rem;" id="root" class="card">
+                                            <h1>No posee este tipo de producto</h1>
+
+                                        </div>
+                                        <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
+                                        <div class="update">
+                                            <form style="background-color: #B30000; padding: 1rem;">
+
+
+                                                <br>
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+
                                 }
                             }
                             else
