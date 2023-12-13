@@ -5,5 +5,95 @@
     Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
-<h2>ListadoTarjetas</h2>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información de Créditos para Vivienda</h4>
+
+            <table id="tableData" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="color:white">Cliente</th>
+                        <th style="color:white">Número</th>
+                        <th style="color:white">Vence</th>
+                        <th style="color:white">Saldo</th>
+                        <th style="color:white">Divisa</th>
+                        <th style="color:white">Tipo</th>
+                        <th style="color:white">Marca</th>
+
+
+                        <th style="color:white">Estado</th>
+                        <th style="color:white">Activar/Inactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.nombrePoseedor</td>
+                            <td>@item.numeroTarjeta</td>
+                            <td>@item.fechaVencimiento</td>
+                            <td>@item.saldo</td>
+
+                            @if (item.id_TipoDivisa == 1)
+                            {
+                                <td>Colones</td>
+                            }
+                            else
+                            {
+                                <td>Dolares</td>
+                            }
+
+                            @if (item.id_TipoTarjeta == 1)
+                            {
+                                <td>Débito</td>
+                            }
+                            else
+                            {
+                                <td>Crédito</td>
+                            }
+
+                            @if (item.id_MarcaTarjeta == 4)
+                            {
+                                <td>Visa</td>
+                            }
+                            else
+                            {
+                                <td>Mastercard</td>
+                            }
+
+                            @if (item.activa)
+                            {
+                                <td>Activo</td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                            }
+
+                            <td style="text-align:center"><a href="@Url.Action("ActualizarEstadoTarjeta","Administrador", new { q = item.id_Tarjeta })"><i class="mdi mdi-power"></i></a></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
+
+
+
+
 

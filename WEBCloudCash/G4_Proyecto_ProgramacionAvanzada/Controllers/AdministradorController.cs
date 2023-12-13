@@ -93,7 +93,8 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult ListadoUsuarios()
         {
-            var datos = modUsuario.ListarClientesTabla();
+            long idUsuarioActivo = long.Parse(Session["CodigoUsuario"].ToString());
+            var datos = modUsuario.ListarClientesTabla().Where(x => x.id_Usuario != idUsuarioActivo).ToList();
             return View(datos);
         }
 
@@ -282,7 +283,7 @@ namespace WEBCloudCash.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListadoTarjetas(long q)
+        public ActionResult ActualizarEstadoTarjeta(long q)
         {
             var tarjeta = new entTarjetas();
             tarjeta.id_Tarjeta = q;
