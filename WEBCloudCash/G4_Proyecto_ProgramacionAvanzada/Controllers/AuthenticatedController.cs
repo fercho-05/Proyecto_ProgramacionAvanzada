@@ -1,8 +1,8 @@
-﻿using System;
+﻿using WEBCloudCash.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WEBCloudCash.Entities;
 using WEBCloudCash.Models;
 
 
@@ -13,6 +13,7 @@ namespace WEBCloudCash.Controllers
     {
         modUsuarios modUsuario = new modUsuarios();
         modCuenta modCuenta = new modCuenta();
+        modCreditoVivienda modCreditoVivienda = new modCreditoVivienda();
 
         [HttpGet]
         public ActionResult Perfil()
@@ -66,7 +67,10 @@ namespace WEBCloudCash.Controllers
         [HttpGet]
         public ActionResult MiCredito()
         {
-            return View();
+            string cedula = Session["CedulaUsuario"] as string;
+            var model = new modCreditoVivienda();
+            model.credito = model.ListarCreditoVivienda(cedula);
+            return View(model);
         }
 
         [HttpGet]

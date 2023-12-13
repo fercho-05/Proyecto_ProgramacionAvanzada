@@ -1,4 +1,5 @@
-﻿
+﻿@model WEBCloudCash.Models.modCreditoVivienda
+
 @{
     ViewBag.Title = "MiCredito";
     Layout = "~/Views/Shared/_Layout_Authenticated.cshtml";
@@ -14,75 +15,112 @@
         <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: black;">Mi Crédito de Vivienda</h2>
     </div>
     <div class="row">
+        @if (Model.credito != null)
+        {
+            <div class="col-md-6 mx-auto">
+                <div class="card card-body text-center mt-5">
+                    <h1 class="heading display-5 pb-3">Detalle del Crédito</h1>
+                    <form id="loan-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                @if (Model.credito.id_TipoDivisa == 1)
+                                {
+                                    <div class="input-group-prepend">
+                                        <span style="background-color: #b30000; color: white;" class="input-group-text">CRC</span>
+                                    </div>
+                                }
+                                else if (Model.credito.id_TipoDivisa == 2)
+                                {
+                                    <div class="input-group-prepend">
+                                        <span style="background-color: #b30000; color: white;" class="input-group-text">USD</span>
+                                    </div>
+                                }
+                                <input style="color: white; background-color: #363E48;" type="number" id="amount" placeholder="Monto del crédito" class="form-control" name="" value="@Model.credito.Monto" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span style="background-color: #b30000; color: white;" class="input-group-text">Porcentaje</span>
+                                </div>
+                                <input style="color: white; background-color: #363E48;" type="number" id="interest" placeholder="Interés" class="form-control" name="" value="@Model.credito.PorcentajeInteres" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                
+                                <input style="color: white; background-color: #363E48;" type="number" id="years" placeholder="Plazo en años" class="form-control" name="" value="@Model.credito.PlazoAnnios" readonly>
+                                <div class="input-group-prepend">
+                                    <span style="background-color: #b30000; color: white;" class="input-group-text">AÑOS</span>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="col-md-6 mx-auto">
-            <div class="card card-body text-center mt-5">
-                <h1 class="heading display-5 pb-3">Detalle</h1>
-                <form id="loan-form">
-                    <div class="form-group"> 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span style="background-color: #b30000; color: white;" class="input-group-text">CRC</span>
-                            </div>
-                            <input style="color: white;" type="number" id="amount" placeholder="Monto del crédito" class="form-control" name="" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span style="background-color: #b30000; color: white;" class="input-group-text">Porcentaje</span>
-                            </div>
-                            <input type="number" id="interest" placeholder="Interés" class="form-control" name="" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="number" id="years" placeholder="Plazo en años" class="form-control" name="" value="">
-                        </div>
-                    </div>
-                
                         <div class="form-group">
                             <input style="background-color: #293033; color:white; border: none; transition: background-color 0.3s; padding: 0.5rem 0.8rem 0.5rem 0.8rem;"
-                            type="submit" class="btn btn-primary mb-3" onmouseover="this.style.backgroundColor='#B30000';" onmouseout="this.style.backgroundColor='#293033';" name="" value="Calcular">
+                                   type="submit" class="btn btn-primary mb-3" onmouseover="this.style.backgroundColor='#B30000';" onmouseout="this.style.backgroundColor='#293033';" name="" value="Calcular">
                         </div>
-                </form>
-                <!-- Loader  -->
-                <div id="loading">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Loading Gif" style="height: 100px;" class="img-fluid">
-                </div>
-                <!-- Result  -->
-                <div id="results" class="pt-4">
-                    <h5>Resultados:</h5>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span style="background-color: #b30000; color: white;" class="input-group-text">Pago Mensual</span>
-                            </div>
-                            <input style="background-color: #2A3038; color: white;" type="number" id="monthly-payment" class="form-control" name="" value="" disabled>
-                        </div>
+                    </form>
+                    <!-- Loader  -->
+                    <div id="loading">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Loading Gif" style="height: 100px;" class="img-fluid">
                     </div>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span style="background-color: #b30000; color: white;" class="input-group-text">Pago Total</span>
+                    <!-- Result  -->
+                    <div id="results" class="pt-4">
+                        <h5>Resultados:</h5>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span style="background-color: #b30000; color: white;" class="input-group-text">Pago Mensual</span>
+                                </div>
+                                <input style="background-color: #2A3038; color: white;" type="number" id="monthly-payment" class="form-control" name="" value="" disabled>
                             </div>
-                            <input style="background-color: #2A3038; color: white;" type="number" id="total-payment" class="form-control" name="" value="" disabled>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span style="background-color: #b30000; color: white;" class="input-group-text">Intereses Totales</span>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span style="background-color: #b30000; color: white;" class="input-group-text">Pago Total</span>
+                                </div>
+                                <input style="background-color: #2A3038; color: white;" type="number" id="total-payment" class="form-control" name="" value="" disabled>
                             </div>
-                            <input style="background-color: #2A3038; color: white;" type="number" id="total-interest" class="form-control" name="" value="" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span style="background-color: #b30000; color: white;" class="input-group-text">Intereses Totales</span>
+                                </div>
+                                <input style="background-color: #2A3038; color: white;" type="number" id="total-interest" class="form-control" name="" value="" disabled>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="container">
+                <!--   Use JavaScript to Populate Card -->
+                <div style="background-color:; padding: 4rem;" id="root" class="card">
+                    <h1>No posee este tipo de producto</h1>
+
+                </div>
+                <!--   AQUI SE DEBERA CARGAR LA INFORMACION DE LA BASE DE DATOS QUE CONTENDRA LOS BALANCES DE LA CUENTA -->
+                <div class="update">
+                    <form style="background-color: #B30000; padding: 1rem;">
+
+
+                        <br>
+
+                    </form>
+                </div>
+
+            </div>
+
+        }
     </div>
+
 </div>
 
 
