@@ -428,6 +428,60 @@ namespace APICloudCash.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListarCreditoVivienda")]
+        public entCreditoVivienda ListarCreditoVivienda(string cedula)
+        {
+            try
+            {
+                using (var context = new DBCC())
+                {
+
+                    var idUsuario = context.Usuarios
+                                          .Where(u => u.cedula == cedula)
+                                          .Select(u => u.id_Usuario)
+                                          .FirstOrDefault();
+                    var idCliente = context.Clientes
+                                          .Where(u => u.id_Usuario == idUsuario)
+                                          .Select(u => u.id_Cliente)
+                                          .FirstOrDefault();
+                    if (idCliente != 0)
+                    {
+                        var creditoVivienda = context.CreditoVivienda
+                                                  .Where(t => t.id_Cliente == idCliente)
+                                                  .FirstOrDefault();
+                        var creditoEntidad = context.CreditoVivienda
+                              .Where(t => t.id_Cliente == idCliente)
+                              .Select(c => new entCreditoVivienda
+                              {
+                                  id_Cliente = c.id_Cliente,
+                                  id_CreditoVivienda = c.id_CreditoVivienda,
+                                  id_TipoDivisa = c.id_TipoDivisa,
+                                  Monto = c.Monto,
+                                  PorcentajeInteres = c.PorcentajeInteres,
+                                  PlazoAnnios = c.PlazoAnnios,
+                                  FechaAprobacion = c.FechaAprobacion
+                              })
+                              .FirstOrDefault();
+
+                        return creditoEntidad;
+
+                    }
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                string mensaje = e.Message.ToString();
+                ReporteErrores(mensaje);
+
+                return null;
+            }
+        }
+
+
+
 
 
 
