@@ -14,7 +14,7 @@ CREATE TABLE [dbo].[Administradores](
 GO
 
 
-/****** Object:  Table [dbo].[EnvioDinero]    Script Date: 12/12/2023 10:51:19 PM ******/
+/****** Object:  Table [dbo].[EnvioDinero]    Script Date: 12/13/2023 1:44:58 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -22,12 +22,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[EnvioDinero](
-	[id_EnvioDinero] [bigint] NOT NULL,
+	[id_EnvioDinero] [bigint] IDENTITY(1,1) NOT NULL,
 	[id_Cuenta] [bigint] NOT NULL,
-	[nombreReceptor] [varchar](70) NOT NULL,
+	[nombreReceptor] [varchar](50) NOT NULL,
 	[numeroCuentaReceptor] [varchar](30) NOT NULL,
 	[monto] [bigint] NOT NULL,
-	[asunto] [varchar](15) NOT NULL,
+	[asunto] [varchar](20) NOT NULL,
  CONSTRAINT [PK_EnvioDinero] PRIMARY KEY CLUSTERED 
 (
 	[id_EnvioDinero] ASC
@@ -35,13 +35,12 @@ CREATE TABLE [dbo].[EnvioDinero](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[EnvioDinero]  WITH CHECK ADD  CONSTRAINT [FK_Cuentas_EnvioDinero] FOREIGN KEY([id_Cuenta])
+ALTER TABLE [dbo].[EnvioDinero]  WITH CHECK ADD  CONSTRAINT [FK_Cuenta_EnvioDinero] FOREIGN KEY([id_Cuenta])
 REFERENCES [dbo].[Cuentas] ([id_Cuenta])
 GO
 
-ALTER TABLE [dbo].[EnvioDinero] CHECK CONSTRAINT [FK_Cuentas_EnvioDinero]
+ALTER TABLE [dbo].[EnvioDinero] CHECK CONSTRAINT [FK_Cuenta_EnvioDinero]
 GO
-
 
 /****** Object:  Table [dbo].[Clientes]    Script Date: 12/12/2023 16:29:25 ******/
 CREATE TABLE [dbo].[Clientes](
