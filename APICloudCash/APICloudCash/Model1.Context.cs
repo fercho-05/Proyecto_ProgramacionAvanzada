@@ -33,14 +33,12 @@ namespace APICloudCash
         public virtual DbSet<Cuentas> Cuentas { get; set; }
         public virtual DbSet<EnvioDinero> EnvioDinero { get; set; }
         public virtual DbSet<Errores> Errores { get; set; }
-        public virtual DbSet<FacturacionServicios> FacturacionServicios { get; set; }
         public virtual DbSet<MarcasTarjetas> MarcasTarjetas { get; set; }
         public virtual DbSet<Tarjetas> Tarjetas { get; set; }
         public virtual DbSet<TCreditos> TCreditos { get; set; }
         public virtual DbSet<TDebitos> TDebitos { get; set; }
         public virtual DbSet<TipoCuentas> TipoCuentas { get; set; }
         public virtual DbSet<TipoDivisas> TipoDivisas { get; set; }
-        public virtual DbSet<TipoServicios> TipoServicios { get; set; }
         public virtual DbSet<TipoTarjetas> TipoTarjetas { get; set; }
         public virtual DbSet<TipoUsuarios> TipoUsuarios { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }

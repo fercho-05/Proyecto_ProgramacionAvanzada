@@ -34,12 +34,13 @@ namespace WEBCloudCash.Controllers
         [HttpPost]
         public ActionResult RegistroUsuarios(entUsuarios entUsuario)
         {
-            if (entUsuario.id_TipoUsuario == 0) { 
-                ViewBag.mensaje = "Seleccione el tipo de usuario"; 
+            if (entUsuario.id_TipoUsuario == 0)
+            {
+                ViewBag.mensaje = "Seleccione el tipo de usuario";
             }
             else if (entUsuario.id_TipoUsuario == 1)
             {
-                var resp =  modUsuario.IngresarAdministrador(entUsuario);
+                var resp = modUsuario.IngresarAdministrador(entUsuario);
                 if (resp == "OK")
                 {
                     ViewBag.mensaje = "Usuario Administrador ingresado con exito";
@@ -81,7 +82,8 @@ namespace WEBCloudCash.Controllers
                     {
                         ViewBag.mensaje = "Esta cedula ya se encuentra registrada";
                     }
-                    else if (resp == "USUARIO REPETIDO") {
+                    else if (resp == "USUARIO REPETIDO")
+                    {
                         ViewBag.mensaje = "Esta cedula ya se encuentra registrada";
                     }
 
@@ -144,12 +146,12 @@ namespace WEBCloudCash.Controllers
                 return View();
             }
         }
-       
+
         [HttpGet]
         public ActionResult EliminarUsuario(long q)
         {
             modUsuario.EliminarUsuario(q);
-            return RedirectToAction("ListadoUsuarios", "Administrador");    
+            return RedirectToAction("ListadoUsuarios", "Administrador");
         }
 
         //REGISTRO DE TARJETAS
@@ -157,7 +159,7 @@ namespace WEBCloudCash.Controllers
         public ActionResult RegistroTarjetas()
         {
             ViewBag.listaTipoTarjetas = modTarjeta.ListarTipoTarjetas();
-            ViewBag.listaMarcasTarjetas = modTarjeta.ListarMarcasTarjetas(); 
+            ViewBag.listaMarcasTarjetas = modTarjeta.ListarMarcasTarjetas();
             ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
             ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
             return View();
@@ -169,7 +171,8 @@ namespace WEBCloudCash.Controllers
             if (entTarjeta.id_TipoTarjeta == 0)
             {
                 ViewBag.mensaje = "Seleccione el tipo de tarjeta deseada";
-            }else if (entTarjeta.id_MarcaTarjeta == 0)
+            }
+            else if (entTarjeta.id_MarcaTarjeta == 0)
             {
                 ViewBag.mensaje = "Seleccione la marca de tarjeta deseada";
             }
@@ -241,7 +244,7 @@ namespace WEBCloudCash.Controllers
                 //return RedirectToAction("ListadoPrestamos", "Administrador");
             }
             else
-            { 
+            {
                 ViewBag.listaClientes = modUsuario.ListarClientesEleccion();
                 ViewBag.listaTipoDivisas = modTarjeta.ListarTipoDivisas();
 
@@ -372,58 +375,5 @@ namespace WEBCloudCash.Controllers
         }
 
 
-        //SERVICIOS
-        //CUENTAS
-        [HttpGet]
-        public ActionResult RegistroServicios()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult RegistroServicios(entServicios entidad)
-        {
-            var resp = modServicio.RegistrarServicio(entidad);
-
-            if (resp == "OK")
-            {
-
-                ViewBag.mensaje = "Servicio registrado con éxito";
-                return View();
-
-                //return RedirectToAction("ListadoServicios", "Administrador");
-            }
-            else
-            {
-                ViewBag.mensaje = "No se ha registrado el servicio";
-                return View();
-            }
-        }
-
-        [HttpGet]
-        public ActionResult ListadoServicios()
-        {
-            var datos = modServicio.ListarServicios();
-            return View(datos);
-        }
-
-        [HttpGet]
-        public ActionResult ActualizarEstadoServicio(int q)
-        {
-            var servicio = new entServicios();
-            servicio.id_TipoServicio = q;
-
-            var resp = modServicio.ActualizarEstadoServicio(servicio);
-
-            if (resp == "OK")
-            {
-                return RedirectToAction("ListadoServicios", "Administrador");
-            }
-            else
-            {
-                ViewBag.MensajeUsuario = "No se pudo actualizar el estado del servicio";
-                return View();
-            }
-        }
-    }
+    }    
 }

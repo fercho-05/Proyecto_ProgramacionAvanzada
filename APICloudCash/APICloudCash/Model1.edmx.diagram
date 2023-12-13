@@ -4,26 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="13c131aa388e4507a234c7fa9c4b815c" Name="Diagram1">
-        <EntityTypeShape EntityType="CloudCashModel.Administradores" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.Clientes" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+      <Diagram DiagramId="11a0d97781af43fea426ff4f2f46553f" Name="Diagram1">
+        <EntityTypeShape EntityType="CloudCashModel.Administradores" Width="1.5" PointX="3.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudCashModel.Clientes" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.CreditoVivienda" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.Cuentas" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.EnvioDinero" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.Errores" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.FacturacionServicios" Width="1.5" PointX="6" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.MarcasTarjetas" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudCashModel.MarcasTarjetas" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.Tarjetas" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.TCreditos" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.TDebitos" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.TipoCuentas" Width="1.5" PointX="3.75" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CloudCashModel.TipoDivisas" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.TipoServicios" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.TipoTarjetas" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.TipoUsuarios" Width="1.5" PointX="1.5" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CloudCashModel.Usuarios" Width="1.5" PointX="1.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudCashModel.TipoTarjetas" Width="1.5" PointX="0.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudCashModel.TipoUsuarios" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudCashModel.Usuarios" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
         <AssociationConnector Association="CloudCashModel.FK_Administradores_idUsuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CloudCashModel.FK_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Clientes" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Clientes_CreditoVivienda" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Clientes_idUsuario" ManuallyRouted="false" />
@@ -32,7 +29,6 @@
         <AssociationConnector Association="CloudCashModel.FK_Cuentas_EnvioDinero" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_TipoCuenta" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_TipoDivisa" ManuallyRouted="false" />
-        <AssociationConnector Association="CloudCashModel.FK_TipoServicio" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Tarjetas_MarcasTarjetas" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Tarjetas_TipoDivisas" ManuallyRouted="false" />
         <AssociationConnector Association="CloudCashModel.FK_Tarjetas_TipoTarjetas" ManuallyRouted="false" />

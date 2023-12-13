@@ -1,8 +1,8 @@
-/****** Object:  Database [CloudCash]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Database [CloudCash]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE DATABASE CloudCash
 USE CloudCash
 
-/****** Object:  Table [dbo].[Administradores]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[Administradores]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[Administradores](
 	[id_Administrador] [bigint] NOT NULL,
 	[id_Usuario] [bigint] NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[Administradores](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Clientes]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[Clientes]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[Clientes](
 	[id_Cliente] [bigint] NOT NULL,
 	[id_Usuario] [bigint] NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE [dbo].[Clientes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CreditoVivienda]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[CreditoVivienda]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[CreditoVivienda](
 	[id_CreditoVivienda] [bigint] IDENTITY(1,1) NOT NULL,
 	[PorcentajeInteres] [int] NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE [dbo].[CreditoVivienda](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Cuentas]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[Cuentas]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[Cuentas](
 	[id_Cuenta] [bigint] IDENTITY(1,1) NOT NULL,
 	[id_Cliente] [bigint] NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE [dbo].[Cuentas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EnvioDinero]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[EnvioDinero]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[EnvioDinero](
 	[id_EnvioDinero] [bigint] IDENTITY(1,1) NOT NULL,
 	[id_Cuenta] [bigint] NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE [dbo].[EnvioDinero](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Errores]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[Errores]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[Errores](
 	[idError] [int] IDENTITY(1,1) NOT NULL,
 	[fecha] [datetime] NOT NULL,
@@ -78,21 +78,7 @@ CREATE TABLE [dbo].[Errores](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FacturacionServicios]    Script Date: 13/12/2023 17:03:36 ******/
-CREATE TABLE [dbo].[FacturacionServicios](
-	[id_FacturacionServicio] [int] IDENTITY(1,1) NOT NULL,
-	[id_TipoServicio] [int] NOT NULL,
-	[id_Cliente] [bigint] NOT NULL,
-	[subtotal] [bigint] NOT NULL,
-	[impuestos] [bigint] NOT NULL,
-	[total] [bigint] NOT NULL,
- CONSTRAINT [PK_FacturacionServicios] PRIMARY KEY CLUSTERED 
-(
-	[id_FacturacionServicio] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[MarcasTarjetas]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[MarcasTarjetas]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[MarcasTarjetas](
 	[id_MarcaTarjeta] [int] NOT NULL,
 	[descripcion] [varchar](50) NOT NULL,
@@ -102,7 +88,7 @@ CREATE TABLE [dbo].[MarcasTarjetas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tarjetas]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[Tarjetas]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[Tarjetas](
 	[id_Tarjeta] [bigint] IDENTITY(1,1) NOT NULL,
 	[id_Cliente] [bigint] NOT NULL,
@@ -121,7 +107,7 @@ CREATE TABLE [dbo].[Tarjetas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TCreditos]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[TCreditos]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[TCreditos](
 	[id_Credito] [bigint] NOT NULL,
 	[id_Tarjeta] [bigint] NOT NULL,
@@ -131,7 +117,7 @@ CREATE TABLE [dbo].[TCreditos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TDebitos]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[TDebitos]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[TDebitos](
 	[id_Debito] [bigint] NOT NULL,
 	[id_Tarjeta] [bigint] NOT NULL,
@@ -141,7 +127,7 @@ CREATE TABLE [dbo].[TDebitos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoCuentas]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[TipoCuentas]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[TipoCuentas](
 	[id_TipoCuenta] [int] IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](20) NOT NULL,
@@ -151,7 +137,7 @@ CREATE TABLE [dbo].[TipoCuentas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoDivisas]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[TipoDivisas]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[TipoDivisas](
 	[id_TipoDivisa] [int] IDENTITY(1,1) NOT NULL,
 	[Abreviado] [varchar](3) NOT NULL,
@@ -162,19 +148,7 @@ CREATE TABLE [dbo].[TipoDivisas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoServicios]    Script Date: 13/12/2023 17:03:36 ******/
-CREATE TABLE [dbo].[TipoServicios](
-	[id_TipoServicio] [int] IDENTITY(1,1) NOT NULL,
-	[descripcion] [varchar](20) NULL,
-	[monto] [bigint] NOT NULL,
-	[activo] [bit] NOT NULL,
- CONSTRAINT [PK_TipoServicios] PRIMARY KEY CLUSTERED 
-(
-	[id_TipoServicio] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[TipoTarjetas]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[TipoTarjetas]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[TipoTarjetas](
 	[id_TipoTarjeta] [int] NOT NULL,
 	[descripcion] [varchar](20) NOT NULL,
@@ -184,7 +158,7 @@ CREATE TABLE [dbo].[TipoTarjetas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoUsuarios]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[TipoUsuarios]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[TipoUsuarios](
 	[id_TipoUsuario] [int] IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](20) NOT NULL,
@@ -194,7 +168,7 @@ CREATE TABLE [dbo].[TipoUsuarios](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuarios]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Table [dbo].[Usuarios]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE TABLE [dbo].[Usuarios](
 	[id_Usuario] [bigint] IDENTITY(1,1) NOT NULL,
 	[cedula] [varchar](20) NOT NULL,
@@ -294,20 +268,6 @@ INSERT [dbo].[TipoDivisas] ([id_TipoDivisa], [Abreviado], [Descripcion]) VALUES 
 GO
 SET IDENTITY_INSERT [dbo].[TipoDivisas] OFF
 GO
-SET IDENTITY_INSERT [dbo].[TipoServicios] ON 
-GO
-INSERT [dbo].[TipoServicios] ([id_TipoServicio], [descripcion], [monto], [activo]) VALUES (1, N'Celular', 18000, 1)
-GO
-INSERT [dbo].[TipoServicios] ([id_TipoServicio], [descripcion], [monto], [activo]) VALUES (2, N'Internet', 35000, 1)
-GO
-INSERT [dbo].[TipoServicios] ([id_TipoServicio], [descripcion], [monto], [activo]) VALUES (3, N'Luz', 20000, 1)
-GO
-INSERT [dbo].[TipoServicios] ([id_TipoServicio], [descripcion], [monto], [activo]) VALUES (4, N'Cable', 25000, 1)
-GO
-INSERT [dbo].[TipoServicios] ([id_TipoServicio], [descripcion], [monto], [activo]) VALUES (5, N'Prestamo', 20000, 1)
-GO
-SET IDENTITY_INSERT [dbo].[TipoServicios] OFF
-GO
 INSERT [dbo].[TipoTarjetas] ([id_TipoTarjeta], [descripcion]) VALUES (1, N'Débito')
 GO
 INSERT [dbo].[TipoTarjetas] ([id_TipoTarjeta], [descripcion]) VALUES (2, N'Crédito')
@@ -333,19 +293,19 @@ GO
 
 
 
-/****** Object:  Index [Uk_numeroTarjeta]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Index [Uk_numeroTarjeta]    Script Date: 13/12/2023 17:35:57 ******/
 ALTER TABLE [dbo].[Tarjetas] ADD  CONSTRAINT [Uk_numeroTarjeta] UNIQUE NONCLUSTERED 
 (
 	[id_Tarjeta] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [Uk_TipoUsuario_Descripcion]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Index [Uk_TipoUsuario_Descripcion]    Script Date: 13/12/2023 17:35:57 ******/
 ALTER TABLE [dbo].[TipoUsuarios] ADD  CONSTRAINT [Uk_TipoUsuario_Descripcion] UNIQUE NONCLUSTERED 
 (
 	[id_TipoUsuario] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [UK_correo]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Index [UK_correo]    Script Date: 13/12/2023 17:35:57 ******/
 ALTER TABLE [dbo].[Usuarios] ADD  CONSTRAINT [UK_correo] UNIQUE NONCLUSTERED 
 (
 	[id_Usuario] ASC
@@ -353,7 +313,7 @@ ALTER TABLE [dbo].[Usuarios] ADD  CONSTRAINT [UK_correo] UNIQUE NONCLUSTERED
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UK_Usuarios_Cedula]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Index [UK_Usuarios_Cedula]    Script Date: 13/12/2023 17:35:57 ******/
 ALTER TABLE [dbo].[Usuarios] ADD  CONSTRAINT [UK_Usuarios_Cedula] UNIQUE NONCLUSTERED 
 (
 	[cedula] ASC
@@ -361,7 +321,7 @@ ALTER TABLE [dbo].[Usuarios] ADD  CONSTRAINT [UK_Usuarios_Cedula] UNIQUE NONCLUS
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UK_Usuarios_nombreUsuario]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  Index [UK_Usuarios_nombreUsuario]    Script Date: 13/12/2023 17:35:57 ******/
 ALTER TABLE [dbo].[Usuarios] ADD  CONSTRAINT [UK_Usuarios_nombreUsuario] UNIQUE NONCLUSTERED 
 (
 	[nombreUsuario] ASC
@@ -407,16 +367,6 @@ REFERENCES [dbo].[Cuentas] ([id_Cuenta])
 GO
 ALTER TABLE [dbo].[EnvioDinero] CHECK CONSTRAINT [FK_Cuentas_EnvioDinero]
 GO
-ALTER TABLE [dbo].[FacturacionServicios]  WITH CHECK ADD  CONSTRAINT [FK_Cliente] FOREIGN KEY([id_Cliente])
-REFERENCES [dbo].[Clientes] ([id_Cliente])
-GO
-ALTER TABLE [dbo].[FacturacionServicios] CHECK CONSTRAINT [FK_Cliente]
-GO
-ALTER TABLE [dbo].[FacturacionServicios]  WITH CHECK ADD  CONSTRAINT [FK_TipoServicio] FOREIGN KEY([id_TipoServicio])
-REFERENCES [dbo].[TipoServicios] ([id_TipoServicio])
-GO
-ALTER TABLE [dbo].[FacturacionServicios] CHECK CONSTRAINT [FK_TipoServicio]
-GO
 ALTER TABLE [dbo].[Tarjetas]  WITH CHECK ADD  CONSTRAINT [FK_Tarjetas_Clientes] FOREIGN KEY([id_Cliente])
 REFERENCES [dbo].[Clientes] ([id_Cliente])
 GO
@@ -454,8 +404,7 @@ ALTER TABLE [dbo].[Usuarios] CHECK CONSTRAINT [FK_Usuarios_TipoUsuarios]
 GO
 
 
-
-/****** Object:  StoredProcedure [dbo].[SP_CrearTarjetaCredito]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  StoredProcedure [dbo].[SP_CrearTarjetaCredito]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE PROCEDURE [dbo].[SP_CrearTarjetaCredito]
 --Variables del Usuario
 
@@ -503,7 +452,7 @@ IF(@numeroTarjetaRegistrado=0)
 	SELECT 'ALREADY CREATED' 'Mensaje'
 END 
 GO
-/****** Object:  StoredProcedure [dbo].[SP_CrearTarjetaDebito]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  StoredProcedure [dbo].[SP_CrearTarjetaDebito]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE PROCEDURE [dbo].[SP_CrearTarjetaDebito]
 --Variables del Usuario
 
@@ -551,7 +500,7 @@ IF(@numeroTarjetaRegistrado=0)
 	SELECT 'ALREADY CREATED' 'Mensaje'
 END 
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IngresarAdministrador]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  StoredProcedure [dbo].[SP_IngresarAdministrador]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE PROCEDURE [dbo].[SP_IngresarAdministrador]
 --Variables del Usuario
 @cedula VARCHAR(20),
@@ -615,7 +564,7 @@ IF(@cedulaRegistrada=0 AND @nombreUsuarioRegistrado=0)
 END 
 
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IngresarCliente]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  StoredProcedure [dbo].[SP_IngresarCliente]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE PROCEDURE [dbo].[SP_IngresarCliente]
 --Variables del Usuario
 @cedula VARCHAR(20),
@@ -678,7 +627,7 @@ IF(@cedulaRegistrada=0 AND @nombreUsuarioRegistrado=0)
 END 
 
 GO
-/****** Object:  StoredProcedure [dbo].[SP_IniciarSesion]    Script Date: 13/12/2023 17:03:36 ******/
+/****** Object:  StoredProcedure [dbo].[SP_IniciarSesion]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE PROCEDURE [dbo].[SP_IniciarSesion]
 @nombreUsuario varchar(20),
 @contrasena varchar(20)
@@ -688,11 +637,7 @@ SELECT * FROM Usuarios u WHERE u.nombreUsuario=@nombreUsuario AND u.contrasena=@
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ListarClientes]    Script Date: 13/12/2023 17:03:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+/****** Object:  StoredProcedure [dbo].[SP_ListarClientes]    Script Date: 13/12/2023 17:35:57 ******/
 CREATE PROCEDURE [dbo].[SP_ListarClientes]
 AS
 Begin 

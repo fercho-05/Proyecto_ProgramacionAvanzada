@@ -157,7 +157,6 @@
     <Compile Include="Entities\entCreditoVivienda.cs" />
     <Compile Include="Entities\entCuentas.cs" />
     <Compile Include="Entities\entEnvioDinero.cs" />
-    <Compile Include="Entities\entServicios.cs" />
     <Compile Include="Entities\entTarjetas.cs" />
     <Compile Include="Entities\entMarcaTarjeta.cs" />
     <Compile Include="Entities\entTipoTarjeta.cs" />
@@ -166,7 +165,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\modServicios.cs" />
     <Compile Include="Models\modCreditoVivienda.cs" />
     <Compile Include="Models\modCuenta.cs" />
     <Compile Include="Models\modCreditos.cs" />
@@ -2305,7 +2303,6 @@
     <Content Include="Views\Authenticated\Productos.cshtml" />
     <Content Include="Views\Authenticated\EnviarDinero.cshtml" />
     <Content Include="Views\Authenticated\MiCredito.cshtml" />
-    <Content Include="Views\Authenticated\PagarServicios.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\EnvioDinero.cshtml" />
     <Content Include="Template\assets\css\maps\style.css.map" />
@@ -2458,8 +2455,6 @@
     <Content Include="Views\Administrador\ListadoTarjetas.cshtml" />
     <Content Include="Views\Administrador\RegistroCuentas.cshtml" />
     <Content Include="Views\Administrador\ListadoCuentas.cshtml" />
-    <Content Include="Views\Administrador\RegistroServicios.cshtml" />
-    <Content Include="Views\Administrador\ListadoServicios.cshtml" />
     <Content Include="Views\Authenticated\VerEnvios.cshtml" />
     <Content Include="Views\Authenticated\AgregarFoto.cshtml" />
   </ItemGroup>

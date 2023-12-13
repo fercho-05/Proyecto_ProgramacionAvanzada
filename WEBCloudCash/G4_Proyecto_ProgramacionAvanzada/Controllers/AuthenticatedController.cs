@@ -69,12 +69,6 @@ namespace WEBCloudCash.Controllers
         }
 
         [HttpGet]
-        public ActionResult PagarServicios()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult MiCredito()
         {
             string cedula = Session["CedulaUsuario"] as string;
